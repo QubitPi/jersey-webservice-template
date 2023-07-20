@@ -109,7 +109,7 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
 - **AWS_ACCESS_KEY_ID**
 - **AWS_SECRET_ACCESS_KEY**
 - **AWS_REGION**
-- **ZONE_ID** AWS Route 53 hosted zone ID (DNS routing) 
+- **ZONE_ID** AWS Route 53 hosted zone ID (DNS routing)
 
 License
 -------
