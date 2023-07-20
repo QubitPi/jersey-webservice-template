@@ -23,18 +23,6 @@ variable "zone_id" {
   sensitive = true
 }
 
-variable "expand_url" {
-  type = string
-  description = "Theresa node expand URL, e.g. http://localhost:5000/expand"
-  sensitive = true
-}
-
-variable "entity_extraction_url" {
-  type = string
-  description = "Theresa entity extraction URL, e.g. http://localhost:5000/entityExtraction"
-  sensitive = true
-}
-
 terraform {
   required_providers {
     aws = {
@@ -81,7 +69,7 @@ resource "aws_instance" "jersey-ws-template" {
   EOF
 }
 
-resource "aws_route53_record" "prometheus" {
+resource "aws_route53_record" "jersey-ws-template" {
   zone_id         = var.zone_id
   name            = "ws-domain.com"
   type            = "A"
