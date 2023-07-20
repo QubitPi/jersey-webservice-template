@@ -73,7 +73,6 @@ export JETTY_HOME=/path/to/jetty-home-11.0.15
 mkdir -p /path/to/jetty-base
 cd /path/to/jetty-base
 java -jar $JETTY_HOME/start.jar --add-module=annotations,server,http,deploy
-java -jar $JETTY_HOME/start.jar
 ```
 
 The `--add-module=annotations,server,http,deploy` is how we configure the Jetty container.
@@ -96,9 +95,19 @@ The webservice will run on port **8080**
 CI/CD
 -----
 
+![Error loading ci-cd.png](./docs/ci-cd.png)
+
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
-- **SONAR_TOKEN**
+- [**SONAR_TOKEN**](https://sonarcloud.io/project/overview?id=QubitPi_jersey-ws-template)
+- **SSL_CERTIFICATE** SSL certificate file content (for
+  [exposing webservice endpoints over HTTPS](./hashicorp/images/nginx-ssl.conf))
+- **SSL_CERTIFICATE_KEY** SSL certificate key file content (for
+  [exposing webservice endpoints over HTTPS](./hashicorp/images/nginx-ssl.conf))
+- [**AWS_ACCESS_KEY_ID**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- [**AWS_SECRET_ACCESS_KEY**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- [**AWS_REGION**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- **ZONE_ID** AWS Route 53 hosted zone ID (DNS routing)
 
 License
 -------
