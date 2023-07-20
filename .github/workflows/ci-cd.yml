@@ -50,6 +50,7 @@ jobs:
 
   tests:
     name: Unit & Integration Tests
+    if: ${{ github.event.repository.name }} == 'QubitPi/jersey-ws-template'
     needs: [yaml-lint, markdown-lint, markdown-link-check]
     runs-on: ubuntu-latest
     steps:
@@ -80,3 +81,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B -Pcoverage sonar:sonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.java.binaries=target/classes -Dsonar.projectKey=QubitPi_jersey-ws-template
+
+  hashicorp:
+    name: Publish Jersey WS AMI Image and Deploy it to EC2 through HashiCorp
+    if: ${{ github.event.repository.name }} != 'QubitPi/jersey-ws-template'
+    needs: tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hashicorp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Load deployment environment variables into Terraform variable file
+        run: |
+          touch instances/variables.auto.tfvars
+          echo 'zone_id = "${{ secrets.ZONE_ID }}"' > instances/variables.auto.tfvars
+      - name: Load SSL Certificates
+        working-directory: hashicorp/images
+        run: |
+          echo '${{ secrets.SSL_CERTIFICATE }}' > server.crt
+          echo '${{ secrets.SSL_CERTIFICATE_KEY }}' > server.key
+      - name: Publish Jersey WS AMI image and deploy it to EC2 through HashiCorp
+        uses: QubitPi/hashicorp-aws@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
