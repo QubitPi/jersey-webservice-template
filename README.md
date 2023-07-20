@@ -99,16 +99,14 @@ CI/CD
 
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
-- **SONAR_TOKEN** T
-
+- [**SONAR_TOKEN**](https://sonarcloud.io/project/overview?id=QubitPi_jersey-ws-template)
 - **SSL_CERTIFICATE** SSL certificate file content (for
   [exposing webservice endpoints over HTTPS](./hashicorp/images/nginx-ssl.conf))
 - **SSL_CERTIFICATE_KEY** SSL certificate key file content (for
   [exposing webservice endpoints over HTTPS](./hashicorp/images/nginx-ssl.conf))
-
-- **AWS_ACCESS_KEY_ID**
-- **AWS_SECRET_ACCESS_KEY**
-- **AWS_REGION**
+- [**AWS_ACCESS_KEY_ID**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- [**AWS_SECRET_ACCESS_KEY**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- [**AWS_REGION**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 - **ZONE_ID** AWS Route 53 hosted zone ID (DNS routing)
 
 License

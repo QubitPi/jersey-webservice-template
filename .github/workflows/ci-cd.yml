@@ -50,7 +50,6 @@ jobs:
 
   tests:
     name: Unit & Integration Tests
-    if: ${{ github.event.repository.name }} == 'QubitPi/jersey-ws-template'
     needs: [yaml-lint, markdown-lint, markdown-link-check]
     runs-on: ubuntu-latest
     steps:
