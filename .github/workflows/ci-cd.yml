@@ -83,7 +83,6 @@ jobs:
 
   hashicorp:
     name: Publish Jersey WS AMI Image and Deploy it to EC2 through HashiCorp
-    if: ${{ github.event.repository.name }} != 'QubitPi/jersey-ws-template'
     needs: tests
     runs-on: ubuntu-latest
     defaults:
