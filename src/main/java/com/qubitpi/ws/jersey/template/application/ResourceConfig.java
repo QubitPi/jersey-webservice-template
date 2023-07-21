@@ -15,6 +15,8 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
+import com.qubitpi.ws.jersey.template.web.filters.CorsFilter;
+
 import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
@@ -41,6 +43,7 @@ public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
         final Binder binder = new BinderFactory().buildBinder();
 
         packages(ENDPOINT_PACKAGE);
+        register(new CorsFilter());
         register(binder);
         register(MultiPartFeature.class);
     }
