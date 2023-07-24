@@ -27,6 +27,52 @@ Jersey Webservice Template <sup>![Java Version Badge][Java Version Badge]</sup>
 [![Reliability Rating][Sonar Reliability Rating]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-ws-template)
 [![Technical Debt][Sonar Technical Debt]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-ws-template)
 
+Features
+--------
+
+- [Healthcheck Endpoint](https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/web/endpoints/DataServlet.java)
+- [CORS Filter](https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/web/filters/CorsFilter.java)
+- Tests in Groovy Spock
+- Docker-based integration tests
+
+Setup
+-----
+
+### Install Java & Maven
+
+```bash
+brew update
+brew install java11
+sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+brew install maven
+```
+
+If we see something similar after typing the command with the version flag below you're good to go
+
+```bash
+$ java --version
+openjdk 11.0.10 2021-01-19
+OpenJDK Runtime Environment (build 11.0.10+9)
+OpenJDK 64-Bit Server VM (build 11.0.10+9, mixed mode)
+```
+
+### Get Source Code
+
+```bash
+https://github.com/QubitPi/jersey-ws-template.git
+cd jersey-ws-template
+```
+
+### Syncing up with jersey-ws-template's Code Styles with IntelliJ
+
+For the moment, we have distilled the most important code style conventions with respect to jersey-ws-template's code as
+IntelliJ settings. If you are using IntelliJ, you may import these code style settings by importing the
+[Jersey-WS-Template-Project-intellij-code-style.xml](./Jersey-WS-Template-Project-intellij-code-style.xml) file in the
+root of the repo. The setting for the project will appear as a new Scheme named Jersey-WS-Template-Project under your
+`Editor -> Code Style` section.
+
+### Install Docker Engine
+
 Running Tests
 -------------
 
