@@ -32,13 +32,16 @@ Features
 
 - [Healthcheck Endpoint](https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/web/endpoints/DataServlet.java)
 - [CORS Filter](https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/web/filters/CorsFilter.java)
-- Tests in Groovy Spock
-- Docker-based integration tests
+- [Tests in Groovy Spock](https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template)
+- [Docker-based integration tests](https://github.com/QubitPi/jersey-ws-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy)
+- [Immutable Infrastructure Approach](#cicd-sup--sup)
 
 Setup
 -----
 
-### Install Java & Maven
+### Prepare for Local Development
+
+#### Install Java & Maven (on Mac)
 
 ```bash
 brew update
@@ -56,6 +59,8 @@ OpenJDK Runtime Environment (build 11.0.10+9)
 OpenJDK 64-Bit Server VM (build 11.0.10+9, mixed mode)
 ```
 
+#### Install Docker Engine
+
 ### Get Source Code
 
 ```bash
@@ -70,8 +75,6 @@ IntelliJ settings. If you are using IntelliJ, you may import these code style se
 [Jersey-WS-Template-Project-intellij-code-style.xml](./Jersey-WS-Template-Project-intellij-code-style.xml) file in the
 root of the repo. The setting for the project will appear as a new Scheme named Jersey-WS-Template-Project under your
 `Editor -> Code Style` section.
-
-### Install Docker Engine
 
 Running Tests
 -------------
@@ -138,8 +141,12 @@ java -jar $JETTY_HOME/start.jar
 
 The webservice will run on port **8080**
 
-CI/CD
------
+[CI/CD](./.github/workflows/ci-cd.yml)
+----------------------------------------
+
+![GitHub Actions Badge][GitHub Actions Badge]
+![HashiCorp Packer Badge][HashiCorp Packer Badge]
+![HashiCorp Terraform Badge][HashiCorp Terraform Badge]
 
 ![Error loading ci-cd.png](./docs/ci-cd.png)
 
@@ -154,6 +161,29 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
 - [**AWS_SECRET_ACCESS_KEY**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 - [**AWS_REGION**](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 - **ZONE_ID** AWS Route 53 hosted zone ID (DNS routing)
+
+Setting Up Sentry
+-----------------
+
+Sentry is a developer-first error tracking and performance monitoring platform that helps developers see what actually
+matters, solve quicker, and learn continuously about their applications.
+
+<p align="center">
+  <img src="https://github.com/getsentry/sentry/raw/master/.github/screenshots/projects.png" width="270">
+  <img src="https://github.com/getsentry/sentry/raw/master/.github/screenshots/issue-details.png" width="270">
+  <img src="https://github.com/getsentry/sentry/raw/master/.github/screenshots/transaction-summary.png" width="270">
+  <img src="https://github.com/getsentry/sentry/raw/master/.github/screenshots/releases.png" width="270">
+</p>
+
+<details>
+<summary>The logging framework has to be <b>Logback</b>, which is the logging library used in
+jersey-ws-template</summary>
+
+<img align="center" width="100%" alt="Create Project" src="./docs/setup-sentry-1.png">
+<img align="center" width="100%" alt="Choose Java Platform" src="./docs/setup-sentry-2.png">
+<img align="center" width="100%" alt="Pick up Logging Framework" src="./docs/setup-sentry-3.png">
+
+</details>
 
 License
 -------
@@ -172,9 +202,13 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 
 [How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
+[GitHub Actions Badge]: https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
 [GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/jersey-ws-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
 
-[Java Version Badge]: https://img.shields.io/badge/Java-11-brightgreen?style=flat-square&logo=OpenJDK&logoColor=white
+[HashiCorp Packer Badge]: https://img.shields.io/badge/Packer-02A8EF?style=for-the-badge&logo=Packer&logoColor=white
+[HashiCorp Terraform Badge]: https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white
+
+[Java Version Badge]: https://img.shields.io/badge/Java-11-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [jersey-ws-template]: https://github.com/QubitPi/jersey-ws-template
 
 [Sonar Bugs]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=bugs
