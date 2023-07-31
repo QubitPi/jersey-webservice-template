@@ -35,6 +35,7 @@ Features
 - [Tests in Groovy Spock](https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template)
 - [Docker-based integration tests](https://github.com/QubitPi/jersey-ws-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy)
 - [Immutable Infrastructure Approach](#cicd-sup--sup)
+- [Out-of-box caching](./src/main/java/com/qubitpi/ws/jersey/template/cache) class if needed
 
 Setup
 -----
@@ -75,6 +76,14 @@ IntelliJ settings. If you are using IntelliJ, you may import these code style se
 [Jersey-WS-Template-Project-intellij-code-style.xml](./Jersey-WS-Template-Project-intellij-code-style.xml) file in the
 root of the repo. The setting for the project will appear as a new Scheme named Jersey-WS-Template-Project under your
 `Editor -> Code Style` section.
+
+### Removing Unneeded Classes
+
+[jersey-ws-template][jersey-ws-template] comes with common classes many webservices need, such as caching feature.
+Remove them if not needed:
+
+- [LRU Caching](./src/main/java/com/qubitpi/ws/jersey/template/cache/LruCache.java) and
+  [its tests](./src/test/groovy/com/qubitpi/ws/jersey/template/cache/LruCacheSpec.groovy)
 
 Running Tests
 -------------
