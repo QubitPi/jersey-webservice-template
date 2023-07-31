@@ -86,6 +86,60 @@ Remove them if not needed:
 - [LRU Caching](./src/main/java/com/qubitpi/ws/jersey/template/cache/LruCache.java) and
   [its tests](./src/test/groovy/com/qubitpi/ws/jersey/template/cache/LruCacheSpec.groovy)
 
+### Remote Call
+
+[async-http-client][async-http-client] has been set up in this template so that we could easily send HTTP request from
+within webservice. For example
+
+```java
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+
+public class MyHttpClient {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Graph.class);
+
+    private final AsyncHttpClient webClient;
+
+    private String sentRequest(
+            @NotNull final String httpParamName,
+            @NotNull final String httpParamValue,
+            @NotNull final String url
+    ) {
+        try {
+            return getWebClient()
+                    .prepareGet(url)
+                    .addQueryParam(
+                            httpParamName,
+                            Objects.requireNonNull(value, String.format("query param '%s'", httpParamValue))
+                    )
+                    .execute()
+                    .get()
+                    .getResponseBody();
+        } catch (final ExecutionException exception) {
+            LOG.error("AsyncHttpClient error: {}", exception.getMessage());
+            throw new IllegalStateException(exception);
+        } catch (final InterruptedException exception) {
+            LOG.error("InterruptedException: {}", exception.getMessage());
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(exception);
+        }
+    }
+
+    @NotNull
+    private AsyncHttpClient getWebClient() {
+        return webClient;
+    }
+}
+```
+
 Running Tests
 -------------
 
@@ -209,6 +263,7 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
+[async-http-client]: https://github.com/AsyncHttpClient/async-http-client
 
 [How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
