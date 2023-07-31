@@ -15,14 +15,12 @@
  */
 package com.qubitpi.ws.jersey.template
 
-import org.hamcrest.Matchers
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.PullPolicy
 import org.testcontainers.images.builder.ImageFromDockerfile
 import org.testcontainers.spock.Testcontainers
 
 import io.restassured.RestAssured
-import io.restassured.path.json.JsonPath
 import spock.lang.IgnoreIf
 import spock.lang.Shared
 import spock.lang.Specification
@@ -40,13 +38,15 @@ import java.nio.file.Paths
  * see https://www.testcontainers.org/test_framework_integration/spock/#testcontainers-class-annotation
  */
 @Testcontainers
-@IgnoreIf({ dockerNotInstalled() })
+@IgnoreIf({ isLocal() })
 class DataServletITSpec extends Specification {
 
     static final int SUCCESS = 0
+    static final List<String> LOCAL_ENVS = ["Mac OS X", "windows"]
     static final String CHECK_DOCKER_INSTALLED_COMMAND = "docker -v"
     static final String DOCKERFILE_ABS_PATH = String.format("%s/Dockerfile", System.getProperty("user.dir"))
 
+    @Deprecated
     @SuppressWarnings('GroovyUnusedCatchParameter')
     private static boolean dockerNotInstalled() {
         try {
@@ -54,6 +54,10 @@ class DataServletITSpec extends Specification {
         } catch (Exception exception) {
             return true // I hate this
         }
+    }
+
+    private static boolean isLocal() {
+        return System.properties['os.name'] as String in LOCAL_ENVS
     }
 
     @Shared
