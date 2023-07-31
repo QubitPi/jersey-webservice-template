@@ -35,6 +35,7 @@ Features
 - [Tests in Groovy Spock](https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template)
 - [Docker-based integration tests](https://github.com/QubitPi/jersey-ws-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy)
 - [Immutable Infrastructure Approach](#cicd-sup--sup)
+- [Easy config mechanism](./src/main/java/com/qubitpi/ws/jersey/template/application/ApplicationConfig.java)
 - [Out-of-box caching](./src/main/java/com/qubitpi/ws/jersey/template/cache) class if needed
 
 Setup
