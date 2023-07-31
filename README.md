@@ -86,7 +86,7 @@ Remove them if not needed:
 - [LRU Caching](./src/main/java/com/qubitpi/ws/jersey/template/cache/LruCache.java) and
   [its tests](./src/test/groovy/com/qubitpi/ws/jersey/template/cache/LruCacheSpec.groovy)
 
-### Remote Call
+### HTTP Request from within Webservice
 
 [async-http-client][async-http-client] has been set up in this template so that we could easily send HTTP request from
 within webservice. For example
