@@ -23,6 +23,12 @@ variable "zone_id" {
   sensitive = true
 }
 
+variable "sentry_dsn" {
+  type = string
+  description = "Sentry.io DSN"
+  sensitive = true
+}
+
 terraform {
   required_providers {
     aws = {
@@ -63,6 +69,7 @@ resource "aws_instance" "jersey-ws-template" {
   user_data = <<-EOF
     #!/bin/bash
     export JETTY_HOME=/home/ubuntu/jetty-home-11.0.15
+    export SENTRY_DSN=${var.sentry_dsn}
 
     cd /home/ubuntu/jetty-base
     java -jar $JETTY_HOME/start.jar
