@@ -67,10 +67,17 @@ implementing caching feature. _Remove them if not needed_:
 
 - [Caching][Caching] and [its tests][Caching tests]
 
+Modifying Templates
+-------------------
+
+- Update [endpoint package] accordingly
+
 [Caching]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
 
 [Docker-based integration tests]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
+
+[endpoint package]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
 [jersey-ws-template]: https://github.com/QubitPi/jersey-ws-template
 [jersey-ws-template Dockerfile]: https://github.com/QubitPi/jersey-ws-template/blob/master/Dockerfile
