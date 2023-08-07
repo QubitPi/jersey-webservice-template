@@ -33,8 +33,8 @@ Jersey Webservice Template <sup>![Java Version Badge][Java Version Badge]</sup>
 Documentation
 -------------
 
-- Doumentation
-- Javadoc
+- [Documentation]
+- [Javadoc]
 
 License
 -------
@@ -51,6 +51,8 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 
+[Documentation]: https://qubitpi.github.io/jersey-ws-template/
+
 [How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 [GitHub Actions Badge]: https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
@@ -60,6 +62,7 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 [HashiCorp Terraform Badge]: https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white
 
 [Java Version Badge]: https://img.shields.io/badge/Java-11-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
+[Javadoc]: https://qubitpi.github.io/jersey-ws-template/apidocs/
 
 [Sonar Bugs]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=bugs
 [Sonar Vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=vulnerabilities
