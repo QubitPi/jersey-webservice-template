@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.qubitpi.ws.jersey.template.application"},{"l":"com.qubitpi.ws.jersey.template.cache"},{"l":"com.qubitpi.ws.jersey.template.web.endpoints"},{"l":"com.qubitpi.ws.jersey.template.web.filters"}]
