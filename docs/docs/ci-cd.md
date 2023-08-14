@@ -39,6 +39,8 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
 
 <!-- markdown-link-check-enable -->
 
+- Update `"Security Group Name"` in [Terraform config file][HashiCorp Terraform config file] accordingly
+
 [docker hub]: https://hub.docker.com/r/jack20191124/jersey-ws-template/
 
 [HashiCorp Packer template]: https://github.com/QubitPi/jersey-ws-template/blob/master/hashicorp/images/aws-jersey-ws.pkr.hcl
