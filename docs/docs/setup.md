@@ -70,7 +70,18 @@ implementing caching feature. _Remove them if not needed_:
 Modifying Templates
 -------------------
 
-- Update [endpoint package] accordingly
+<!-- markdown-link-check-disable -->
+
+1. Setup [CI/CD](ci-cd)
+
+<!-- markdown-link-check-enable -->
+
+2. Renaming `src` package
+3. Setup SonarCloud Project and replace all `QubitPi_jersey-ws-template` with project ID accordingly
+4. Update links by replacing all `jersey-ws-template`, `Jersey Webservice Template`, and `QubitPi` (including cases)
+   accordingly
+5. Update [endpoint package] accordingly
+6. Update Copyright holder "Jiaqi Liu"
 
 [Caching]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache

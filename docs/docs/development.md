@@ -18,7 +18,7 @@ mvn clean package
 ```
 
 A [**WAR** file](https://en.wikipedia.org/wiki/WAR_(file_format)) named `jersey-ws-template-1.0-SNAPSHOT.war` will
-beJersey Webservice Template generated under _target_ directory for [running in Jetty](#running-in-standalone-jetty)
+be generated under _target_ directory for [running in Jetty](#running-in-standalone-jetty)
 
 Running Webservice in Docker (Development)
 ------------------------------------------

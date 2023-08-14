@@ -30,5 +30,3 @@ It is recommended to simply define **SENTRY_DSN** environment variable via CI/CD
 automatically
 
 [jersey-ws-template]: https://github.com/QubitPi/jersey-ws-template
-
-[Sentry DSN]: https://docs.sentry.io/platforms/java/guides/logback/#dsn-configuration

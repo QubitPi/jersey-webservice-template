@@ -83,7 +83,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Easy Config Environment',
+    title: 'Easy Config Management',
     Svg: require('@site/static/img/config.svg').default,
     description: (
       <>
