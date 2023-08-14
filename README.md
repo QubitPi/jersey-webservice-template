@@ -61,7 +61,7 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 [HashiCorp Packer Badge]: https://img.shields.io/badge/Packer-02A8EF?style=for-the-badge&logo=Packer&logoColor=white
 [HashiCorp Terraform Badge]: https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white
 
-[Java Version Badge]: https://img.shields.io/badge/Java-11-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
+[Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [Javadoc]: https://qubitpi.github.io/jersey-ws-template/apidocs/
 
 [Sonar Bugs]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=bugs
