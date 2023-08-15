@@ -62,7 +62,7 @@ resource "aws_instance" "jersey-ws-template" {
   ami = "${data.aws_ami.latest-jersey-ws-template.id}"
   instance_type = "t2.micro"
   tags = {
-    Name = "ES2 Instance Name"
+    Name = "EC2 Instance Name"
   }
   security_groups = ["Security Group Name"]
 
