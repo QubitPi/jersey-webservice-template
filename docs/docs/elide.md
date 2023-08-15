@@ -16,8 +16,6 @@ Configuring Elide requires 2 [bindings][what is binding]:
 The _ResourceConfig_ looks like this:
 
 ```java
-package com.paiondata.astraios.application;
-
 import com.yahoo.elide.Elide;
 
 import org.glassfish.hk2.api.ServiceLocator;
@@ -262,7 +260,7 @@ Troubleshooting
 
 ```bash
 13:17:52.396 [main] INFO  o.h.m.i.EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for
-class: com.paiondata.astraios.application.BinderFactory$Note (class must be instantiated by Interceptor)
+class: ... (class must be instantiated by Interceptor)
 ```
 
 ### How to Exclude GraphQL Feature
