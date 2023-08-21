@@ -17,6 +17,7 @@ package com.qubitpi.ws.jersey.template.config;
 
 import org.aeonbits.owner.Config;
 
+import jakarta.validation.constraints.NotNull;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
 
@@ -49,6 +50,7 @@ public interface OAuthConfig extends Config {
      *
      * @return {@code true} if enabling the OAuth filter or {@code false}, otherwise
      */
+    @NotNull
     @Key("OAUTH_ENABLED")
     boolean authEnabled();
 
@@ -77,6 +79,7 @@ public interface OAuthConfig extends Config {
      *
      * @return a valid URL
      */
+    @NotNull
     @Key("JWKS_URL")
     String jwksUrl();
 }
