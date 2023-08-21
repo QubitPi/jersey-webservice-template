@@ -33,14 +33,12 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
+        <version.elide>7.1.0</version.elide>
         <version.validation.api>3.0.1</version.validation.api>
-        <version.jcip.annotations>1.0</version.jcip.annotations>
-        <version.slf4j>1.7.25</version.slf4j>
-        <version.logback>1.2.3</version.logback>
-        <version.jackson>2.13.3</version.jackson>
-        <version.owner>1.0.12</version.owner>
-        <version.servlet>6.0.0</version.servlet>
         <version.jersey>3.1.1</version.jersey>
+        <hibernate.version>6.2.4.Final</hibernate.version>
+        <version.jcip.annotations>1.0</version.jcip.annotations>
+        <version.owner>1.0.12</version.owner>
         <version.groovy>4.0.6</version.groovy>
         <version.jetty>11.0.15</version.jetty>
 
@@ -62,15 +60,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- JSON Parsing -->
-            <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
-                <version>${version.jackson}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
             <!-- Testing -->
             <dependency>
                 <groupId>org.spockframework</groupId>
@@ -91,9 +80,39 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.2</version>
+            <groupId>${model.package.jar.group.id}</groupId>
+            <artifactId>${model.package.jar.artifact.id}</artifactId>
+            <version>${model.package.jar.version}</version>
+        </dependency>
+
+        <!-- Elide -->
+        <dependency>
+            <groupId>com.yahoo.elide</groupId>
+            <artifactId>elide-core</artifactId>
+            <version>${version.elide}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yahoo.elide</groupId>
+            <artifactId>elide-datastore-jpa</artifactId>
+            <version>${version.elide}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yahoo.elide</groupId>
+            <artifactId>elide-graphql</artifactId>
+            <version>${version.elide}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yahoo.elide</groupId>
+            <artifactId>elide-test-helpers</artifactId>
+            <version>${version.elide}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.49</version>
         </dependency>
 
         <dependency>
@@ -101,75 +120,29 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>${version.validation.api}</version>
         </dependency>
-
-        <!-- Servlet API -->
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>${version.servlet}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
-        <!-- Jersey -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>${version.jersey}</version>
-        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
             <version>${version.jersey}</version>
+            <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-multipart</artifactId>
-            <version>${version.jersey}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${version.jersey}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.test-framework</groupId>
-            <artifactId>jersey-test-framework-core</artifactId>
-            <version>${version.jersey}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency> <!-- Jersey Test 'grizzly' container -->
-            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
-            <version>${version.jersey}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Injection -->
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.hk2</groupId>
-            <artifactId>hk2-locator</artifactId>
-            <version>3.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
-        <!-- JSON Parsing -->
+        <!-- Hibernate -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.asynchttpclient</groupId>
-            <artifactId>async-http-client</artifactId>
-            <version>3.0.0.Beta2</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-hikaricp</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- Concurrency -->
@@ -188,27 +161,18 @@
 
         <!-- Logging -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${version.slf4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${version.logback}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>4.11</version>
-        </dependency>
-        <dependency>
-            <groupId>io.sentry</groupId>
-            <artifactId>sentry-logback</artifactId>
-            <version>6.25.2</version>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
         <!-- Testing -->
+        <dependency>
+            <groupId>io.github.qubitpi</groupId>
+            <artifactId>jersey-webservice-template-jpa-data-models</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
@@ -224,7 +188,6 @@
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>1.14.11</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.objenesis</groupId>
@@ -266,6 +229,12 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>spock</artifactId>
+            <version>1.19.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
             <version>1.19.0</version>
             <scope>test</scope>
         </dependency>
