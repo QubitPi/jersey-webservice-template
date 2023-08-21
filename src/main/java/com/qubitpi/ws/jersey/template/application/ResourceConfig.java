@@ -15,36 +15,50 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
-import com.qubitpi.ws.jersey.template.web.filters.CorsFilter;
+import com.yahoo.elide.Elide;
+import com.yahoo.elide.annotation.Include;
 
+import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.Binder;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 import jakarta.inject.Inject;
+import jakarta.servlet.ServletContext;
 import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Context;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
 
 /**
  * The resource configuration for the web applications.
  */
+@Include
 @Immutable
 @ThreadSafe
-@ApplicationPath("v1")
+@ApplicationPath("/v1/data/")
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
-    private static final String ENDPOINT_PACKAGE = "com.qubitpi.ws.jersey.template.web.endpoints";
+    private static final String ENDPOINT_PACKAGE = "com.yahoo.elide.jsonapi.resources";
 
     /**
      * DI Constructor.
+     *
+     * @param injector  A standard HK2 service locator
+     * @param servletContext  Currently unused
      */
     @Inject
-    public ResourceConfig() {
-        final Binder binder = new BinderFactory().buildBinder();
-
+    public ResourceConfig(final ServiceLocator injector, @Context final ServletContext servletContext) {
         packages(ENDPOINT_PACKAGE);
-        register(new CorsFilter());
+
+        final Binder binder = new BinderFactory().buildBinder(injector);
+
         register(binder);
-        register(MultiPartFeature.class);
+
+        register(new org.glassfish.hk2.utilities.binding.AbstractBinder() {
+            @Override
+            protected void configure() {
+                final Elide elide = injector.getService(Elide.class, "elide");
+                elide.doScans();
+            }
+        });
     }
 }
