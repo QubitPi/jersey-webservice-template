@@ -1,0 +1,75 @@
+# Copyright Jiaqi Liu
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: 'settings.xml'
+description: 'Generate settings.xml for CI/CD'
+
+inputs:
+  data-model-package-jar-group-id:
+    description: 'Maven group ID of data model JAR'
+    required: true
+  data-model-package-jar-artifact-id:
+    description: 'Maven artifact ID of data model JAR'
+    required: true
+  data-model-package-jar-version:
+    description: 'The version of data model JAR'
+    required: true
+
+  data-model-server-id:
+    description: 'The server ID of the Maven repository hosting the data model JAR if the model is in a private repo'
+    required: true
+  data-model-server-user:
+    description: 'The server user of the Maven repository hosting the data model JAR if the model is in a private repo'
+    required: true
+  data-model-server-token:
+    description: 'The user password of the Maven repository hosting the data model JAR if the model is in a private repo'
+    required: true
+  data-model-package-repo-id:
+    description: 'The ID of the Maven repository ID hosting the data model JAR if the model is in a private repo'
+    required: true
+  data-model-package-repo-url:
+    description: 'The URL of the Maven repository that hosts the data model JAR if the model is in a private repo'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate settings.xml
+      uses: whelk-io/maven-settings-xml-action@v20
+      with:
+        profiles: >
+          [
+            {
+              "id": "data-model-config",
+              "properties": {
+                "model.package.jar.group.id": "${{ inputs.data-model-package-jar-group-id }}",
+                "model.package.jar.artifact.id": "${{ inputs.data-model-package-jar-artifact-id }}",
+                "model.package.jar.version": "${{ inputs.data-model-package-jar-version }}",
+                "model.package.repo.id": "${{ inputs.data-model-package-repo-id }}",
+                "model.package.repo.url": "${{ inputs.data-model-package-repo-url }}"
+              }
+            }
+          ]
+        active_profiles: >
+          [
+            "data-model-config"
+          ]
+        servers: >
+          [
+            {
+              "id": "${{ inputs.data-model-server-id }}",
+              "username": "${{ inputs.data-model-server-user }}",
+              "password": "${{ inputs.data-model-server-token }}"
+            }
+          ]

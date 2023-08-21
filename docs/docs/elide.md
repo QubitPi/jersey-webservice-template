@@ -44,22 +44,22 @@ Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` w
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-    <profiles>
-        <profile>
-            <id>data-models</id>
-            <properties>
-                <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
-                <model.package.jar.artifact.id>
-                   jersey-webservice-template-jpa-data-model
-                </model.package.jar.artifact.id>
-                <model.package.jar.version>1.0.0</model.package.jar.version>
-            </properties>
-        </profile>
-    </profiles>
+   <profiles>
+      <profile>
+         <id>data-models</id>
+         <properties>
+            <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
+            <model.package.jar.artifact.id>
+               jersey-webservice-template-jpa-data-model
+            </model.package.jar.artifact.id>
+            <model.package.jar.version>1.0.0</model.package.jar.version>
+         </properties>
+      </profile>
+   </profiles>
 
-    <activeProfiles>
-        <activeProfile>data-models</activeProfile>
-    </activeProfiles>
+   <activeProfiles>
+      <activeProfile>data-models</activeProfile>
+   </activeProfiles>
 </settings>
 ```
 

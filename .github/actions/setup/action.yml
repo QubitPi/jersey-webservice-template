@@ -19,6 +19,15 @@ inputs:
   runbooks-repo-token:
     description: 'hashicorp-aws config file repo fine-grained PAT token;'
     required: true
+  data-models-repo-token:
+    description: 'Data models repo fine-grained PAT token;'
+    required: true
+  data-models-repo-org:
+    description: 'Data models repo owner, e.g. QubitPi'
+    required: true
+  data-models-repo-name:
+    description: 'Data models repo name, e.g. jersey-webservice-template-jpa-data-model'
+    required: true
 
 runs:
   using: "composite"
@@ -29,18 +38,23 @@ runs:
         java-version: '17'
         distribution: 'adopt'
     - name: Checkout HashiCorp deployment tool
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
       run: git clone https://github.com/QubitPi/hashicorp-aws.git ../hashicorp-aws
     - name: Checkout HashiCorp deployment config files
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
       run: git clone https://${{ inputs.runbooks-repo-token }}@github.com/QubitPi/hashicorp-aws-runbooks.git ../hashicorp-aws-runbooks
     - name: Load Packer variable file
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
       run: cp ../hashicorp-aws-runbooks/aws-ws.pkrvars.hcl ../hashicorp-aws/hashicorp/webservice/images/aws-ws.auto.pkrvars.hcl
     - name: Load Terraform variable file
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
       run: cp ../hashicorp-aws-runbooks/aws-ws.tfvars ../hashicorp-aws/hashicorp/webservice/instances/aws-ws.auto.tfvars
     - name: Load Maven settings.xml
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
       run: |
         if [[ ${{ inputs.data-models-repo-org }} == "QubitPi" ]]; then
@@ -49,5 +63,14 @@ runs:
           cp ../hashicorp-aws-runbooks/settings.xml ~/.m2/settings.xml
         fi
     - name: Load webservice properties files
+      if: ${{ github.event.repository.name != 'jersey-webservice-template' }}
       shell: bash
-      run: cp ../hashicorp-aws-runbooks/application.properties src/main/resources/
+      run: |
+        cp ../hashicorp-aws-runbooks/application.properties src/main/resources/
+        cp ../hashicorp-aws-runbooks/jpadatastore.properties src/main/resources/
+    - name: Install data models
+      shell: bash
+      run: |
+        git clone https://${{ inputs.data-models-repo-token }}@github.com/${{ inputs.data-models-repo-org }}/${{ inputs.data-models-repo-name }}.git ../jpa-models
+        cd ../jpa-models
+        mvn clean install
