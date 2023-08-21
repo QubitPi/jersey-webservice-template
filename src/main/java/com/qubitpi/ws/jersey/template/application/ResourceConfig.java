@@ -15,11 +15,14 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
+import com.yahoo.elide.Elide;
+
 import com.qubitpi.ws.jersey.template.web.filters.CorsFilter;
 
-import org.glassfish.hk2.utilities.Binder;
+import org.glassfish.hk2.api.ServiceLocator;
 
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.ApplicationPath;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
@@ -29,21 +32,44 @@ import net.jcip.annotations.ThreadSafe;
  */
 @Immutable
 @ThreadSafe
-@ApplicationPath("v1")
+@ApplicationPath("/v1/data/")
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
-    private static final String ENDPOINT_PACKAGE = "com.qubitpi.ws.jersey.template.web.endpoints";
+    private static final String GRAPHQL_ENDPOINT_PACKAGE = "com.yahoo.elide.graphql";
+    private static final String JAON_API_ENDPOINT_PACKAGE = "com.yahoo.elide.jsonapi.resources";
 
     /**
-     * DI Constructor that allows for finer dependency injection control.
+     * DI Constructor.
+     *
+     * @param injector  A standard HK2 service locator
      */
     @Inject
-    public ResourceConfig() {
-        packages(ENDPOINT_PACKAGE);
+    public ResourceConfig(final ServiceLocator injector) {
+        this(injector, new BinderFactory());
+    }
+
+    /**
+     * Constructor that allows for finer dependency injection control.
+     *
+     * @param injector  A standard HK2 service locator
+     * @param binderFactory  An object that produces resource binder
+     */
+    private ResourceConfig(@NotNull final ServiceLocator injector, @NotNull final BinderFactory binderFactory) {
+        packages(JAON_API_ENDPOINT_PACKAGE, GRAPHQL_ENDPOINT_PACKAGE);
 
         register(CorsFilter.class);
 
-        final Binder binder = new BinderFactory().buildBinder();
-        register(binder);
+        register(binderFactory.buildBinder(injector));
+
+        // Bind api docs to given endpoint
+        // This looks strange, but Jersey binds its Abstract binders first, and then later it binds 'external'
+        // binders (like this HK2 version). This allows breaking dependency injection into two phases.
+        // Everything bound in the first phase can be accessed in the second phase.
+        register(new org.glassfish.hk2.utilities.binding.AbstractBinder() {
+            @Override
+            protected void configure() {
+                injector.getService(Elide.class, "elide").doScans();
+            }
+        });
     }
 }
