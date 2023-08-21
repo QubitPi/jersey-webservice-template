@@ -12,11 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'setup'
-description: 'CI setup, such as installing JDK'
+name: 'CI Setup'
+description: 'Environment setup for CI phase such as installing JDK and Elide data models'
+
+inputs:
+  data-models-repo-org:
+    description: 'Elide data models repo owner, e.g. paion-data'
+    required: true
+  data-models-repo-name:
+    description: 'Elide data models repo name, e.g. my-jpa-data-model'
+    required: true
 
 runs:
   using: "composite"
   steps:
     - name: Set up JDK
       uses: QubitPi/hashicorp-aws/auxiliary/github/actions/jdk-setup@master
+    - name: Load Maven settings.xml
+      shell: bash
+      run: cp settings.xml.example ~/.m2/settings.xml
+    - name: Install data models
+      shell: bash
+      run: |
+        git clone https://github.com/${{ inputs.data-models-repo-org }}/${{ inputs.data-models-repo-name }}.git ../jpa-models
+        cd ../jpa-models
+        mvn clean install
