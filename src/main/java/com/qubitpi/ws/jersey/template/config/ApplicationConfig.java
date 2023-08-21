@@ -17,6 +17,7 @@ package com.qubitpi.ws.jersey.template.config;
 
 import org.aeonbits.owner.Config;
 
+import jakarta.validation.constraints.NotNull;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
 
@@ -45,10 +46,11 @@ import net.jcip.annotations.ThreadSafe;
 public interface ApplicationConfig extends Config {
 
     /**
-     * Example config definition.
+     * The fully qualified package name that contains a set of Elide JPA models.
      *
-     * @return a config value as string.
+     * @return a standard package name under which each class is a JPA entity class
      */
-    @Key("EXAMPLE_CONFIG_KEY_NAME")
-    String exampleConfigKey();
+    @NotNull
+    @Key("MODEL_PACKAGE_NAME")
+    String modelPackageName();
 }
