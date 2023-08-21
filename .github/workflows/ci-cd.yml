@@ -19,6 +19,7 @@ name: Template CI/CD
   push:
     branches:
       - master
+      - jpa-elide
 
 env:
   JDK_VERSION: 17
