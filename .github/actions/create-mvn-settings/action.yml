@@ -1,0 +1,28 @@
+name: 'settings.xml'
+description: 'Generate settings.xml for authenticating internal model package download'
+
+inputs:
+  internal-maven-repo-server-id:
+    description: 'The server ID of Maven repo that contains the model package'
+    required: true
+  internal-maven-repo-user:
+    description: 'The accessing user of Maven repo that contains the model package'
+    required: true
+  internal-maven-repo-token:
+    description: 'The access token of Maven repo that contains the model package'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Authenticating internal model package download
+      uses: whelk-io/maven-settings-xml-action@v20
+      with:
+        servers: >
+          [
+            {
+              "id": "${{ inputs.internal-maven-repo-server-id }}",
+              "username": "${{ inputs.internal-maven-repo-user }}",
+              "password": "${{ inputs.internal-maven-repo-token }}"
+            }
+          ]

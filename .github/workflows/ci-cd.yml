@@ -19,12 +19,14 @@ name: Template CI/CD
   push:
     branches:
       - master
+      - jpa-elide
 
 env:
   JDK_VERSION: 17
   JDK_DISTRIBUTION: 'adopt'
   USER: QubitPi
   EMAIL: jack20220723@gmail.com
+  MODEL_PACKAGE_NAME: 'com.qubitpi.ws.jersey.template.models'
 
 jobs:
   yaml-lint:
@@ -105,43 +107,6 @@ jobs:
           user_name: ${{ env.USER }}
           user_email: ${{ env.EMAIL }}
 
-  docker-image:
-    name: Build Test & Release Development Docker Image
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK_VERSION }}
-          distribution: ${{ env.JDK_DISTRIBUTION }}
-      - name: Build App WAR file so that Docker can pickup during image build
-        run: mvn clean package
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Test image build
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: false
-      - name: Login to DockerHub
-        if: github.ref == 'refs/heads/master'
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Push image to DockerHub
-        if: github.ref == 'refs/heads/master'
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/jersey-ws-template:latest
-
   hashicorp:
     name: Generated Webservice WAR in GitHub Action, and Publish Template AMI Image and Deploy it to EC2 through HashiCorp
     if: ${{ github.event.repository.name != 'jersey-ws-template' }}
@@ -155,10 +120,17 @@ jobs:
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
+      - name: Generate Maven settings.xml
+        uses: ./.github/actions/create-mvn-settings
+        with:
+          internal-maven-repo-server-id: ${{ secrets.INTERNAL_MAVEN_REPO_SERVER_ID }}
+          internal-maven-repo-user: ${{ secrets.INTERNAL_MAVEN_REPO_USER }}
+          internal-maven-repo-token: ${{ secrets.INTERNAL_MAVEN_REPO_TOKEN }}
       - name: Load webservice settings
         run: |
           echo "${{ secrets.OAUTH_PROPERTIES }}" > src/main/resources/oauth.properties
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
+          echo "${{ secrets.JPADATASTORE_PROPERTIES }}" > src/main/resources/jpadatastore.properties
       - name: Generate webservice WAR file
         run: mvn -B clean package
       - name: Load SSL Certificates into AMI
