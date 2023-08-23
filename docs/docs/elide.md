@@ -62,6 +62,26 @@ curl -X POST http://localhost:8080/v1/data/EntityType \
   -d '{"data": {"type": "EntityType", "id": "elide-demo"}}'
 ```
 
+Docker Compose
+--------------
+
+To facilitate local dev and testing (such as in CI/CD):
+
+```bash
+cd jersey-ws-template
+mvn clean package
+docker compose up --build --force-recreate
+```
+
+```bash
+curl -X POST http://localhost:8080/v1/data/book \
+  -H "Content-Type: application/vnd.api+json" \
+  -H "Accept: application/vnd.api+json" \
+  -d '{"data": {"type": "book", "id": "elide-demo", "attributes": {"title": "Pride & Prejudice"}}}'
+```
+
+`http://localhost:8080/v1/data/note`
+
 Troubleshooting
 ---------------
 
