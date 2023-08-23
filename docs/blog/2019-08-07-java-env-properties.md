@@ -2,7 +2,7 @@
 slug: java-env-properties
 title: Java System Properties & Environment Variables API's
 authors: jiaqi
-tags: [java]
+tags: [Java]
 ---
 
 System Properties
