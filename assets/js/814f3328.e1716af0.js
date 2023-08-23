@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Refer to Environment Variables in POM","permalink":"/jersey-ws-template/blog/env-var-in-pom"},{"title":"Java System Properties & Environment Variables API\'s","permalink":"/jersey-ws-template/blog/java-env-properties"}]}')}}]);
