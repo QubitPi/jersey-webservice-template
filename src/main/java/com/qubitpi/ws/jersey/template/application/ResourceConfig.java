@@ -15,7 +15,6 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
-import com.yahoo.elide.Elide;
 import com.yahoo.elide.annotation.Include;
 
 import org.glassfish.hk2.api.ServiceLocator;
@@ -52,13 +51,5 @@ public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
         final Binder binder = new BinderFactory().buildBinder(injector);
 
         register(binder);
-
-        register(new org.glassfish.hk2.utilities.binding.AbstractBinder() {
-            @Override
-            protected void configure() {
-                final Elide elide = injector.getService(Elide.class, "elide");
-                elide.doScans();
-            }
-        });
     }
 }
