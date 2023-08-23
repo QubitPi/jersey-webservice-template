@@ -84,8 +84,10 @@ public class BinderFactory {
             @Override
             protected void configure() {
                 final ElideSettings elideSettings = buildElideSettings();
+                final Elide elide = buildElide(elideSettings);
+                elide.doScans();
 
-                bind(buildElide(elideSettings)).to(Elide.class).named("elide");
+                bind(elide).to(Elide.class).named("elide");
                 bind(elideSettings).to(ElideSettings.class);
                 bind(elideSettings.getDictionary()).to(EntityDictionary.class);
                 bind(elideSettings.getDataStore()).to(DataStore.class).named("elideDataStore");
@@ -154,7 +156,7 @@ public class BinderFactory {
                 dbProperties.putIfAbsent("hibernate.hikari.idleTimeout", "30000");
 
                 dbProperties.put("jakarta.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-                dbProperties.put("jakarta.persistence.jdbc.url", "jdbc:mysql://localhost/elide?serverTimezone=UTC");
+                dbProperties.put("jakarta.persistence.jdbc.url", "jdbc:mysql://db:3306/elide?serverTimezone=UTC");
                 dbProperties.put("jakarta.persistence.jdbc.user", "root");
                 dbProperties.put("jakarta.persistence.jdbc.password", "root");
 
