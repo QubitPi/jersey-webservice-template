@@ -8,7 +8,7 @@ Template can delegate JPA persistence to [Elide].
 Configuring Elide requires 2 [bindings][what is binding]:
 
 1. **[Elide][Elide instance class]**
-2. **[ElideSettings][ElideSettings instance class]** itself with 2 extra sub-bindings:
+2. **[ElideSettings][ElideSettings instance class]** with 2 extra sub-bindings:
 
    - **EntityDictionary**
    - **DataStore**
@@ -33,7 +33,7 @@ model package is internal and cannot be visible publicly, either make the webser
 
 ```bash
 export MODEL_PACKAGE_JAR_GROUP_ID=com.mycompnay
-export MODEL_PACKAGE_JAR_ARTIFACT_ID=astraios-model-package
+export MODEL_PACKAGE_JAR_ARTIFACT_ID=my-model-package
 export MODEL_PACKAGE_JAR_VERSION=1.0.7
 ```
 
@@ -43,6 +43,12 @@ The jetty-base should be initialized with
 
 ```bash
 java -jar $JETTY_HOME/start.jar --add-module=annotations,server,http,deploy,servlet,webapp,resources,jsp,websocket
+```
+
+In addition, before running webservice, the environment variable **MODEL_PACKAGE_NAME** must be set. For example:
+
+```bash
+export MODEL_PACKAGE_NAME=com.mycompnay.models
 ```
 
 :::
