@@ -19,7 +19,7 @@ The binding is referencing [Elide Standalone] in the following way:
 
 To inject Elide model package, simply put the models in a separate JAR and include it as a dependency in POM. If the
 model package is internal and cannot be visible publicly, either make the webservice project private or public with
-[env variable][Refer to Environment Variables in POM] masking, for example:
+env variable masking, for example:
 
 ```xml
 <dependencies>
@@ -103,7 +103,6 @@ To optionally disable GraphQL endpoints, simply exclude corresponding dependenci
 [Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
 [ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
-[Refer to Environment Variables in POM]: https://www.baeldung.com/maven-env-variables
 [ResourceConfig]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html
