@@ -31,6 +31,9 @@ import com.yahoo.elide.datastores.jpa.JpaDataStore;
 import com.yahoo.elide.datastores.jpa.PersistenceUnitInfoImpl;
 import com.yahoo.elide.datastores.jpa.transaction.NonJtaTransaction;
 
+import com.qubitpi.ws.jersey.template.config.ApplicationConfig;
+import com.qubitpi.ws.jersey.template.config.JpaDatastoreConfig;
+
 import org.aeonbits.owner.ConfigFactory;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.Binder;
@@ -77,17 +80,18 @@ public class BinderFactory {
 
             private static final Consumer<EntityManager> TXCANCEL = em -> em.unwrap(Session.class).cancelQuery();
 
-            private static final ApplicationConfig CONFIG = ConfigFactory.create(ApplicationConfig.class);
+            private static final ApplicationConfig APPLICATION_CONFIG = ConfigFactory.create(ApplicationConfig.class);
+            private static final JpaDatastoreConfig JPA_DATASTORE_CONFIG = ConfigFactory.create(
+                    JpaDatastoreConfig.class
+            );
 
             private final ClassScanner classScanner = new DefaultClassScanner();
 
             @Override
             protected void configure() {
                 final ElideSettings elideSettings = buildElideSettings();
-                final Elide elide = buildElide(elideSettings);
-                elide.doScans();
 
-                bind(elide).to(Elide.class).named("elide");
+                bind(buildElide(elideSettings)).to(Elide.class).named("elide");
                 bind(elideSettings).to(ElideSettings.class);
                 bind(elideSettings.getDictionary()).to(EntityDictionary.class);
                 bind(elideSettings.getDataStore()).to(DataStore.class).named("elideDataStore");
@@ -116,11 +120,12 @@ public class BinderFactory {
             }
 
             private EntityManagerFactory buildEntityManagerFactory() {
-                final String modelPackageName = CONFIG.modelPackageName();
+                final String modelPackageName = APPLICATION_CONFIG.modelPackageName();
+
                 final ClassLoader classLoader = null;
 
                 final PersistenceUnitInfo persistenceUnitInfo = new PersistenceUnitInfoImpl(
-                        "jersey-ws-template",
+                        "astraios",
                         combineModelEntities(classScanner, modelPackageName, false),
                         getDefaultDbConfigs(),
                         classLoader
@@ -139,7 +144,7 @@ public class BinderFactory {
 
                 dbProperties.put("hibernate.show_sql", "true");
                 dbProperties.put("hibernate.hbm2ddl.auto", "create");
-                dbProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+                dbProperties.put("hibernate.dialect", JPA_DATASTORE_CONFIG.dbDialect());
                 dbProperties.put("hibernate.current_session_context_class", "thread");
                 dbProperties.put("hibernate.jdbc.use_scrollable_resultset", "true");
 
@@ -155,10 +160,10 @@ public class BinderFactory {
                 dbProperties.putIfAbsent("hibernate.hikari.maximumPoolSize", "30");
                 dbProperties.putIfAbsent("hibernate.hikari.idleTimeout", "30000");
 
-                dbProperties.put("jakarta.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-                dbProperties.put("jakarta.persistence.jdbc.url", "jdbc:mysql://db:3306/elide?serverTimezone=UTC");
-                dbProperties.put("jakarta.persistence.jdbc.user", "root");
-                dbProperties.put("jakarta.persistence.jdbc.password", "root");
+                dbProperties.put("jakarta.persistence.jdbc.driver", JPA_DATASTORE_CONFIG.dbDriver());
+                dbProperties.put("jakarta.persistence.jdbc.url", JPA_DATASTORE_CONFIG.dbUrl());
+                dbProperties.put("jakarta.persistence.jdbc.user", JPA_DATASTORE_CONFIG.dbUser());
+                dbProperties.put("jakarta.persistence.jdbc.password", JPA_DATASTORE_CONFIG.dbPassword());
 
                 return dbProperties;
             }

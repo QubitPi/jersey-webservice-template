@@ -41,7 +41,7 @@
         <version.slf4j>1.7.25</version.slf4j>
         <version.logback>1.2.3</version.logback>
         <version.jackson>2.13.3</version.jackson>
-        <version.owner>1.1.2</version.owner>
+        <version.owner>1.0.12</version.owner>
         <version.servlet>6.0.0</version.servlet>
         <version.jersey>3.1.1</version.jersey>
         <version.groovy>4.0.6</version.groovy>
@@ -292,7 +292,13 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>spock</artifactId>
-            <version>1.18.0</version>
+            <version>1.19.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
+            <version>1.19.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -540,12 +546,4 @@
             </build>
         </profile>
     </profiles>
-
-    <repositories>
-        <repository>
-            <id>paion</id>
-            <name>Paion Data Official Release Repository</name>
-            <url>https://nexus.paion-data.dev/repository/maven-oss</url>
-        </repository>
-    </repositories>
 </project>
