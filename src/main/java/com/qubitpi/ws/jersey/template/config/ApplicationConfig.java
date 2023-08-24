@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.application;
+package com.qubitpi.ws.jersey.template.config;
 
 import org.aeonbits.owner.Config;
 
@@ -41,7 +41,7 @@ import net.jcip.annotations.ThreadSafe;
 @Immutable
 @ThreadSafe
 @Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources({"system:env", "system:properties"})
+@Config.Sources({"classpath:application.properties", "system:env", "system:properties"})
 public interface ApplicationConfig extends Config {
 
     @Key("MODEL_PACKAGE_NAME")
