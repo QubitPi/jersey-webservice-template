@@ -118,14 +118,14 @@ To optionally disable GraphQL endpoints, simply exclude corresponding dependenci
         </dependency>
 ```
 
-[BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
-[Book entity]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
+[BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
+[Book entity]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
 
 [Elide]: https://elide.io/
 [Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
 [Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
 [ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
-[ResourceConfig]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
+[ResourceConfig]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html
