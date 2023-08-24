@@ -62,6 +62,28 @@ curl -X POST http://localhost:8080/v1/data/EntityType \
   -d '{"data": {"type": "EntityType", "id": "elide-demo"}}'
 ```
 
+Docker Compose
+--------------
+
+To facilitate local dev and testing (such as in CI/CD):
+
+```bash
+cd jersey-ws-template
+mvn clean package
+docker compose up --build --force-recreate
+```
+
+The dockerized app exposes a [Book entity] in JSON-API. We can create a new book using, for example
+
+```bash
+curl -X POST http://localhost:8080/v1/data/book \
+  -H "Content-Type: application/vnd.api+json" \
+  -H "Accept: application/vnd.api+json" \
+  -d '{"data": {"type": "book", "id": "elide-demo", "attributes": {"title": "Pride & Prejudice"}}}'
+```
+
+Then we can see the list of all books which includes the book we just POSTed at `http://localhost:8080/v1/data/book`
+
 Troubleshooting
 ---------------
 
@@ -96,13 +118,14 @@ To optionally disable GraphQL endpoints, simply exclude corresponding dependenci
         </dependency>
 ```
 
-[BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
+[BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
+[Book entity]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
 
 [Elide]: https://elide.io/
 [Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
 [Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
 [ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
-[ResourceConfig]: https://github.com/QubitPi/jersey-ws-template/blob/jpa/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
+[ResourceConfig]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html
