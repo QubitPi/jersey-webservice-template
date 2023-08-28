@@ -39,4 +39,3 @@ public class CorsFilter implements ContainerResponseFilter {
         );
     }
 }
-
