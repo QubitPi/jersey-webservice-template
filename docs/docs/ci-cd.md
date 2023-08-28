@@ -5,6 +5,28 @@ title: CI/CD
 
 ![Error loading ci-cd.png](./img/ci-cd.png)
 
+:::caution
+
+[Never use SonarCloud Caching](https://github.com/paion-data/astraios/pull/9), otherwise the dependency injection will
+get screwed up. i.e. The following snippet will never go to GitHub Action script
+
+```xml
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+```
+
+:::
+
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
 - [**SONAR_TOKEN**](https://sonarcloud.io/project/overview?id=QubitPi_jersey-ws-template)
@@ -47,6 +69,7 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
 [HashiCorp Packer template]: https://github.com/QubitPi/jersey-ws-template/blob/master/hashicorp/images/aws-jersey-ws.pkr.hcl
 [HashiCorp Packer template setup script]: https://github.com/QubitPi/jersey-ws-template/blob/master/hashicorp/scripts/setup.sh
 [HashiCorp Terraform config file]: https://github.com/QubitPi/jersey-ws-template/blob/master/hashicorp/instances/main.tf
+[How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 [jersey-ws-template CI/CD]: https://github.com/QubitPi/jersey-ws-template/blob/master/.github/workflows/ci-cd.yml
 [jersey-ws-template Dockerfile]: https://github.com/QubitPi/jersey-ws-template/blob/master/Dockerfile
