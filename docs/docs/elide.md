@@ -119,7 +119,7 @@ To optionally disable GraphQL endpoints, simply exclude corresponding dependenci
 ```
 
 [BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
-[Book entity]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
+[Book entity]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/test/java/com/qubitpi/ws/jersey/template/models/Book.java
 
 [Elide]: https://elide.io/
 [Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
