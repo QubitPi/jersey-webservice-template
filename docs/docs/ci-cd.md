@@ -5,28 +5,6 @@ title: CI/CD
 
 ![Error loading ci-cd.png](./img/ci-cd.png)
 
-:::caution
-
-[Never use SonarCloud Caching](https://github.com/paion-data/astraios/pull/9), otherwise the dependency injection will
-get screwed up. i.e. The following snippet will never go to GitHub Action script
-
-```xml
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-```
-
-:::
-
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
 - [**SONAR_TOKEN**](https://sonarcloud.io/project/overview?id=QubitPi_jersey-ws-template)
@@ -63,6 +41,36 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
 
 - Update `"EC2 Instance Name"` and `"Security Group Name"` in [Terraform config file][HashiCorp Terraform config file]
   accordingly
+
+### JPA through Elide
+
+- **APPLICATION_PROPERTIES** The _application.properties_ file content that will be put under _src/main/resources/_
+  directory by CI/CD
+- **JPADATASTORE_PROPERTIES** The _jpadatastore.properties_ file content that will be put under _src/main/resources/_
+  directory
+
+Note that if model package is from an internal Maven repo which requires authentication, we can insert a _settings.xml_
+generating step using [create-mvn-settings]. For example:
+
+```yml
+  hashicorp:
+    name: Generated Webservice WAR in GitHub Action, and Publish Template AMI Image and Deploy it to EC2 through HashiCorp
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      ...
+
+      - name: Generate Maven settings.xml
+        uses: ./.github/actions/create-mvn-settings
+        with:
+          internal-maven-repo-server-id: ${{ secrets.INTERNAL_MAVEN_REPO_SERVER_ID }}
+          internal-maven-repo-user: ${{ secrets.INTERNAL_MAVEN_REPO_USER }}
+          internal-maven-repo-token: ${{ secrets.INTERNAL_MAVEN_REPO_TOKEN }}
+
+      ...
+```
+
+[create-mvn-settings]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/.github/actions/create-mvn-settings/action.yml
 
 [docker hub]: https://hub.docker.com/r/jack20191124/jersey-ws-template/
 

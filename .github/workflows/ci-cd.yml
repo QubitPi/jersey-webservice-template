@@ -143,28 +143,33 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/jersey-ws-template:latest
 
   hashicorp:
-    name: Publish Jersey WS AMI Image and Deploy it to EC2 through HashiCorp
+    name: Generated Webservice WAR in GitHub Action, and Publish Template AMI Image and Deploy it to EC2 through HashiCorp
     if: ${{ github.event.repository.name != 'jersey-ws-template' }}
     needs: tests
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: hashicorp
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Load deployment environment variables into Terraform variable file
-        run: |
-          touch instances/variables.auto.tfvars
-          echo 'zone_id = "${{ secrets.ZONE_ID }}"' > instances/variables.auto.tfvars
-          echo 'sentry_dsn = "${{ secrets.SENTRY_DSN }}"' >> instances/variables.auto.tfvars
-      - name: Load SSL Certificates
+      - name: Set up JDK ${{ env.JDK_VERSION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: ${{ env.JDK_DISTRIBUTION }}
+      - name: Generate webservice WAR file
+        run: mvn -B clean package
+      - name: Load SSL Certificates into AMI
         working-directory: hashicorp/images
         run: |
           echo '${{ secrets.SSL_CERTIFICATE }}' > server.crt
           echo '${{ secrets.SSL_CERTIFICATE_KEY }}' > server.key
-      - name: Publish Jersey WS AMI image and deploy it to EC2 through HashiCorp
-        uses: QubitPi/hashicorp-aws@master
+      - name: Load runtime settings into Terraform variable file
+        working-directory: hashicorp/instances
+        run: |
+          touch variables.auto.tfvars
+          echo 'zone_id = "${{ secrets.ZONE_ID }}"' > variables.auto.tfvars
+          echo 'sentry_dsn = "${{ secrets.SENTRY_DSN }}"' >> variables.auto.tfvars
+      - name: Push AMI and Deploy EC2
+        uses: QubitPi/aergia@master
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

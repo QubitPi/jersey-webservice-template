@@ -60,7 +60,7 @@ data "aws_ami" "latest-jersey-ws-template" {
 
 resource "aws_instance" "jersey-ws-template" {
   ami = "${data.aws_ami.latest-jersey-ws-template.id}"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   tags = {
     Name = "EC2 Instance Name"
   }

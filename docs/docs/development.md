@@ -3,43 +3,10 @@ sidebar_position: 3
 title: Development
 ---
 
-Running Webservice in Docker Compose
-------------------------------------
-
-### Defining Data Models
-
-Jersey WS Template can run in [Docker Compose] for the following purposes
-
-1. Decoupling frontend and backend development
-2. Easily integrating application backed by Jersey WS Template testing in CI/CD
-
-![Error Loading docker-compose.png](./img/docker-compose.png)
-
-```bash
-git clone https://github.com/QubitPi/jersey-ws-template.git
-cd jersey-ws-template
-git checkout jpa-elide
-mvn clean package
-MODEL_PACKAGE_NAME=$JWT_MODEL_PACKAGE_NAME docker compose up --build --force-recreate
-```
-
-where `$JWT_MODEL_PACKAGE_NAME` is the package in config JAR that contains all
-[elide models](https://elide.io/pages/guide/v7/02-data-model.html). It can be set, for example, at command line with:
-
-```bash
-export JWT_MODEL_PACKAGE_NAME=com.mycompany.jwt.models
-```
-
-The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
-
-### Troubleshooting
-
-#### Database Does Not Contain Model Packages's Bean Table
-
-_If tests is running in IDE_, make sure the model package JAR it is in IDE's **External Libraries**
-
 Running Tests
 -------------
+
+The following commands runs both unit and integration tests
 
 ```bash
 mvn clean verify
@@ -55,7 +22,7 @@ Packaging
 mvn clean package
 ```
 
-A [**WAR** file](https://en.wikipedia.org/wiki/WAR_(file_format)) named `jersey-ws-template-1.0-SNAPSHOT.war` will
+A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **jersey-ws-template-1.0-SNAPSHOT.war** will
 be generated under _target_ directory for [running in Jetty](#running-in-standalone-jetty)
 
 Running Webservice in Standalone Jetty (Production)
@@ -64,13 +31,7 @@ Running Webservice in Standalone Jetty (Production)
 ### Download Jetty
 
 At [download page](https://www.eclipse.org/jetty/download.php), pick up a `.tgz` distribution. **It is very important
-to pick up Jetty server version that matches JDK version**. For JDK **17**, it's been tested that Jetty _11.0.15_ works
-
-:::note
-
-During testing, the embedded Jetty version is also 11.0.15
-
-:::
+to pick up Jetty server version that matches JDK version**. For JDK **17**, it's been tested that Jetty _11.0.15_ worked
 
 Hence, we will use "11.0.15" release as an example:
 
@@ -109,12 +70,6 @@ Lastly, drop the [WAR file](#packaging) into **/path/to/jetty-base/webapps** dir
 ```bash
 mv /path/to/war-file /path/to/jetty-base/webapps/ROOT.war
 ```
-
-### Configuring Webservice
-
-#### Define Model Package
-
-#### Set Application Properties
 
 ### Running Webservice
 
