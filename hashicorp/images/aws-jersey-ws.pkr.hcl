@@ -64,6 +64,12 @@ build {
     destination = "/home/ubuntu/nginx-ssl.conf"
   }
 
+  # Load WS WAR file into AMI image
+  provisioner "file" {
+    source = "../../target/jersey-ws-template-1.0-SNAPSHOT.war"
+    destination = "/home/ubuntu/ROOT.war"
+  }
+
   provisioner "shell" {
     script = "../scripts/setup.sh"
   }
