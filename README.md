@@ -39,7 +39,7 @@ Documentation
 License
 -------
 
-The use and distribution terms for [jersey-ws-template][jersey-ws-template] are covered by the
+The use and distribution terms for [jersey-ws-template] are covered by the
 [Apache License, Version 2.0][Apache License, Version 2.0].
 
 <div align="center">
@@ -63,6 +63,7 @@ The use and distribution terms for [jersey-ws-template][jersey-ws-template] are 
 
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [Javadoc]: https://qubitpi.github.io/jersey-ws-template/apidocs/
+[jersey-ws-template]: https://qubitpi.github.io/jersey-ws-template/
 
 [Sonar Bugs]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=bugs
 [Sonar Vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-ws-template&metric=vulnerabilities
