@@ -15,17 +15,20 @@
  */
 package com.qubitpi.ws.jersey.template
 
+import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
+
 import org.eclipse.jetty.server.Server
 import org.glassfish.jersey.server.ResourceConfig
 
 import io.restassured.RestAssured
+import io.restassured.builder.RequestSpecBuilder
 import jakarta.inject.Inject
 import jakarta.ws.rs.ApplicationPath
 import spock.lang.Specification
 
 class JettyServerFactorySpec extends Specification {
 
-    static final int PORT = 8235
+    static final int PORT = 8080
     static final String ENDPOINT_RESOURCE_PACKAGE = "com.qubitpi.ws.jersey.template.resource"
 
     /**
@@ -47,6 +50,11 @@ class JettyServerFactorySpec extends Specification {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = PORT
         RestAssured.basePath = "/v1"
+        RestAssured.requestSpecification = new RequestSpecBuilder()
+                .addHeader(
+                        OAuthFilter.AUTHORIZATION_HEADER,
+                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken")
+                .build()
     }
 
     def "Factory produces Jsersey-Jetty applications"() {

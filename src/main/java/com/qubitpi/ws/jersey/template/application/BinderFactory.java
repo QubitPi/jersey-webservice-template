@@ -15,6 +15,8 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
+import com.qubitpi.ws.jersey.template.web.filters.oauth.AccessTokenValidator;
+
 import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
@@ -45,7 +47,12 @@ public class BinderFactory {
         return new AbstractBinder() {
             @Override
             protected void configure() {
-                // intentionally left blank
+                bind(new AccessTokenValidator() {
+                    @Override
+                    public boolean validate(final String accessToken) {
+                        return true;
+                    }
+                }).to(AccessTokenValidator.class);
             }
         };
     }
