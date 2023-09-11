@@ -7,6 +7,14 @@ title: CI/CD
 
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
+- [**APPLICATION_PROPERTIES**][Application configs], such as
+
+  ![Error loading application-config-file-example.png](./img/application-config-file-example.png)
+
+- [**OAUTH_PROPERTIES**][OAuth-related configs], such as
+
+  ![Error loadinng oauth-config-example.png](./img/oauth-config-example.png)
+
 - [**SONAR_TOKEN**](https://sonarcloud.io/project/overview?id=QubitPi_jersey-ws-template)
 - (Optional) **SSL_CERTIFICATE** SSL certificate file content (for
   [exposing webservice endpoints over HTTPS][Nginx SSL Config])
@@ -70,6 +78,8 @@ generating step using [create-mvn-settings]. For example:
       ...
 ```
 
+[Application configs]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/config/ApplicationConfig.java
+
 [create-mvn-settings]: https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/.github/actions/create-mvn-settings/action.yml
 
 [docker hub]: https://hub.docker.com/r/jack20191124/jersey-ws-template/
@@ -83,3 +93,5 @@ generating step using [create-mvn-settings]. For example:
 [jersey-ws-template Dockerfile]: https://github.com/QubitPi/jersey-ws-template/blob/master/Dockerfile
 
 [Nginx SSL Config]: https://github.com/QubitPi/jersey-ws-template/blob/master/hashicorp/images/nginx-ssl.conf
+
+[OAuth-related configs]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/config/OAuthConfig.java
