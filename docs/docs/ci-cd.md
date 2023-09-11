@@ -7,11 +7,11 @@ title: CI/CD
 
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
-- [**APPLICATION_PROPERTIES**], such as
+- [**APPLICATION_PROPERTIES**][Application configs], such as
 
   ![Error loading application-config-file-example.png](./img/application-config-file-example.png)
 
-- [**OAUTH_PROPERTIES**], such as
+- [**OAUTH_PROPERTIES**][OAuth-related configs], such as
 
   ![Error loadinng oauth-config-example.png](./img/oauth-config-example.png)
 
