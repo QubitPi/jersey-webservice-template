@@ -2,3 +2,4 @@ com.qubitpi.ws.jersey.template.application
 com.qubitpi.ws.jersey.template.cache
 com.qubitpi.ws.jersey.template.web.endpoints
 com.qubitpi.ws.jersey.template.web.filters
+com.qubitpi.ws.jersey.template.web.filters.oauth
