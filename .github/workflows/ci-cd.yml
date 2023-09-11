@@ -155,6 +155,10 @@ jobs:
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
+      - name: Load webservice settings
+        run: |
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
+          echo "${{ secrets.OAUTH_PROPERTIES }}" > src/main/resources/oauth.properties
       - name: Generate webservice WAR file
         run: mvn -B clean package
       - name: Load SSL Certificates into AMI
