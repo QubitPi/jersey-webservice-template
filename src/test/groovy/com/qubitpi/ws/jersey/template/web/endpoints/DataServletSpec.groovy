@@ -38,6 +38,7 @@ class DataServletSpec extends Specification {
                         OAuthFilter.AUTHORIZATION_HEADER,
                         OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken")
                 .build()
+        System.setProperty("OAUTH_ENABLED", "true")
     }
 
     def "Healthchecking endpoints returns 200"() {
