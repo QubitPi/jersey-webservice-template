@@ -16,7 +16,6 @@ incoming request. Each API request requires a standard **"Authentication": "Bear
 The validator can be turned on by setting **OAUTH_ENABLED** to _true_. There are 3 ways to do so (with the priority in
 the following order):
 
-
 1. Setting an OS environment variable using, for example, `export OAUTH_ENABLED=true`
 2. Define a JVM system property by
 
@@ -50,7 +49,6 @@ like the following
 ```
 
 :::
-
 
 ![Error loading oauth2-filtering.png](./img/oauth2-filtering.png)
 
