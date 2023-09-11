@@ -24,7 +24,6 @@ import org.testcontainers.spock.Testcontainers
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
-import spock.lang.IgnoreIf
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Subject
@@ -41,7 +40,6 @@ import java.nio.file.Paths
  * see https://www.testcontainers.org/test_framework_integration/spock/#testcontainers-class-annotation
  */
 @Testcontainers
-@IgnoreIf({ isLocal() })
 class DataServletITSpec extends Specification {
 
     static final int SUCCESS = 0
@@ -68,6 +66,7 @@ class DataServletITSpec extends Specification {
     GenericContainer container = new GenericContainer<>(
             new ImageFromDockerfile().withDockerfile(Paths.get(DOCKERFILE_ABS_PATH))
     )
+            .withEnv("OAUTH_ENABLED", "true")
             .withExposedPorts(8080)
             .withImagePullPolicy(PullPolicy.defaultPolicy())
 
@@ -78,8 +77,10 @@ class DataServletITSpec extends Specification {
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .addHeader(
                         OAuthFilter.AUTHORIZATION_HEADER,
-                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken")
+                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken"
+                )
                 .build()
+        System.setProperty("OAUTH_ENABLED", "true")
     }
 
     @Unroll

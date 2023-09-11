@@ -47,6 +47,11 @@ public class DataServlet {
         // intentionally left blank
     }
 
+    /**
+     * A webservice sanity-check endpoint.
+     *
+     * @return 200 OK response
+     */
     @GET
     @Path("/healthcheck")
     public Response healthcheck() {
