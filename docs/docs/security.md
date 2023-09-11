@@ -37,7 +37,7 @@ validator below:
 
 :::note
 
-Note that the implementation below depends on 2 JWT libraries:
+Note that the implementation[^1] below depends on 2 JWT libraries:
 
 ```xml
 <dependency>
@@ -213,6 +213,8 @@ public class ES384JwtTokenValidator implements AccessTokenValidator {
     }
 }
 ```
+
+[^1]: https://stackoverflow.com/a/58965516
 
 [BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
 
