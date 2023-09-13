@@ -36,9 +36,9 @@ class DataServletSpec extends Specification {
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .addHeader(
                         OAuthFilter.AUTHORIZATION_HEADER,
-                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken")
+                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken"
+                )
                 .build()
-        System.setProperty("OAUTH_ENABLED", "true")
     }
 
     def "Healthchecking endpoints returns 200"() {

@@ -80,7 +80,6 @@ class DataServletITSpec extends Specification {
                         OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken"
                 )
                 .build()
-        System.setProperty("OAUTH_ENABLED", "true")
     }
 
     @Unroll
