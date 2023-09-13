@@ -15,11 +15,9 @@
  */
 package com.qubitpi.ws.jersey.template.application
 
-import com.qubitpi.ws.jersey.template.config.OAuthConfig
 import com.qubitpi.ws.jersey.template.web.filters.CorsFilter
 import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
 
-import org.aeonbits.owner.ConfigFactory
 import org.glassfish.jersey.internal.inject.Binder
 
 import spock.lang.Specification
@@ -27,12 +25,7 @@ import spock.lang.Unroll
 
 class ResourceConfigSpec extends Specification {
 
-    static final OAuthConfig OAUTH_CONFIG = ConfigFactory.create(OAuthConfig.class)
     static final Set<Class> ALWAYS_REGISTERED_FILTERS = [CorsFilter] as Set
-
-    def setupSpec() {
-        System.setProperty("OAUTH_ENABLED", "true")
-    }
 
     @SuppressWarnings('GroovyAccessibility')
     def "Instantiation triggers initialization and binding lifecycles"() {
@@ -41,7 +34,7 @@ class ResourceConfigSpec extends Specification {
         binderFactory.buildBinder() >> Mock(Binder)
 
         when: "injecting resources"
-        org.glassfish.jersey.server.ResourceConfig resourceConfig = new ResourceConfig(OAUTH_CONFIG.authEnabled())
+        org.glassfish.jersey.server.ResourceConfig resourceConfig = new ResourceConfig(true)
 
         then: "all request & response filters are injected"
         resourceConfig.classes.containsAll(ALWAYS_REGISTERED_FILTERS)
