@@ -38,7 +38,8 @@ import net.jcip.annotations.ThreadSafe;
 @ApplicationPath("/v1/data/")
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
-    private static final String ENDPOINT_PACKAGE = "com.yahoo.elide.jsonapi.resources";
+    private static final String GRAPHQL_ENDPOINT_PACKAGE = "com.yahoo.elide.graphql";
+    private static final String JAON_API_ENDPOINT_PACKAGE = "com.yahoo.elide.jsonapi.resources";
     private static final OAuthConfig OAUTH_CONFIG = ConfigFactory.create(OAuthConfig.class);
 
     /**
@@ -58,12 +59,12 @@ public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
      * @param binderFactory  An object that produces resource binder
      * @param oauthEnabled  Flag on whether or not to enable auth feature, mainly for differentiating dev/test and prod
      */
-    public ResourceConfig(
+    private ResourceConfig(
             @NotNull final ServiceLocator injector,
             @NotNull final BinderFactory binderFactory,
             final boolean oauthEnabled
     ) {
-        packages(ENDPOINT_PACKAGE);
+        packages(JAON_API_ENDPOINT_PACKAGE, GRAPHQL_ENDPOINT_PACKAGE);
 
         register(CorsFilter.class);
         if (oauthEnabled) {

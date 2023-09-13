@@ -15,8 +15,6 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
-import static com.yahoo.elide.standalone.Util.combineModelEntities;
-
 import com.yahoo.elide.Elide;
 import com.yahoo.elide.ElideSettings;
 import com.yahoo.elide.ElideSettingsBuilder;
@@ -44,6 +42,7 @@ import org.hibernate.Session;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 import org.hibernate.jpa.boot.internal.PersistenceUnitInfoDescriptor;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.spi.PersistenceUnitInfo;
@@ -53,8 +52,10 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * A binder factory builds a custom binder for the Jersey application.
@@ -167,7 +168,7 @@ public class BinderFactory {
 
                 final PersistenceUnitInfo persistenceUnitInfo = new PersistenceUnitInfoImpl(
                         "astraios",
-                        combineModelEntities(classScanner, modelPackageName, false),
+                        getAllEntities(classScanner, modelPackageName),
                         getDefaultDbConfigs(),
                         classLoader
                 );
@@ -177,6 +178,24 @@ public class BinderFactory {
                         new HashMap<>(),
                         classLoader
                 ).build();
+            }
+
+            /**
+             * Get all the entities in a package.
+             *
+             * @param scanner  An object that picks up entities by Elide annotation
+             * @param packageName  A fully qualified package name under which contains all entities
+             *
+             * @return all entities found in the provided package.
+             */
+            @NotNull
+            public static List<String> getAllEntities(
+                    @NotNull final ClassScanner scanner,
+                    @NotNull final String packageName
+            ) {
+                return scanner.getAnnotatedClasses(packageName, Entity.class).stream()
+                        .map(Class::getName)
+                        .collect(Collectors.toList());
             }
 
             /**
