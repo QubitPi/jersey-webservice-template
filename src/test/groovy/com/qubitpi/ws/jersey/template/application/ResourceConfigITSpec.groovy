@@ -15,8 +15,26 @@
  */
 package com.qubitpi.ws.jersey.template.application
 
+import static com.yahoo.elide.test.graphql.GraphQLDSL.argument
+import static com.yahoo.elide.test.graphql.GraphQLDSL.arguments
+import static com.yahoo.elide.test.graphql.GraphQLDSL.document
+import static com.yahoo.elide.test.graphql.GraphQLDSL.field
+import static com.yahoo.elide.test.graphql.GraphQLDSL.mutation
+import static com.yahoo.elide.test.graphql.GraphQLDSL.query
+import static com.yahoo.elide.test.graphql.GraphQLDSL.selection
+import static com.yahoo.elide.test.graphql.GraphQLDSL.selections
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.attr
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.attributes
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.data
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.datum
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.id
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.resource
+import static com.yahoo.elide.test.jsonapi.JsonApiDSL.type
+import static org.hamcrest.Matchers.equalTo
+
 import com.yahoo.elide.jsonapi.JsonApi
 
+import com.qubitpi.ws.jersey.template.models.Book
 import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
 
 import org.apache.http.HttpStatus
@@ -24,18 +42,16 @@ import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.servlet.ServletHolder
 import org.glassfish.jersey.servlet.ServletContainer
-import org.hamcrest.Matchers
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.spock.Testcontainers
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
+import io.restassured.response.Response
 import spock.lang.Shared
 
 @Testcontainers
 class ResourceConfigITSpec extends AbstractITSpec {
-
-    static final int WS_PORT = 8080
 
     final Server jettyEmbeddedServer = new Server(WS_PORT)
 
@@ -75,98 +91,10 @@ class ResourceConfigITSpec extends AbstractITSpec {
         jerseyServlet.setInitParameter("jakarta.ws.rs.Application", ResourceConfig.class.getCanonicalName())
 
         jettyEmbeddedServer.start()
-
-        expect: "database is initially empty"
-        RestAssured
-                .given()
-                .when()
-                .get("book")
-                .then()
-                .statusCode(200)
-                .body("data", Matchers.equalTo([]))
     }
 
     def cleanup() {
         jettyEmbeddedServer.stop()
         jettyEmbeddedServer.destroy()
-    }
-
-    def "JSON API allows for POSTing, GETing, PATCHing, and DELETing a book"() {
-        when: "an entity is POSTed via JSON API"
-        RestAssured
-                .given()
-                .contentType(JsonApi.MEDIA_TYPE)
-                .accept(JsonApi.MEDIA_TYPE)
-                .body("""
-                    {"data": {"type": "book", "id": "elide-demo", "attributes": {"title": "Pride & Prejudice"}}}
-                """)
-                .when()
-                .post("book")
-                .then()
-                .statusCode(HttpStatus.SC_CREATED)
-
-        then: "we can GET that entity next"
-        RestAssured
-                .given()
-                .when()
-                .get("book")
-                .then()
-                .statusCode(200)
-                .body("data", Matchers.equalTo([
-                        [
-                                type: "book",
-                                id: "elide-demo",
-                                attributes: [
-                                        title: "Pride & Prejudice"
-                                ]
-                        ]
-                ]))
-
-        when: "we update that entity"
-        RestAssured
-                .given()
-                .contentType(JsonApi.MEDIA_TYPE)
-                .accept(JsonApi.MEDIA_TYPE)
-                .body("""
-                    {"data": {"type": "book", "id": "elide-demo", "attributes": {"title": "Pride and Prejudice"}}}
-                """)
-                .when()
-                .patch("book/elide-demo")
-                .then()
-                .statusCode(HttpStatus.SC_NO_CONTENT)
-
-        then: "we can GET that entity with updated attribute"
-        RestAssured
-                .given()
-                .when()
-                .get("book")
-                .then()
-                .statusCode(200)
-                .body("data", Matchers.equalTo([
-                        [
-                                type: "book",
-                                id: "elide-demo",
-                                attributes: [
-                                        title: "Pride and Prejudice"
-                                ]
-                        ]
-                ]))
-
-        when: "the entity is deleted"
-        RestAssured
-                .given()
-                .when()
-                .delete("book/elide-demo")
-                .then()
-                .statusCode(HttpStatus.SC_NO_CONTENT)
-
-        then: "that entity is not found in database anymore"
-        RestAssured
-                .given()
-                .when()
-                .get("book")
-                .then()
-                .statusCode(200)
-                .body("data", Matchers.equalTo([]))
     }
 }

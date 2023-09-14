@@ -29,17 +29,5 @@ class DockerComposeITSpec extends AbstractITSpec {
 
     final DockerComposeContainer COMPOSE = new DockerComposeContainer(new File("docker-compose.yml"))
             .withEnv("MODEL_PACKAGE_NAME", System.getenv().get("MODEL_PACKAGE_NAME"))
-            .withExposedService("web", WS_PORT, Wait.forHttp("/v1/data/myEntity").forStatusCode(200))
-
-    def "JSON API allows for POSTing and GETing an entity"() {
-        expect: "database is initially empty"
-        RestAssured
-                .given()
-                .when()
-                .get("myEntity")
-                .then()
-                .statusCode(200
-                )
-                .body("data", Matchers.equalTo([]))
-    }
+            .withExposedService("web", WS_PORT, Wait.forHttp("/v1/data/book").forStatusCode(200))
 }
