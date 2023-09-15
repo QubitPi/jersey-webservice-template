@@ -74,7 +74,11 @@ generating step using [create-mvn-settings]. For example:
           internal-maven-repo-server-id: ${{ secrets.INTERNAL_MAVEN_REPO_SERVER_ID }}
           internal-maven-repo-user: ${{ secrets.INTERNAL_MAVEN_REPO_USER }}
           internal-maven-repo-token: ${{ secrets.INTERNAL_MAVEN_REPO_TOKEN }}
-
+          jersey-ws-template-model-package-jar-group-id: ${{ secrets.JWT_MODEL_PACKAGE_JAR_GROUP_ID }}
+          jersey-ws-template-model-package-jar-artifact-id: ${{ secrets.JWT_MODEL_PACKAGE_JAR_ARTIFACT_ID }}
+          jersey-ws-template-model-package-jar-version: ${{ secrets.JWT_MODEL_PACKAGE_JAR_VERSION }}
+          jersey-ws-template-model-package-repo-id: ${{ secrets.JWT_MODEL_PACKAGE_REPO_ID }}
+          jersey-ws-template-model-package-repo-url: ${{ secrets.JWT_MODEL_PACKAGE_REPO_URL }}
       ...
 ```
 
