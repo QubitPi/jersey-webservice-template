@@ -12,12 +12,15 @@ The configurations in this page can be set from several sources in the following
 3. a **.properties** file placed under CLASSPATH. This file can be put under `src/main/resources` source directory with
    contents, for example, `OAUTH_ENABLED=true`
 
+Note that environment config has higher priority than Java system properties. Java system properties have higher
+priority than file based configuration.
+
 Core Properties
 ---------------
 
-:::note
+:::info
 
-The following configurations can be placed in the properties file called **application.properties**
+The following configurations can be placed in the properties file called **src/main/resources/application.properties**
 
 :::
 
@@ -26,16 +29,16 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="jpa-elide" label="JPA(Elide)" default>
-    - **MODEL_PACKAGE_NAME**: The fully qualified package name that contains a set of Elide JPA models
+    <b>MODEL_PACKAGE_NAME</b>: The fully qualified package name that contains a set of Elide JPA models
   </TabItem>
 </Tabs>
 
-OAuth 2
--------
+Security
+--------
 
-:::note
+:::info
 
-The following configurations can be placed in the properties file called **oauth.properties**
+The following configurations can be placed in the properties file called **src/main/resources/oauth.properties**
 
 :::
 
@@ -59,27 +62,29 @@ The following configurations can be placed in the properties file called **oauth
   }
   ```
 
-(Elide) JPA DataStore
----------------------
+JPA DataStore
+-------------
 
-:::note
+:::info
 
-The following configurations can be placed in the properties file called **jpadatastore.properties**
+The following configurations can be placed in the properties file called **src/main/resources/jpadatastore.properties**
 
 :::
 
 <Tabs>
   <TabItem value="jpa-elide" label="JPA(Elide)" default>
-    - **DB_USER**: Persistence DB username (needs have both Read and Write permissions).
-    - **DB_PASSWORD**: The persistence DB user password.
-    - **DB_URL**: The persistence DB URL, such as "jdbc:mysql://localhost/elide?serverTimezone=UTC".
-    - **DB_DRIVER**: The SQL DB driver class name, such as "com.mysql.jdbc.Driver".
-    - **DB_DIALECT**: The SQL DB dialect name, such as "org.hibernate.dialect.MySQLDialect".
+    <ul>
+      <li> <b>DB_USER</b>: Persistence DB username (needs have both Read and Write permissions).</li>
+      <li> <b>DB_PASSWORD</b>: The persistence DB user password.</li>
+      <li> <b>DB_URL</b>: The persistence DB URL, such as "jdbc:mysql://localhost/elide?serverTimezone=UTC".</li>
+      <li> <b>DB_DRIVER</b>: The SQL DB driver class name, such as "com.mysql.jdbc.Driver".</li>
+      <li> <b>DB_DIALECT</b>: The SQL DB dialect name, such as "org.hibernate.dialect.MySQLDialect".</li>
+    </ul>
   </TabItem>
 </Tabs>
 
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
 [JWKS]: https://datatracker.ietf.org/doc/html/rfc7517
 
-[OAuthFilter]: https://paion-data.github.io/astraios/apidocs/com/paiondata/astraios/web/filters/OAuthFilter.html
+[OAuthFilter]: https://qubitpi.github.io/jersey-ws-template/apidocs/com/qubitpi/ws/jersey/template/web/filters/OAuthFilter.html
 [operating system's environment variables]: https://docs.oracle.com/javase/tutorial/essential/environment/env.html
