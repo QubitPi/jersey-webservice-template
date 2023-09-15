@@ -40,6 +40,8 @@ import org.apache.http.HttpStatus
 
 import io.restassured.RestAssured
 import io.restassured.response.Response
+import jakarta.validation.constraints.NotNull
+import jakarta.ws.rs.core.MediaType
 import spock.lang.Specification
 
 abstract class AbstractITSpec extends Specification {
@@ -194,8 +196,8 @@ abstract class AbstractITSpec extends Specification {
         expect: "database is initially empty"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 query(
@@ -218,8 +220,8 @@ abstract class AbstractITSpec extends Specification {
         when: "an entity is POSTed via GraphQL API"
         Response response = RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 mutation(
@@ -264,8 +266,8 @@ abstract class AbstractITSpec extends Specification {
         then: "we can retrieve that entity next"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 query(
@@ -300,8 +302,8 @@ abstract class AbstractITSpec extends Specification {
         when: "we update that entity"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 mutation(
@@ -340,8 +342,8 @@ abstract class AbstractITSpec extends Specification {
         then: "we can retrieve that entity with updated attribute"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 query(
@@ -376,8 +378,8 @@ abstract class AbstractITSpec extends Specification {
         when: "the entity is deleted"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 mutation(
@@ -403,8 +405,8 @@ abstract class AbstractITSpec extends Specification {
         then: "that entity is not found in database anymore"
         RestAssured
                 .given()
-                .contentType("application/json")
-                .accept("application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .body(
                         query: document(
                                 query(
@@ -423,5 +425,87 @@ abstract class AbstractITSpec extends Specification {
                 .when().post().then()
                 .statusCode(200)
                 .body(equalTo("""{"data":{"book":{"edges":[]}}}"""))
+    }
+
+    def "GraphQL API can sort and paginate (effectively fetching 1 record with some min/max attribute)"() {
+        given: "3 entities are inserted into the database"
+        createBook(new Book(id: 1, title: "Pride & Prejudice"))
+        createBook(new Book(id: 2, title: "Effective Java"))
+        createBook(new Book(id: 3, title: "Critiques of Pure Reason"))
+
+        expect: "sorting by ID in descending order and paginating to get the firsts result returns Kant's work"
+        RestAssured
+                .given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(
+                        query: """
+                                {
+                                    book(sort: "-id", first: "1", after: "0") {
+                                        edges {
+                                            node {
+                                                id
+                                                title
+                                            }
+                                        }
+                                        pageInfo {
+                                            totalRecords
+                                            startCursor
+                                            endCursor
+                                            hasNextPage
+                                        }
+                                    }
+                                }
+
+                        """
+                )
+                .when().post().then()
+                .statusCode(200)
+                .body("", equalTo(
+                        data: [
+                                book: [
+                                        edges:[[
+                                                node: [
+                                                    id: "3",
+                                                    title:"Critiques of Pure Reason"
+                                                ]
+                                        ]],
+                                        pageInfo: [
+                                                totalRecords: 3,
+                                                startCursor: "0",
+                                                endCursor: "1",
+                                                hasNextPage:true
+                                        ]
+                                ]
+                        ] as HashMap
+                ))
+    }
+
+    static Response createBook(@NotNull final Book book) {
+        RestAssured
+                .given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(
+                        query: document(
+                                mutation(
+                                        selection(
+                                                field(
+                                                        "book",
+                                                        arguments(
+                                                                argument("op", "UPSERT"),
+                                                                argument("data", book)
+                                                        ),
+                                                        selections(
+                                                                field("id"),
+                                                                field("title")
+                                                        )
+                                                )
+                                        )
+                                )
+                        ).toQuery()
+                )
+                .when()
+                .post()
     }
 }

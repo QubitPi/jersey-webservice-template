@@ -15,29 +15,8 @@
  */
 package com.qubitpi.ws.jersey.template.application
 
-import static com.yahoo.elide.test.graphql.GraphQLDSL.argument
-import static com.yahoo.elide.test.graphql.GraphQLDSL.arguments
-import static com.yahoo.elide.test.graphql.GraphQLDSL.document
-import static com.yahoo.elide.test.graphql.GraphQLDSL.field
-import static com.yahoo.elide.test.graphql.GraphQLDSL.mutation
-import static com.yahoo.elide.test.graphql.GraphQLDSL.query
-import static com.yahoo.elide.test.graphql.GraphQLDSL.selection
-import static com.yahoo.elide.test.graphql.GraphQLDSL.selections
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.attr
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.attributes
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.data
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.datum
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.id
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.resource
-import static com.yahoo.elide.test.jsonapi.JsonApiDSL.type
-import static org.hamcrest.Matchers.equalTo
-
-import com.yahoo.elide.jsonapi.JsonApi
-
-import com.qubitpi.ws.jersey.template.models.Book
 import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
 
-import org.apache.http.HttpStatus
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.servlet.ServletHolder
@@ -47,7 +26,6 @@ import org.testcontainers.spock.Testcontainers
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
-import io.restassured.response.Response
 import spock.lang.Shared
 
 @Testcontainers
