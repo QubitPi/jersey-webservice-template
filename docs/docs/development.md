@@ -30,7 +30,7 @@ Running Webservice in Standalone Jetty (Production)
 
 ### Download Jetty
 
-For JDK **17**, which is Astraios' Java version, it's been tested that Jetty _11.0.15_ worked. Hence, we will use
+For JDK **17**, which is the version JWT runs on, it's been tested that Jetty _11.0.15_ worked. Hence, we will use
 ["11.0.15" release](https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/11.0.15/jetty-home-11.0.15.tar.gz) as
 an example:
 
