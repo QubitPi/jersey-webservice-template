@@ -95,6 +95,18 @@ where `$JWT_MODEL_PACKAGE_NAME` is the package in config JAR that contains all
 export JWT_MODEL_PACKAGE_NAME=com.mycompany.jwt.models
 ```
 
+:::info
+
+JWT comes with a
+[pre-build model](https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java)
+that can be used with the [demo queries below](#graphql-queries-through-graphiql). Set JWT to use this model via
+
+```bash
+export JWT_MODEL_PACKAGE_NAME=com.qubitpi.ws.jersey.template.models
+```
+
+:::
+
 The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
 
 ### Troubleshooting
@@ -141,3 +153,56 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html
+
+GraphQL Queries through GraphiQL
+--------------------------------
+
+### Install GraphiQL (on Mac)
+
+via [Homebrew](https://formulae.brew.sh/cask/graphiql)
+
+```bash
+brew install --cask graphiql
+```
+
+### Quering GraphQL Endpoint
+
+Let's crete a book:
+
+```graphql
+mutation {
+  book(op: UPSERT, data:{title: "Pride & Prejudice"}) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+```
+
+![Error loading graphiql-mutation-example.png](./img/graphiql-mutation-example.png)
+
+We can create few more books, sort and paginate them with:
+
+```graphql
+{
+  book(sort: "-id", first: "1", after: "0") {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+    pageInfo {
+      totalRecords
+      startCursor
+      endCursor
+      hasNextPage
+    }
+  }
+}
+```
+
+![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
