@@ -12,12 +12,46 @@ inputs:
     description: 'The access token of Maven repo that contains the model package'
     required: true
 
+  jersey-ws-template-model-package-jar-group-id:
+    description: 'Maven group ID of JAR containing package specified by MODEL_PACKAGE_NAME'
+    required: true
+  jersey-ws-template-model-package-jar-artifact-id:
+    description: 'Maven artifact ID of JAR containing package specified by MODEL_PACKAGE_NAME'
+    required: true
+  jersey-ws-template-model-package-jar-version:
+    description: 'The version of JAR containing package specified by MODEL_PACKAGE_NAME'
+    required: true
+
+  jersey-ws-template-model-package-repo-id:
+    description: 'The ID of the Maven repository ID hosting the JAR containing package specified by MODEL_PACKAGE_NAME'
+    required: true
+  jersey-ws-template-model-package-repo-url:
+    description: 'The URL of the Maven repository that hosts the JAR containing package specified by MODEL_PACKAGE_NAME'
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Authenticating internal model package download
       uses: whelk-io/maven-settings-xml-action@v20
       with:
+        profiles: >
+          [
+            {
+              "id": "jersey-ws-template-config-properties",
+              "properties": {
+                "jersey-ws-template.model.package.jar.group.id": "${{ inputs.jersey-ws-template-model-package-jar-group-id }}",
+                "jersey-ws-template.model.package.jar.artifact.id": "${{ inputs.jersey-ws-template-model-package-jar-artifact-id }}",
+                "jersey-ws-template.model.package.jar.version": "${{ inputs.jersey-ws-template-model-package-jar-version }}",
+                "jersey-ws-template.model.package.repo.id": "${{ inputs.jersey-ws-template-model-package-repo-id }}",
+                "jersey-ws-template.model.package.repo.url": "${{ inputs.jersey-ws-template-model-package-repo-url }}"
+              }
+            }
+          ]
+        active_profiles: >
+          [
+            "jersey-ws-template-config-properties"
+          ]
         servers: >
           [
             {
