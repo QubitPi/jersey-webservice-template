@@ -26,6 +26,7 @@ env:
   JDK_DISTRIBUTION: 'adopt'
   USER: QubitPi
   EMAIL: jack20220723@gmail.com
+  MODEL_PACKAGE_NAME: 'com.qubitpi.ws.jersey.template.models'
 
 jobs:
   yaml-lint:
