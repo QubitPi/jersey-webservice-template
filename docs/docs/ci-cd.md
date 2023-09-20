@@ -43,6 +43,8 @@ The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be 
   [aforementioned image][jersey-ws-template Dockerfile]
 <!-- markdown-link-check-disable -->
 
+- [**ELK_URL**] The URL of ELK/Logstash host which log lines are sent to. A ELK/Logstash instance working for Jersey WS
+  Template can be deployed using [Aergia's ELK through HashiCorp](https://qubitpi.github.io/aergia/docs/elk)
 - [**SENTRY_DSN**](sentry)
 
 <!-- markdown-link-check-enable -->
