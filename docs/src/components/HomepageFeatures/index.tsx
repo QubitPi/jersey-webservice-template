@@ -91,6 +91,15 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  {
+    title: 'ELK Support',
+    Svg: require('@site/static/img/elastic.svg').default,
+    description: (
+      <>
+
+      </>
+    ),
+  },
 ];
 
 function Feature({title, Svg, description}: FeatureItem) {
