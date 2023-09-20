@@ -157,8 +157,8 @@ jobs:
           distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Load webservice settings
         run: |
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
           echo "${{ secrets.OAUTH_PROPERTIES }}" > src/main/resources/oauth.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
       - name: Generate webservice WAR file
         run: mvn -B clean package
       - name: Load SSL Certificates into AMI
@@ -166,6 +166,9 @@ jobs:
         run: |
           echo '${{ secrets.SSL_CERTIFICATE }}' > server.crt
           echo '${{ secrets.SSL_CERTIFICATE_KEY }}' > server.key
+      - name: Inject Logstash host into Filebeat config file
+        working-directory: hashicorp/images
+        run: sed -i -e 's,logstash-host,'${{ secrets.ELK_URL }}',g' filebeat.yml
       - name: Load runtime settings into Terraform variable file
         working-directory: hashicorp/instances
         run: |
