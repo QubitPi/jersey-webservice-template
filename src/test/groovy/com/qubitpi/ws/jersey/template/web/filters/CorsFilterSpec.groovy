@@ -19,26 +19,147 @@ import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerResponseContext
 import jakarta.ws.rs.core.MultivaluedHashMap
 import jakarta.ws.rs.core.MultivaluedMap
+import jakarta.ws.rs.core.Response
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class CorsFilterSpec extends Specification {
 
-    def "Cross-origin header gets attached"() {
-        given:
+    def "When a request #beingPreflight preflight, request #beingAborted aborted"() {
+        setup: "a request is being configure for being preflight or not"
+        ContainerRequestContext request = Mock(ContainerRequestContext)
+
+        if (isPreflight) {
+            request.getHeaderString("Origin") >> "some origin"
+            request.getMethod() >> "OPTIONS"
+        } else {
+            request.getHeaderString("Origin") >> null
+            request.getMethod() >> "POST"
+        }
+
+        when: "the request is pre-matched by CORS filter"
+        new CorsFilter().filter(request)
+
+        then: "preflight request is bounced back and non-preflight request is accepted"
+        (isPreflight ? 1 : 0) * request.abortWith(_ as Response)
+
+        where:
+        _ | isPreflight
+        _ | true
+        _ | false
+
+        beingPreflight = isPreflight ? "is" : "is not"
+        beingAborted = isPreflight ? "is" : "is not"
+    }
+
+    @Unroll
+    def "When a request #beingCrossOrigin cross-origin and #beingPreflight preflight, response headers are #expectedResponseHeaders"() {
+        setup: "a request is being configure for being cross-origin/preflight or not"
+        ContainerRequestContext request = Mock(ContainerRequestContext)
         ContainerResponseContext response = Mock(ContainerResponseContext)
-        MultivaluedMap headers = Mock(MultivaluedMap)
-        response.getHeaders() >>> [
-                headers,
-                new MultivaluedHashMap<>([:]),
-                new MultivaluedHashMap<>([:]),
-                new MultivaluedHashMap<>([:])
-        ]
 
-        when:
-        new CorsFilter().filter(Mock(ContainerRequestContext), response)
+        if (isCrossOrigin) {
+            request.getHeaderString("Origin") >>> ["some origin"]
+        } else {
+            request.getHeaderString("Origin") >>> [null]
+        }
 
-        then:
-        1 * headers.add("Access-Control-Allow-Origin", "*")
+        if (isPreflight) {
+            request.getHeaderString("Origin") >>> ["some origin"]
+            request.getMethod() >> "OPTIONS"
+        } else {
+            request.getHeaderString("Origin") >>> [null]
+            request.getMethod() >> "POST"
+        }
+
+        MultivaluedMap headers = new MultivaluedHashMap()
+        response.getHeaders() >>> [headers, headers, headers, headers]
+
+        when: "a response is being processed by CORS filter"
+        new CorsFilter().filter(request, response)
+
+        then: "the response header gets populated based on cross-origin/preflight nature of the configured request"
+        response.getHeaders() == expectedResponseHeaders
+
+        where:
+        isCrossOrigin | isPreflight || expectedResponseHeaders
+        false         | false       || [:]
+        false         | true        || [:]
+        true          | false       || accessControlAllowOrigin()
+        true          | true        || accessControlAllowHeaders() << accessControlAllowCredentials() << accessControlAllowMethods() << accessControlAllowOrigin()
+
+        beingCrossOrigin = isCrossOrigin ? "is" : "is not"
+        beingPreflight = isPreflight ? "is" : "is not"
+    }
+
+    @SuppressWarnings('GroovyAccessibility')
+    def "When a request #contains 'Origin' header, it #is a cross origin request"() {
+        given:
+        ContainerRequestContext request = Mock(ContainerRequestContext)
+
+        if (isCorssOrigin) {
+            request.getHeaderString("Origin") >> "some origin"
+        } else {
+            request.getHeaderString("Origin") >> null
+        }
+
+        expect:
+        CorsFilter.isCrossOriginRequest(request) == isCorssOrigin
+
+        where:
+        _ || isCorssOrigin
+        _ || true
+        _ || false
+
+        contains = isCorssOrigin ? "contains" : "does not contain"
+        is = isCorssOrigin ? "is" : "is not"
+    }
+
+    @SuppressWarnings('GroovyAccessibility')
+    def "When a request #containsOrigin 'Origin' header and method #isOptions 'OPTIONS', it #is a preflight request"() {
+        given:
+        ContainerRequestContext request = Mock(ContainerRequestContext)
+
+        if (isCorssOrigin) {
+            request.getHeaderString("Origin") >> "some origin"
+        } else {
+            request.getHeaderString("Origin") >> null
+        }
+
+        if (methodIsOptions) {
+            request.getMethod() >> "OPTIONS"
+        } else {
+            request.getMethod() >> "POST"
+        }
+
+        expect:
+        CorsFilter.isPreflightRequest(request) == isPreflight
+
+        where:
+        isCorssOrigin | methodIsOptions || isPreflight
+        false         | false           || false
+        false         | true            || false
+        true          | false           || false
+        true          | true            || true
+
+        containsOrigin = isCorssOrigin ? "contains" : "does not contain"
+        isOptions = isCorssOrigin ? "is" : "is not"
+        is = isPreflight ? "is" : "is not"
+    }
+
+    static def accessControlAllowHeaders() {
+        ["Access-Control-Allow-Headers": ["CSRF-Token, X-Requested-By, Authorization, Content-Type"]]
+    }
+
+    static def accessControlAllowCredentials() {
+        ["Access-Control-Allow-Credentials": ["true"]]
+    }
+
+    static def accessControlAllowMethods() {
+        ["Access-Control-Allow-Methods": ["GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH"]]
+    }
+
+    static def accessControlAllowOrigin() {
+        ["Access-Control-Allow-Origin": ["*"]]
     }
 }
-
