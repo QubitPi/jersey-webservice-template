@@ -29,7 +29,7 @@ Running Webservice in Docker Compose
 
 ### Step 1: Defining Data Models
 
-To inject [Elide model package](https://github.com/yahoo/elide/tree/master/elide-standalone#create-models), simply put
+To inject [Elide model package](https://github.com/QubitPi/elide/tree/master/elide-standalone#create-models), simply put
 the models in a separate JAR and include it as a dependency in POM. If the model package is internal and cannot be
 visible publicly, either make the instantiated JWT private or public with model package dependency info
 [injected via settings.xml](https://maven.apache.org/examples/injecting-properties-via-settings.html), for example:
@@ -237,10 +237,10 @@ We can create few more books, sort and paginate them with:
 
 ![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
 
-[Elide]: https://elide.io/
-[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
-[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
-[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
+[Elide]: https://qubitpi.github.io/elide-doc/
+[Elide instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
+[Elide Standalone]: https://github.com/QubitPi/elide/tree/master/elide-standalone
+[ElideSettings instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
 
