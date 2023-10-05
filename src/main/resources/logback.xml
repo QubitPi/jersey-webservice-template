@@ -15,9 +15,9 @@ limitations under the License.
 -->
 <configuration>
     <appender name="ELK" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logback/astraios.log</file>
+        <file>logback/jwt.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logback/astraios.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logback/jwt.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>

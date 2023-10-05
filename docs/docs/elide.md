@@ -31,7 +31,7 @@ Running Webservice in Docker Compose
 
 To inject [Elide model package](https://github.com/yahoo/elide/tree/master/elide-standalone#create-models), simply put
 the models in a separate JAR and include it as a dependency in POM. If the model package is internal and cannot be
-visible publicly, either make the astraios project private or public with model package dependency info
+visible publicly, either make the instantiated JWT private or public with model package dependency info
 [injected via settings.xml](https://maven.apache.org/examples/injecting-properties-via-settings.html), for example:
 
 ```xml
@@ -41,9 +41,9 @@ visible publicly, either make the astraios project private or public with model 
 
     <dependencies>
         <dependency>
-            <groupId>${astraios.model.package.jar.group.id}</groupId>
-            <artifactId>${astraios.model.package.jar.artifact.id}</artifactId>
-            <version>${astraios.model.package.jar.version}</version>
+            <groupId>${jwt.model.package.jar.group.id}</groupId>
+            <artifactId>${jwt.model.package.jar.artifact.id}</artifactId>
+            <version>${jwt.model.package.jar.version}</version>
         </dependency>
     </dependencies>
 
@@ -51,9 +51,9 @@ visible publicly, either make the astraios project private or public with model 
 
     <repositories>
         <repository>
-            <id>${astraios.model.package.repo.id}</id>
-            <name>Astraios model pacakge JAR repository</name>
-            <url>${astraios.model.package.repo.url}</url>
+            <id>${jwt.model.package.repo.id}</id>
+            <name>jwt model pacakge JAR repository</name>
+            <url>${jwt.model.package.repo.url}</url>
         </repository>
     </repositories>
 
@@ -72,22 +72,22 @@ with a corresponding `~/.m2/settings.xml`:
 
     <profiles>
         <profile>
-            <id>astraios-config-properties</id>
+            <id>jwt-config-properties</id>
             <properties>
-                <astraios.model.package.jar.group.id>com.mycompnay</astraios.model.package.jar.group.id>
-                <astraios.model.package.jar.artifact.id>my-model-package</astraios.model.package.jar.artifact.id>
-                <astraios.model.package.jar.version>1.0.7</astraios.model.package.jar.version>
-                <astraios.model.package.repo.id>mycompany-maven-repo-id</astraios.model.package.repo.id>
-                <astraios.model.package.repo.url>
+                <jwt.model.package.jar.group.id>com.mycompnay</jwt.model.package.jar.group.id>
+                <jwt.model.package.jar.artifact.id>my-model-package</jwt.model.package.jar.artifact.id>
+                <jwt.model.package.jar.version>1.0.7</jwt.model.package.jar.version>
+                <jwt.model.package.repo.id>mycompany-maven-repo-id</jwt.model.package.repo.id>
+                <jwt.model.package.repo.url>
                     https://private.mvnrepository.com/artifact/com.company/my-model-package
-                </astraios.model.package.repo.url>
+                </jwt.model.package.repo.url>
             </properties>
         </profile>
     </profiles>
 
 
     <activeProfiles>
-        <activeProfile>astraios-config-properties</activeProfile>
+        <activeProfile>jwt-config-properties</activeProfile>
     </activeProfiles>
 
     <servers>
@@ -96,7 +96,7 @@ with a corresponding `~/.m2/settings.xml`:
 </settings>
 ```
 
-Lastly, if IntelliJ IDE is used for developing Astraios, please make sure to let IDE pick up the `~/.m2/settings.xml` by
+Lastly, if IntelliJ IDE is used for developing JWT, please make sure to let IDE pick up the `~/.m2/settings.xml` by
 unchecking the _Use settings from .mvn/maven.config_:
 
 ![Error loading load-m2-settings.png](./img/load-m2-settings.png)
@@ -184,15 +184,6 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
         </dependency>
 ```
 
-[Elide]: https://elide.io/
-[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
-[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
-[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
-
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
-
-[what is binding]: https://qubitpi.github.io/jersey/ioc.html
-
 GraphQL Queries through GraphiQL
 --------------------------------
 
@@ -245,3 +236,12 @@ We can create few more books, sort and paginate them with:
 ```
 
 ![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
+
+[Elide]: https://elide.io/
+[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
+[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
+[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
+
+[Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
+
+[what is binding]: https://qubitpi.github.io/jersey/ioc.html

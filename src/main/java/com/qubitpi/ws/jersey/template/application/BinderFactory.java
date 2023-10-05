@@ -167,7 +167,7 @@ public class BinderFactory {
                 final ClassLoader classLoader = null;
 
                 final PersistenceUnitInfo persistenceUnitInfo = new PersistenceUnitInfoImpl(
-                        "astraios",
+                        "jersey-ws-template",
                         getAllEntities(classScanner, modelPackageName),
                         getDefaultDbConfigs(),
                         classLoader
