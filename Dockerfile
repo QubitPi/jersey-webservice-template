@@ -41,7 +41,7 @@ RUN rm jetty-home-$JETTY_VERSION.tar.gz
 RUN mkdir jetty-base
 RUN cd jetty-base && java -jar $JETTY_HOME/start.jar --add-module=annotations,server,http,deploy,servlet,webapp,resources,jsp
 
-COPY ./target/ersey-ws-template-$WS_VERSION.war $JETTY_WEBAPPS_DIR/ROOT.war
+COPY ./target/jersey-ws-template-$WS_VERSION.war $JETTY_WEBAPPS_DIR/ROOT.war
 
 ENV OAUTH_ENABLED false
 
