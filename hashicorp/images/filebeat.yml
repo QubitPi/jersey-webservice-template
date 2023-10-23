@@ -19,7 +19,7 @@ filebeat.config.modules:
 filebeat.inputs:
   - type: log
     paths:
-      - /home/ubuntu/jetty-base/logback/jersey-ws-template.log
+      - /home/ubuntu/jetty-base/logback/jersey-webservice-template.log
 
 output.logstash:
   hosts: ["logstash-host:5044"]

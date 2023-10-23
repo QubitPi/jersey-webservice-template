@@ -22,7 +22,7 @@ Packaging
 mvn clean package
 ```
 
-A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **jersey-ws-template-1.0-SNAPSHOT.war** will
+A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **jersey-webservice-template-1.0-SNAPSHOT.war** will
 be generated under _target_ directory for [running in Jetty](#running-in-standalone-jetty)
 
 Running Webservice in Standalone Jetty (Production)

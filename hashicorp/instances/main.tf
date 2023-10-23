@@ -43,13 +43,13 @@ provider "aws" {
   region = var.aws_deploy_region
 }
 
-data "aws_ami" "latest-jersey-ws-template" {
+data "aws_ami" "latest-jersey-webservice-template" {
   most_recent = true
   owners = ["899075777617"]
 
   filter {
     name   = "name"
-    values = ["jersey-ws-template"]
+    values = ["jersey-webservice-template"]
   }
 
   filter {
@@ -58,8 +58,8 @@ data "aws_ami" "latest-jersey-ws-template" {
   }
 }
 
-resource "aws_instance" "jersey-ws-template" {
-  ami = "${data.aws_ami.latest-jersey-ws-template.id}"
+resource "aws_instance" "jersey-webservice-template" {
+  ami = "${data.aws_ami.latest-jersey-webservice-template.id}"
   instance_type = "t2.small"
   tags = {
     Name = "EC2 Instance Name"
@@ -78,11 +78,11 @@ resource "aws_instance" "jersey-ws-template" {
   EOF
 }
 
-resource "aws_route53_record" "jersey-ws-template" {
+resource "aws_route53_record" "jersey-webservice-template" {
   zone_id         = var.zone_id
   name            = "ws-domain.com"
   type            = "A"
   ttl             = 300
-  records         = [aws_instance.jersey-ws-template.public_ip]
+  records         = [aws_instance.jersey-webservice-template.public_ip]
   allow_overwrite = true
 }

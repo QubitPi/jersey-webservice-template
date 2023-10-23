@@ -21,8 +21,8 @@ packer {
   }
 }
 
-source "amazon-ebs" "jersey-ws-template" {
-  ami_name = "jersey-ws-template"
+source "amazon-ebs" "jersey-webservice-template" {
+  ami_name = "jersey-webservice-template"
   force_deregister = "true"
   force_delete_snapshot = "true"
 
@@ -43,9 +43,9 @@ source "amazon-ebs" "jersey-ws-template" {
 }
 
 build {
-  name = "install-jersey-ws-template"
+  name = "install-jersey-webservice-template"
   sources = [
-    "source.amazon-ebs.jersey-ws-template"
+    "source.amazon-ebs.jersey-webservice-template"
   ]
 
   # Load SSL Certificates into AMI image
@@ -66,7 +66,7 @@ build {
 
   # Load WS WAR file into AMI image
   provisioner "file" {
-    source = "../../target/jersey-ws-template-1.0-SNAPSHOT.war"
+    source = "../../target/jersey-webservice-template-1.0-SNAPSHOT.war"
     destination = "/home/ubuntu/ROOT.war"
   }
 

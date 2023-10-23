@@ -11,10 +11,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://qubitpi.github.io',
-  baseUrl: '/jersey-ws-template/',
+  baseUrl: '/jersey-webservice-template/',
 
   organizationName: 'QubitPi',
-  projectName: 'jersey-ws-template',
+  projectName: 'jersey-webservice-template',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -73,12 +73,12 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: "https://QubitPi.github.io/jersey-ws-template/apidocs",
+            href: "https://QubitPi.github.io/jersey-webservice-template/apidocs",
             label: "API",
             position: "left",
           },
           {
-            href: 'https://github.com/QubitPi/jersey-ws-template',
+            href: 'https://github.com/QubitPi/jersey-webservice-template',
             label: 'GitHub',
             position: 'right',
           },
@@ -114,7 +114,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/QubitPi/jersey-ws-template',
+                href: 'https://github.com/QubitPi/jersey-webservice-template',
               },
             ],
           },
