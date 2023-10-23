@@ -17,7 +17,7 @@ The binding is referencing [Elide Standalone] in the following way:
 :::danger
 
 Although the Jersey binder wraps HK2 binder, we
-[must pick the _Jersey binder_ for binding Elide resources](https://github.com/QubitPi/jersey-ws-template/pull/29/files#diff-afa024cc2643aaf681db505cac24b8601c94931290718993392e7726001b1559L39-R40),
+[must pick the _Jersey binder_ for binding Elide resources](https://github.com/QubitPi/jersey-webservice-template/pull/29/files#diff-afa024cc2643aaf681db505cac24b8601c94931290718993392e7726001b1559L39-R40),
 otherwise, dependency injection will flaky and not right.
 
 :::
@@ -120,8 +120,8 @@ to run this Docker Compose in production!_
 Simply run:
 
 ```bash
-git clone https://github.com/QubitPi/jersey-ws-template.git
-cd jersey-ws-template
+git clone https://github.com/QubitPi/jersey-webservice-template.git
+cd jersey-webservice-template
 git checkout jpa-elide
 mvn clean package
 MODEL_PACKAGE_NAME=$JWT_MODEL_PACKAGE_NAME docker compose up --build --force-recreate
@@ -137,7 +137,7 @@ export JWT_MODEL_PACKAGE_NAME=com.mycompany.jwt.models
 :::info
 
 JWT comes with a
-[pre-build model](https://github.com/QubitPi/jersey-ws-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java)
+[pre-build model](https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java)
 that can be used with the [demo queries below](#graphql-queries-through-graphiql). Set JWT to use this model via
 
 ```bash
@@ -189,7 +189,7 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
 [Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
 [ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
+[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html
 

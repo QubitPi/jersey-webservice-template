@@ -59,23 +59,24 @@ OpenJDK 64-Bit Server VM (build 17.0.10+9, mixed mode)
 ### Installing Docker Engine
 
 [Jersey Webservice Template] has [Docker-based integration tests][Docker-based integration tests];
-it also supports [running template webserivce in Docker][jersey-ws-template Dockerfile]. Docker can be installed by
-following its [official instructions](https://docs.docker.com/desktop/install/mac-install/)
+it also supports [running template webserivce in Docker][jersey-webservice-template Dockerfile]. Docker can be
+installed by following its [official instructions](https://docs.docker.com/desktop/install/mac-install/)
 
 Getting Source Code
 -------------------
 
 ```bash
-git clone git@github.com:QubitPi/jersey-ws-template.git
-cd jersey-ws-template
+git clone git@github.com:QubitPi/jersey-webservice-template.git
+cd jersey-webservice-template
 ```
 
-### Syncing up with jersey-ws-template's Code Styles with IntelliJ
+### Syncing up with jersey-webservice-template's Code Styles with IntelliJ
 
-For the moment, we have distilled the most important code style conventions with respect to jersey-ws-template's code as
-IntelliJ settings. If IntelliJ is used for IDE, we may import these code style settings by importing the
-[Jersey-WS-Template-Project-intellij-code-style.xml][style config] file in the root of the repo. The setting for the
-project will appear as a new Scheme named "Jersey-WS-Template-Project" under IDE's `Editor -> Code Style` section.
+For the moment, we have distilled the most important code style conventions with respect to
+jersey-webservice-template's code as IntelliJ settings. If IntelliJ is used for IDE, we may import these code style
+settings by importing the [jersey-webservice-template-Project-intellij-code-style.xml][style config] file in the root
+of the repo. The setting for the project will appear as a new Scheme named "jersey-webservice-template-Project" under
+IDE's `Editor -> Code Style` section.
 
 Modifying Templates
 -------------------
@@ -87,20 +88,20 @@ Modifying Templates
 <!-- markdown-link-check-enable -->
 
 2. Renaming `src` package
-3. Setup SonarCloud Project and replace all `QubitPi_jersey-ws-template` with project ID accordingly
-4. Update links by replacing all `jersey-ws-template`, `Jersey Webservice Template`, and `QubitPi` (including cases)
-   accordingly
+3. Setup SonarCloud Project and replace all `QubitPi_jersey-webservice-template` with project ID accordingly
+4. Update links by replacing all `jersey-webservice-template`, `Jersey Webservice Template`, and `QubitPi` (including
+   cases) accordingly
 5. Update [endpoint package] accordingly
 6. Update Copyright holder "Jiaqi Liu"
 
-[Caching]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
-[Caching tests]: https://github.com/QubitPi/jersey-ws-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
+[Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
+[Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
 
-[Docker-based integration tests]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
+[Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
 
-[endpoint package]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
+[endpoint package]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-ws-template/
-[jersey-ws-template Dockerfile]: https://github.com/QubitPi/jersey-ws-template/blob/master/Dockerfile
+[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+[jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
 
-[style config]: https://github.com/QubitPi/jersey-ws-template/blob/master/Jersey-WS-Template-Project-intellij-code-style.xml
+[style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/jersey-webservice-template-Project-intellij-code-style.xml

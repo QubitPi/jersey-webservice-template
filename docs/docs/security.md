@@ -255,6 +255,6 @@ public class ES384JwtTokenValidator implements AccessTokenValidator {
 
 [^1]: https://stackoverflow.com/a/58965516
 
-[BinderFactory]: https://github.com/QubitPi/jersey-ws-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
+[BinderFactory]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/BinderFactory.java
 
 [OAuth 2 access token]: https://www.oauth.com/oauth2-servers/access-tokens/
