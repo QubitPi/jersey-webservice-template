@@ -103,10 +103,10 @@ unchecking the _Use settings from .mvn/maven.config_:
 
 ### Step 2: Spinning Up Docker Compose
 
-Jersey WS Template can run in [Docker Compose] for the following purposes
+Jersey Webservice Template can run in [Docker Compose] for the following purposes
 
 1. Decoupling frontend and backend developments
-2. Making it easy to run E2E testing of Jersey WS Template-backed application in CI/CD
+2. Making it easy to run E2E testing of Jersey Webservice Template-backed application in CI/CD
 
 :::caution
 
@@ -184,15 +184,6 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
         </dependency>
 ```
 
-[Elide]: https://elide.io/
-[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
-[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
-[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
-
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
-
-[what is binding]: https://qubitpi.github.io/jersey/ioc.html
-
 GraphQL Queries through GraphiQL
 --------------------------------
 
@@ -245,3 +236,14 @@ We can create few more books, sort and paginate them with:
 ```
 
 ![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
+
+[Docker Compose]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/docker-compose.yml
+
+[Elide]: https://elide.io/
+[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
+[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
+[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
+
+[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+
+[what is binding]: https://qubitpi.github.io/jersey/ioc.html

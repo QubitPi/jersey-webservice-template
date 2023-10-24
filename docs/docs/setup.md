@@ -104,4 +104,4 @@ Modifying Templates
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 [jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
 
-[style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/jersey-webservice-template-Project-intellij-code-style.xml
+[style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Jersey-Webservice-Template-Project-intellij-code-style.xml

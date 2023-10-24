@@ -15,6 +15,13 @@ mvn clean verify
 For IT tests, we use [Testcontainers] instead of [jcabi-mysql] because the latter is hard to configure and debug and
 [Testcontainers] support more types of db, such as mongo
 
+:::tip
+
+If tests fail with 404 or endpoint-not-working, make sure the port 8080 is not occupied all integration tests runs
+against webservice running at that port.
+
+:::
+
 Packaging
 ---------
 
@@ -24,6 +31,81 @@ mvn clean package
 
 A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **jersey-webservice-template-1.0-SNAPSHOT.war** will
 be generated under _target_ directory for [running in Jetty](#running-in-standalone-jetty)
+
+Running Webservice in Docker (Local Dev & Testing ONLY)
+-------------------------------------------------------
+
+This [Docker] image can be used for
+
+1. decoupling frontend and backend developments, and
+2. making it easy to run E2E testing of application backed by Jersey Webservice Template in CI/CD
+
+:::caution
+
+Docker designed here is intended for local development and testing purposes ONLY! _It is strongly discouraged
+to run this Docker container in production!_
+
+:::
+
+### Getting the Image
+
+We can obtain the image in one of the 2 approaches below:
+
+#### Docker Hub
+
+We can pull the image from [my docker hub](https://hub.docker.com/r/jack20191124/jersey-webservice-template/):
+
+```bash
+docker pull jack20191124/jersey-webservice-template
+```
+
+#### GitHub
+
+We could also build the image from [source][Docker]:
+
+```bash
+git clone https://github.com/QubitPi/jersey-webservice-template.git
+cd jersey-webservice-template
+mvn clean package
+docker build -t jack20191124/jersey-webservice-template .
+```
+
+:::info
+
+<!-- markdown-link-check-disable -->
+
+- The `mvn clean package` requires JDK 17 which can be setup with [instructions here](setup)
+- The `jack20191124/jersey-webservice-template` in the last command is the image name; we could replace that value with
+  anything preferred
+
+<!-- markdown-link-check-enable -->
+
+:::
+
+### Standing up a Container
+
+When image is built, we can spin up an instance with
+
+```bash
+docker run --name=jersey-webservice-template -it -p 8080:8080 jack20191124/jersey-webservice-template
+```
+
+- **name=jersey-webservice-template**: the container is named "jersey-webservice-template". We can change it
+  accordingly.
+- **-p 8080:8080**: 8080 is the port where webservice will listen on. With this port forwarding, we will be able to
+  access webservice from host machine web browser at `localhost:8080`
+
+If we see the following output, it means the container is running properly and ready to accept request such as
+`http://localhost:8080/v1/data/healthcheck`
+
+```bash
+...
+
+2023-10-24 05:21:46.032:INFO :oejss.DefaultSessionIdManager:main: Session workerName=node0
+2023-10-24 05:21:46.977:INFO :oejsh.ContextHandler:main: Started o.e.j.w.WebAppContext@2892dae4{ROOT.war,/,file:///tmp/jetty-0_0_0_0-8080-ROOT_war-_-any-13760845903749066689/webapp/,AVAILABLE}{/jetty-base/webapps/ROOT.war}
+2023-10-24 05:21:46.994:INFO :oejs.AbstractConnector:main: Started ServerConnector@5c8dfc08{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2023-10-24 05:21:47.009:INFO :oejs.Server:main: Started Server@71d44a3{STARTING}[11.0.15,sto=5000] @2947ms
+```
 
 Running Webservice in Standalone Jetty (Production)
 ---------------------------------------------------
@@ -77,6 +159,8 @@ java -jar $JETTY_HOME/start.jar
 ```
 
 The webservice will run on port **8080**, and you will see the data you inserted
+
+[Docker]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
 
 [jcabi-mysql]: https://mysql.jcabi.com/
 
