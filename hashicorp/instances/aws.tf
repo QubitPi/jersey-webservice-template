@@ -43,6 +43,10 @@ provider "aws" {
   region = var.aws_deploy_region
 }
 
+data "template_file" "init" {
+  template = "${file("../scripts/aws-tf-init.sh")}"
+}
+
 data "aws_ami" "latest-jersey-webservice-template" {
   most_recent = true
   owners = ["899075777617"]
@@ -66,16 +70,7 @@ resource "aws_instance" "jersey-webservice-template" {
   }
   security_groups = ["Security Group Name"]
 
-  user_data = <<-EOF
-    #!/bin/bash
-    export JETTY_HOME=/home/ubuntu/jetty-home-11.0.15
-    export SENTRY_DSN=${var.sentry_dsn}
-
-    sudo /usr/bin/filebeat -e -c filebeat.yml -d "publish" &
-
-    cd /home/ubuntu/jetty-base
-    java -jar $JETTY_HOME/start.jar
-  EOF
+  user_data = "${data.template_file.init.rendered}"
 }
 
 resource "aws_route53_record" "jersey-webservice-template" {

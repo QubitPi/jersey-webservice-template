@@ -5,6 +5,8 @@ title: CI/CD
 
 ![Error loading ci-cd.png](./img/ci-cd.png)
 
+The deployment uses https://github.com/marketplace/actions/application-deployment-on-aws-through-hashicorp
+
 The following [GitHub Secrets][How to set up GitHub Action Secrets] needs to be defined
 
 - [**APPLICATION_PROPERTIES**][Application configs], such as
@@ -90,7 +92,7 @@ generating step using [create-mvn-settings]. For example:
 
 [docker hub]: https://hub.docker.com/r/jack20191124/jersey-webservice-template/
 
-[HashiCorp Packer template]: https://github.com/QubitPi/jersey-webservice-template/blob/master/hashicorp/images/aws-jersey-ws.pkr.hcl
+[HashiCorp Packer template]: https://github.com/QubitPi/jersey-webservice-template/blob/master/hashicorp/images/aws.pkr.hcl
 [HashiCorp Packer template setup script]: https://github.com/QubitPi/jersey-webservice-template/blob/master/hashicorp/scripts/setup.sh
 [HashiCorp Terraform config file]: https://github.com/QubitPi/jersey-webservice-template/blob/master/hashicorp/instances/main.tf
 [How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets

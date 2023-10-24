@@ -77,6 +77,6 @@ build {
   }
 
   provisioner "shell" {
-    script = "../scripts/setup.sh"
+    script = "../scripts/aws-pkr-setup.sh"
   }
 }
