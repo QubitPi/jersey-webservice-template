@@ -8,6 +8,14 @@ Running Tests
 
 The following commands runs both unit and integration tests
 
+:::info
+
+<!-- markdown-link-check-disable -->
+For [JPA through Elide Middleware](elide) template, please refer to its dedicated [setup](elide#setup) section first
+<!-- markdown-link-check-enable -->
+
+:::
+
 ```bash
 mvn clean verify
 ```
