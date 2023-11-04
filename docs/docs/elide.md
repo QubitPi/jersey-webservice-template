@@ -239,10 +239,10 @@ We can create few more books, sort and paginate them with:
 
 [Docker Compose]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/docker-compose.yml
 
-[Elide]: https://elide.io/
-[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
-[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
-[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
+[Elide]: https://qubitpi.github.io/elide-doc/
+[Elide instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
+[Elide Standalone]: https://github.com/QubitPi/elide/tree/master/elide-standalone
+[ElideSettings instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 
