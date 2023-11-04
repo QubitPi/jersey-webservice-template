@@ -19,6 +19,15 @@ inputs:
   runbooks-repo-token:
     description: 'hashicorp-aws config file repo fine-grained PAT token;'
     required: true
+  data-models-repo-token:
+    description: 'Data models repo fine-grained PAT token;'
+    required: true
+  data-models-repo-org:
+    description: 'Data models repo owner, e.g. QubitPi'
+    required: true
+  data-models-repo-name:
+    description: 'Data models repo name, e.g. jersey-webservice-template-jpa-data-model'
+    required: true
 
 runs:
   using: "composite"
@@ -50,4 +59,12 @@ runs:
         fi
     - name: Load webservice properties files
       shell: bash
-      run: cp ../hashicorp-aws-runbooks/application.properties src/main/resources/
+      run: |
+        cp ../hashicorp-aws-runbooks/application.properties src/main/resources/
+        cp ../hashicorp-aws-runbooks/jpadatastore.properties src/main/resources/
+    - name: Install data models
+      shell: bash
+      run: |
+        git clone https://${{ inputs.data-models-repo-token }}@github.com/${{ inputs.data-models-repo-org }}/${{ inputs.data-models-repo-name }}.git ../jpa-models
+        cd ../jpa-models
+        mvn clean install
