@@ -8,7 +8,7 @@ tags: [Java, Maven]
 Environment Variables
 ---------------------
 
-To refer to environment variables from the pom.xml, we can use the **${env.VARIABLE_NAME}** syntax.
+To refer to environment variables from the pom.xml, we can use the `${env.VARIABLE_NAME}` syntax.
 
 For instance, let's use it to externalize the Java version in the build process:
 

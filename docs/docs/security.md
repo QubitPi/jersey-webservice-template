@@ -8,8 +8,8 @@ Core Concepts
 
 API authentication is largely a solved problem and generally outside the scope of Jersey Webservice Template.
 
-Jersey Webservice Template does, however, adds a layer of security on its own by validating [OAuth 2 access token] on all
-incoming request. Each API request requires a standard **"Authentication": "Bearer <access_token>"** token header:
+Jersey Webservice Template does, however, adds a layer of security on its own by validating [OAuth 2 access token] on
+all incoming request. Each API request requires a standard `"Authentication": "Bearer <access_token>"` token header:
 
 :::info
 
