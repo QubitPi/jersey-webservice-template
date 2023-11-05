@@ -168,6 +168,12 @@ java -jar $JETTY_HOME/start.jar
 
 The webservice will run on port **8080**, and you will see the data you inserted
 
+Deployment
+----------
+
+Jersey Webservice Template supports
+[automatically deploying to AWS through HashiCorp][hashicorp-aws webservice]
+
 [Docker]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
 
 [jcabi-mysql]: https://mysql.jcabi.com/

@@ -81,18 +81,12 @@ IDE's `Editor -> Code Style` section.
 Modifying Templates
 -------------------
 
-<!-- markdown-link-check-disable -->
-
-1. Setup [CI/CD](ci-cd)
-
-<!-- markdown-link-check-enable -->
-
-2. Renaming `src` package
-3. Setup SonarCloud Project and replace all `QubitPi_jersey-webservice-template` with project ID accordingly
-4. Update links by replacing all `jersey-webservice-template`, `Jersey Webservice Template`, and `QubitPi` (including
+1. Renaming `src` package
+2. Setup SonarCloud Project and replace all `QubitPi_jersey-webservice-template` with project ID accordingly
+3. Update links by replacing all `jersey-webservice-template`, `Jersey Webservice Template`, and `QubitPi` (including
    cases) accordingly
-5. Update [endpoint package] accordingly
-6. Update Copyright holder "Jiaqi Liu"
+4. Update [endpoint package] accordingly
+5. Update Copyright holder "Jiaqi Liu"
 
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
