@@ -44,17 +44,17 @@ Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` w
 
     <profiles>
         <profile>
-            <id>astraios-models</id>
+            <id>data-models</id>
             <properties>
-                <astraios.model.package.jar.group.id>com.qubitpi</astraios.model.package.jar.group.id>
-                <astraios.model.package.jar.artifact.id>jersey-webservice-template-jpa-data-model</astraios.model.package.jar.artifact.id>
-                <astraios.model.package.jar.version>1.0.0</astraios.model.package.jar.version>
+                <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
+                <model.package.jar.artifact.id>jersey-webservice-template-jpa-data-model</model.package.jar.artifact.id>
+                <model.package.jar.version>1.0.0</model.package.jar.version>
             </properties>
         </profile>
     </profiles>
 
     <activeProfiles>
-        <activeProfile>astraios-models</activeProfile>
+        <activeProfile>data-models</activeProfile>
     </activeProfiles>
 </settings>
 ```
