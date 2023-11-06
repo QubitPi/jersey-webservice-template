@@ -45,7 +45,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Authenticating internal model package download
+    - name: Generate settings.xml
       uses: whelk-io/maven-settings-xml-action@v20
       with:
         profiles: >

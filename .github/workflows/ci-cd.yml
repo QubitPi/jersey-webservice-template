@@ -71,11 +71,11 @@ jobs:
           data-model-package-jar-group-id: com.qubitpi
           data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-model
           data-model-package-jar-version: 1.0.0
-          data-model-server-id: ""
-          data-model-server-user: ""
-          data-model-server-token: ""
-          data-model-package-repo-id: ""
-          data-model-package-repo-url: ""
+          data-model-server-id: N/A
+          data-model-server-user: N/A
+          data-model-server-token: N/A
+          data-model-package-repo-id: N/A
+          data-model-package-repo-url: N/A
       - name: Set up Docker for Integration Tests
         uses: docker-practice/actions-setup-docker@master
       - name: Run unit & integration tests
@@ -110,11 +110,11 @@ jobs:
           data-model-package-jar-group-id: com.qubitpi
           data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-model
           data-model-package-jar-version: 1.0.0
-          data-model-server-id: ""
-          data-model-server-user: ""
-          data-model-server-token: ""
-          data-model-package-repo-id: ""
-          data-model-package-repo-url: ""
+          data-model-server-id: N/A
+          data-model-server-user: N/A
+          data-model-server-token: N/A
+          data-model-package-repo-id: N/A
+          data-model-package-repo-url: N/A
       - name: Install dependencies
         working-directory: docs
         run: npm install
