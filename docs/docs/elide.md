@@ -44,17 +44,19 @@ Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` w
 
     <profiles>
         <profile>
-            <id>astraios-models</id>
+            <id>data-models</id>
             <properties>
-                <astraios.model.package.jar.group.id>com.qubitpi</astraios.model.package.jar.group.id>
-                <astraios.model.package.jar.artifact.id>jersey-webservice-template-jpa-data-model</astraios.model.package.jar.artifact.id>
-                <astraios.model.package.jar.version>1.0.0</astraios.model.package.jar.version>
+                <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
+                <model.package.jar.artifact.id>
+                   jersey-webservice-template-jpa-data-model
+                </model.package.jar.artifact.id>
+                <model.package.jar.version>1.0.0</model.package.jar.version>
             </properties>
         </profile>
     </profiles>
 
     <activeProfiles>
-        <activeProfile>astraios-models</activeProfile>
+        <activeProfile>data-models</activeProfile>
     </activeProfiles>
 </settings>
 ```
@@ -82,9 +84,9 @@ visible publicly, either make the astraios project private or public with model 
 
     <dependencies>
         <dependency>
-            <groupId>${astraios.model.package.jar.group.id}</groupId>
-            <artifactId>${astraios.model.package.jar.artifact.id}</artifactId>
-            <version>${astraios.model.package.jar.version}</version>
+            <groupId>${model.package.jar.group.id}</groupId>
+            <artifactId>${model.package.jar.artifact.id}</artifactId>
+            <version>${model.package.jar.version}</version>
         </dependency>
     </dependencies>
 
@@ -92,9 +94,9 @@ visible publicly, either make the astraios project private or public with model 
 
     <repositories>
         <repository>
-            <id>${astraios.model.package.repo.id}</id>
-            <name>Astraios model pacakge JAR repository</name>
-            <url>${astraios.model.package.repo.url}</url>
+            <id>${model.package.repo.id}</id>
+            <name>Data model pacakge JAR repository</name>
+            <url>${model.package.repo.url}</url>
         </repository>
     </repositories>
 
@@ -115,13 +117,13 @@ with a corresponding `~/.m2/settings.xml`:
         <profile>
             <id>astraios-config-properties</id>
             <properties>
-                <astraios.model.package.jar.group.id>com.mycompnay</astraios.model.package.jar.group.id>
-                <astraios.model.package.jar.artifact.id>my-model-package</astraios.model.package.jar.artifact.id>
-                <astraios.model.package.jar.version>1.0.7</astraios.model.package.jar.version>
-                <astraios.model.package.repo.id>mycompany-maven-repo-id</astraios.model.package.repo.id>
-                <astraios.model.package.repo.url>
+                <model.package.jar.group.id>com.mycompnay</model.package.jar.group.id>
+                <model.package.jar.artifact.id>my-model-package</model.package.jar.artifact.id>
+                <model.package.jar.version>1.0.7</model.package.jar.version>
+                <model.package.repo.id>mycompany-maven-repo-id</model.package.repo.id>
+                <model.package.repo.url>
                     https://private.mvnrepository.com/artifact/com.company/my-model-package
-                </astraios.model.package.repo.url>
+                </model.package.repo.url>
             </properties>
         </profile>
     </profiles>
@@ -165,27 +167,15 @@ git clone https://github.com/QubitPi/jersey-webservice-template.git
 cd jersey-webservice-template
 git checkout jpa-elide
 mvn clean package
-MODEL_PACKAGE_NAME=$JWT_MODEL_PACKAGE_NAME docker compose up --build --force-recreate
+MODEL_PACKAGE_NAME=$MODEL_PACKAGE_NAME docker compose up --build --force-recreate
 ```
 
-where `$JWT_MODEL_PACKAGE_NAME` is the package in config JAR that contains all
+where the value of `$JWT_MODEL_PACKAGE_NAME` variable is the package in config JAR that contains all
 [elide models](https://elide.io/pages/guide/v7/02-data-model.html). It can be set, for example, at command line with:
 
 ```bash
-export JWT_MODEL_PACKAGE_NAME=com.mycompany.jwt.models
+export JWT_MODEL_PACKAGE_NAME=com.mycompany.data.models
 ```
-
-:::info
-
-JWT comes with a
-[pre-build model](https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java)
-that can be used with the [demo queries below](#graphql-queries-through-graphiql). Set JWT to use this model via
-
-```bash
-export JWT_MODEL_PACKAGE_NAME=com.qubitpi.ws.jersey.template.models
-```
-
-:::
 
 The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
 
