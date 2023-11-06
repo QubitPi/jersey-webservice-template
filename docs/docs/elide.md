@@ -170,11 +170,11 @@ mvn clean package
 MODEL_PACKAGE_NAME=$MODEL_PACKAGE_NAME docker compose up --build --force-recreate
 ```
 
-where the value of `$JWT_MODEL_PACKAGE_NAME` variable is the package in config JAR that contains all
+where the value of `$MODEL_PACKAGE_NAME` variable is the package in config JAR that contains all
 [elide models](https://elide.io/pages/guide/v7/02-data-model.html). It can be set, for example, at command line with:
 
 ```bash
-export JWT_MODEL_PACKAGE_NAME=com.mycompany.data.models
+export MODEL_PACKAGE_NAME=com.mycompany.data.models
 ```
 
 The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
