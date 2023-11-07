@@ -15,12 +15,12 @@
  */
 package com.qubitpi.ws.jersey.template.web.filters;
 
+import jakarta.annotation.Priority;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
-import jakarta.ws.rs.container.PreMatching;
 import jakarta.ws.rs.core.Response;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
@@ -46,7 +46,7 @@ import net.jcip.annotations.ThreadSafe;
  */
 @Immutable
 @ThreadSafe
-@PreMatching
+@Priority(1)
 public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
     @Override
