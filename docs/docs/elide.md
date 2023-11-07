@@ -228,6 +228,7 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
 ```
 
 Querying Webservice
+-------------------
 
 ### GraphQL Queries through GraphiQL
 
