@@ -74,7 +74,7 @@ Running Webservice in Docker Compose
 
 To inject [Elide model package](https://github.com/yahoo/elide/tree/master/elide-standalone#create-models), simply put
 the models in a separate JAR and include it as a dependency in POM. If the model package is internal and cannot be
-visible publicly, either make the astraios project private or public with model package dependency info
+visible publicly, either make project private, or make public with model package dependency info
 [injected via settings.xml](https://maven.apache.org/examples/injecting-properties-via-settings.html), for example:
 
 ```xml
@@ -115,7 +115,7 @@ with a corresponding `~/.m2/settings.xml`:
 
     <profiles>
         <profile>
-            <id>astraios-config-properties</id>
+            <id>data-models</id>
             <properties>
                 <model.package.jar.group.id>com.mycompnay</model.package.jar.group.id>
                 <model.package.jar.artifact.id>my-model-package</model.package.jar.artifact.id>
@@ -130,7 +130,7 @@ with a corresponding `~/.m2/settings.xml`:
 
 
     <activeProfiles>
-        <activeProfile>astraios-config-properties</activeProfile>
+        <activeProfile>data-models</activeProfile>
     </activeProfiles>
 
     <servers>
@@ -139,7 +139,7 @@ with a corresponding `~/.m2/settings.xml`:
 </settings>
 ```
 
-Lastly, if IntelliJ IDE is used for developing Astraios, please make sure to let IDE pick up the `~/.m2/settings.xml` by
+Lastly, if IntelliJ IDE is used for development, please make sure to let IDE pick up the `~/.m2/settings.xml` by
 unchecking the _Use settings from .mvn/maven.config_:
 
 ![Error loading load-m2-settings.png](./img/load-m2-settings.png)
@@ -227,10 +227,11 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
         </dependency>
 ```
 
-GraphQL Queries through GraphiQL
---------------------------------
+Querying Webservice
 
-### Install GraphiQL (on Mac)
+### GraphQL Queries through GraphiQL
+
+#### Install GraphiQL (on Mac)
 
 via [Homebrew](https://formulae.brew.sh/cask/graphiql)
 
@@ -238,7 +239,7 @@ via [Homebrew](https://formulae.brew.sh/cask/graphiql)
 brew install --cask graphiql
 ```
 
-### Quering GraphQL Endpoint
+#### Quering GraphQL Endpoint
 
 Let's crete a book:
 
@@ -274,6 +275,85 @@ We can create few more books, sort and paginate them with:
       endCursor
       hasNextPage
     }
+  }
+}
+```
+
+#### TypeScript/JavaScript Axios
+
+:::caution
+
+Note that any serialization of TS/JS object (`someObject`) should be done with
+`JSON.stringify(someObject).replace(/"/g, '\\"')`, otherwise the GraphQL query won't be parsed properly by webservice.
+
+:::
+
+```typescript
+import axios from "axios";
+
+const JERSEY_WEBSERVICE_TEMPLATE_GRAPHQL_API_ENDPOINT = "https://myservice.com/v1/data";
+
+export class Client {
+  public saveOrUpdate(book: Book, userId: string, accessToken: string): Promise<any> {
+    const someJsonField = JSON.stringify({ field1: book.field1, field2: book.field2 }).replace(/"/g, '\\"');
+
+    return this.postGraphQLQuery(
+      `
+      mutation saveGraph {
+        graph(op: UPSERT, data: {
+          id: "${book.id}"
+          title: "${book.title}"
+          authorId: "${book.authorId}"
+          jsonField: "${someJsonField}"
+        }) {
+          edges {
+            node {
+              id
+              title
+              author
+            }
+          }
+        }
+      }
+      `,
+      accessToken
+    );
+  }
+
+  public getBooksByAuthorId(authorId: string, accessToken: string) {
+    return this.postGraphQLQuery(
+      `
+      query getBooksByAuthorId {
+        book(filter:"authorId==${authorId}") {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+      }
+      `,
+      accessToken
+    );
+  }
+
+  private postGraphQLQuery(query: string, accessToken: string): Promise<any> {
+    return axios
+      .post(JERSEY_WEBSERVICE_TEMPLATE_GRAPHQL_API_ENDPOINT, { query: query }, this.getHeaders(accessToken))
+      .then((response) => {
+        return response;
+      });
+  }
+
+  private getHeaders(token: string) {
+    return {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
   }
 }
 ```
