@@ -280,7 +280,7 @@ We can create few more books, sort and paginate them with:
 }
 ```
 
-#### TypeScript/JavaScript Axios
+### TypeScript/JavaScript Axios
 
 :::caution
 
