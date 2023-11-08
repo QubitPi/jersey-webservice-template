@@ -3,6 +3,8 @@ sidebar_position: 4
 title: JPA through Elide Middleware
 ---
 
+[![AWS EC2 min size][AWS EC2 min size]](https://aws.amazon.com/ec2/instance-types/)
+
 [Jersey Webservice Template] (_JWT_) delegates JPA capabilities to [Elide] and configures Elide through 2 required
 Elide [bindings][what is binding]:
 
@@ -360,6 +362,8 @@ export class Client {
 ```
 
 ![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
+
+[AWS EC2 min size]: https://img.shields.io/badge/EC2-%E2%89%A5t2.small-FF9902?style=for-the-badge&logo=amazonec2&logoColor=white
 
 [Docker Compose]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/docker-compose.yml
 
