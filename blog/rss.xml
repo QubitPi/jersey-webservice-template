@@ -4,10 +4,26 @@
         <title>Jersey Webservice Template Blog</title>
         <link>https://qubitpi.github.io/jersey-webservice-template/blog</link>
         <description>Jersey Webservice Template Blog</description>
-        <lastBuildDate>Fri, 23 Aug 2019 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 18 Nov 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Provider v.s. @Provider]]></title>
+            <link>https://qubitpi.github.io/jersey-webservice-template/blog/provider</link>
+            <guid>https://qubitpi.github.io/jersey-webservice-template/blog/provider</guid>
+            <pubDate>Sat, 18 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[A Provider is an interface defined in JSR 330. It is part of the general dependency]]></description>
+            <content:encoded><![CDATA[<p>A <strong>Provider</strong> is an interface defined in <a href="https://qubitpi.github.io/javax-inject/api/javax/inject/Provider.html" target="_blank" rel="noopener noreferrer">JSR 330</a>. It is part of the <em>general</em> dependency
+injection concept in Java.</p>
+<p>Whether we are on Java SR or EE, Provider will always be loadable from classpath. For example, the <a href="https://qubitpi.github.io/glassfish-hk2/" target="_blank" rel="noopener noreferrer">HK2</a> is an
+implementation of JSR-330 in a JavaSE environment and it conforms to the JSR 330 standard by loading the
+<a href="https://qubitpi.github.io/javax-inject/api/javax/inject/Provider.html" target="_blank" rel="noopener noreferrer">Provider</a> in its implementations.</p>
+<p><strong>@Provider</strong>, on the other hand, is a
+<a href="https://github.com/jakartaee/rest/blob/master/jaxrs-api/src/main/java/jakarta/ws/rs/ext/Provider.java" target="_blank" rel="noopener noreferrer"><em>Java EE/Jakarta EE concept</em></a>.
+If we are developing Java EE applications, we can use both (<code>Provider</code> &amp; <code>@Provider</code>) at the same time.</p>]]></content:encoded>
+            <category>Java</category>
+        </item>
         <item>
             <title><![CDATA[Refer to Environment Variables in POM]]></title>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom</link>
