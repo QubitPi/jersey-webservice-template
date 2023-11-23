@@ -63,7 +63,6 @@ model the absence and presence of a value.
 
 To give some context, let's briefly look at what other programming languages have to offer.
 
-
 What Alternatives to Null Are There?
 ------------------------------------
 
