@@ -96,7 +96,7 @@ using operations available on the `Option` type, which enforces the idea of "nul
 Java 8 _Optional_ in a Nutshell
 -------------------------------
 
-Java SE 8 introduces a new class called **java.util.Optional<T>** that is inspired from the ideas of Haskell and Scala.
+Java SE 8 introduces a new class called `java.util.Optional<T>` that is inspired from the ideas of Haskell and Scala.
 It is a class that encapsulates an optional value, as illustrated in figure below. You can view `Optional` as a
 single-value container that either contains a value or doesn't (it is then said to be "empty"):
 
