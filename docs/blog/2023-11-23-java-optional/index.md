@@ -309,7 +309,7 @@ String version = computer.map(Computer::getSoundcard)
         .orElse("UNKNOWN");
 ```
 
-Unfortunately, this code doesn't compile. Why? The variable computer is of type **Optional<Computer>**, so it is
+Unfortunately, this code doesn't compile. Why? The variable computer is of type `Optional<Computer>`, so it is
 perfectly correct to call the `map` method. However, `getSoundcard()` returns an object of type `Optional<Soundcard>`.
 This means the result of the `map` operation is an object of type `Optional<Optional<Soundcard>>`. As a result, the
 call to `getUSB()` is invalid because the outermost Optional contains as its value another Optional, which of course
