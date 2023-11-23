@@ -63,8 +63,8 @@ model the absence and presence of a value.
 
 To give some context, let's briefly look at what other programming languages have to offer.
 
-What Alternatives to Null Are There?
-------------------------------------
+What Alternatives to Null Are There
+-----------------------------------
 
 Languages such as Groovy have a _safe navigation operator_ represented by "?." to safely navigate through potential
 null references. (Note that it is soon to be included in C#, too, and it was proposed for Java SE 7 but didn't make it
