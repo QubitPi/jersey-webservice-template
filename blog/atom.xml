@@ -370,6 +370,35 @@ If we are developing Java EE applications, we can use both (<code>Provider</code
         <category label="Java" term="Java"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Happy Path]]></title>
+        <id>https://qubitpi.github.io/jersey-webservice-template/blog/happy-path</id>
+        <link href="https://qubitpi.github.io/jersey-webservice-template/blog/happy-path"/>
+        <updated>2022-11-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[In the context of software or information modeling, a happy path (sometimes called happy flow) is a default scenario]]></summary>
+        <content type="html"><![CDATA[<p>In the context of software or information modeling, a happy path (sometimes called happy flow) is a default scenario
+featuring no exceptional or error conditions. For example, the happy path for a function validating credit card numbers
+would be where none of the validation rules raise an error, thus letting execution continue successfully to the end,
+generating a positive response.</p>
+<p>Process steps for a happy path are also used in the context of a <a href="https://en.wikipedia.org/wiki/Use_case" target="_blank" rel="noopener noreferrer">use case</a>. In
+contrast to the happy path, process steps for alternate paths and exception paths may also be documented.</p>
+<p>Happy path test is a well-defined test case using known input, which executes without exception and produces an expected
+output. Happy path testing can show that a system meets its functional requirements but it doesn't guarantee a graceful
+handling of error conditions or aid in finding hidden bugs.</p>
+<blockquote>
+<p>Happy day (or sunny day) scenario and golden path are synonyms for happy path.</p>
+</blockquote>
+<p>In use case analysis, there is only one happy path, but there may be any number of additional alternate path scenarios
+which are all valid optional outcomes. If valid alternatives exist, the happy path is then identified as the default or
+most likely positive alternative. The analysis may also show one or more exception paths. An exception path is taken as
+the result of a fault condition. Use cases and the resulting interactions are commonly modeled in graphical languages
+such as the Unified Modeling Language (UML) or SysML</p>]]></content>
+        <author>
+            <name>Jack</name>
+            <uri>https://github.com/QubitPi</uri>
+        </author>
+        <category label="Testing" term="Testing"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Refer to Environment Variables in POM]]></title>
         <id>https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom</id>
         <link href="https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom"/>
