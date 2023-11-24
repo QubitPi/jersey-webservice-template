@@ -9,6 +9,26 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[What is Java EE]]></title>
+            <link>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</link>
+            <guid>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</guid>
+            <pubDate>Fri, 24 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Java EE is a collection of specifications for developing]]></description>
+            <content:encoded><![CDATA[<p><a href="https://www.oracle.com/java/technologies/java-ee-glance.html" target="_blank" rel="noopener noreferrer">Java EE</a> is a collection of specifications for developing
+and deploying enterprise applications.</p>
+<p>In general, enterprise applications refer to software hosted on servers that provide the applications that support the
+enterprise.</p>
+<p>The specifications (defined by Sun) describe services, application programming interfaces (APIs), and protocols.</p>
+<p>The Java EE product provider is typically an application-server, web-server, or database-system vendor who provides
+classes that implement the interfaces defined in the specifications. These vendors compete on implementations of the
+Java EE specifications.</p>
+<p>When a company requires Java EE experience what are they really asking for is experience using the technologies that
+make up Java EE. Frequently, a company will only be using a subset of the Java EE technologies.</p>
+<p>A reference implementation of Java EE is <a href="https://javaee.github.io/glassfish/documentation" target="_blank" rel="noopener noreferrer">GlassFish</a></p>]]></content:encoded>
+            <category>Java</category>
+            <category>Standard</category>
+        </item>
+        <item>
             <title><![CDATA[Understanding Weak References]]></title>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</guid>

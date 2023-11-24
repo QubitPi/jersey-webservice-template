@@ -8,6 +8,30 @@
     <subtitle>Jersey Webservice Template Blog</subtitle>
     <icon>https://qubitpi.github.io/jersey-webservice-template/img/favicon.ico</icon>
     <entry>
+        <title type="html"><![CDATA[What is Java EE]]></title>
+        <id>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</id>
+        <link href="https://qubitpi.github.io/jersey-webservice-template/blog/java-ee"/>
+        <updated>2023-11-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Java EE is a collection of specifications for developing]]></summary>
+        <content type="html"><![CDATA[<p><a href="https://www.oracle.com/java/technologies/java-ee-glance.html" target="_blank" rel="noopener noreferrer">Java EE</a> is a collection of specifications for developing
+and deploying enterprise applications.</p>
+<p>In general, enterprise applications refer to software hosted on servers that provide the applications that support the
+enterprise.</p>
+<p>The specifications (defined by Sun) describe services, application programming interfaces (APIs), and protocols.</p>
+<p>The Java EE product provider is typically an application-server, web-server, or database-system vendor who provides
+classes that implement the interfaces defined in the specifications. These vendors compete on implementations of the
+Java EE specifications.</p>
+<p>When a company requires Java EE experience what are they really asking for is experience using the technologies that
+make up Java EE. Frequently, a company will only be using a subset of the Java EE technologies.</p>
+<p>A reference implementation of Java EE is <a href="https://javaee.github.io/glassfish/documentation" target="_blank" rel="noopener noreferrer">GlassFish</a></p>]]></content>
+        <author>
+            <name>Jack</name>
+            <uri>https://github.com/QubitPi</uri>
+        </author>
+        <category label="Java" term="Java"/>
+        <category label="Standard" term="Standard"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Understanding Weak References]]></title>
         <id>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</id>
         <link href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references"/>
