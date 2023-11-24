@@ -4,10 +4,124 @@
         <title>Jersey Webservice Template Blog</title>
         <link>https://qubitpi.github.io/jersey-webservice-template/blog</link>
         <description>Jersey Webservice Template Blog</description>
-        <lastBuildDate>Thu, 23 Nov 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 24 Nov 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Understanding Weak References]]></title>
+            <link>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</link>
+            <guid>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</guid>
+            <pubDate>Fri, 24 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Strong References]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="strong-references">Strong References<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#strong-references" class="hash-link" aria-label="Direct link to Strong References" title="Direct link to Strong References">​</a></h2>
+<p>A <strong>strong reference</strong> is an ordinary Java reference, the kind you use every day. For example, the code:</p>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token class-name">StringBuffer</span><span class="token plain"> buffer </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">StringBuffer</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>creates a new <code>StringBuffer</code> and stores a strong reference to it in the variable <code>buffer</code>. Yes, yes, this is kiddie
+stuff, but bear with me. <em>The important part about strong references -- the part that makes them "strong" -- is how they
+interact with the garbage collector</em>. Specifically, if an object is reachable via a chain of strong references (strongly
+reachable), it is not eligible for garbage collection. As you don't want the garbage collector destroying objects you're
+working on, this is normally exactly what you want.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-strong-references-are-too-strong">When Strong References are Too Strong<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#when-strong-references-are-too-strong" class="hash-link" aria-label="Direct link to When Strong References are Too Strong" title="Direct link to When Strong References are Too Strong">​</a></h2>
+<p>It's not uncommon for an application to use classes that it can't reasonably extend. The class might simply be marked
+<code>final</code>, or it could be something more complicated, such as an interface returned by a factory method backed by an
+unknown (and possibly even unknowable) number of concrete implementations. Suppose you have to use a class <code>Widget</code> and,
+for whatever reason, it isn't possible or practical to extend <code>Widget</code> to add new functionality.</p>
+<p>What happens when you need to keep track of extra information about the object? In this case, suppose we find ourselves
+needing to keep track of each Widget's serial number, but the Widget class doesn't actually have a serial number
+property -- and because Widget isn't extensible, we can't add one. No problem at all, that's what <code>HashMaps</code> are for:</p>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">serialNumberMap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">put</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">widget</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> widgetSerialNumber</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This might look okay on the surface, but the strong reference to widget will almost certainly cause problems. We have to
+know (with 100% certainty) when a particular Widget's serial number is no longer needed, so we can remove its entry from
+the map. Otherwise we're going to have a memory leak (if we don't remove Widgets when we should) or we're going to
+inexplicably find ourselves missing serial numbers (if we remove Widgets that we're still using). If these problems
+sound familiar, they should: they are exactly the problems that users of non-garbage-collected languages face when
+trying to manage memory, and we're not supposed to have to worry about this in a more civilized language like Java.</p>
+<p>Another common problem with strong references is caching, particular with very large structures like images. Suppose you
+have an application which has to work with user-supplied images, like the web site design tool I work on. Naturally you
+want to cache these images, because loading them from disk is very expensive and you want to avoid the possibility of
+having two copies of the (potentially gigantic) image in memory at once. Because an image cache is supposed to prevent
+us from reloading images when we don't absolutely need to, you will quickly realize that the cache should always contain
+a reference to any image which is already in memory. With ordinary strong references, though, that reference itself will
+force the image to remain in memory, which requires you (just as above) to somehow determine when the image is no longer
+needed in memory and remove it from the cache, so that it becomes eligible for garbage collection. Once again you are
+forced to duplicate the behavior of the garbage collector and manually determine whether or not an object should be in
+memory.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="weak-references">Weak References<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#weak-references" class="hash-link" aria-label="Direct link to Weak References" title="Direct link to Weak References">​</a></h2>
+<p>A <strong>weak reference</strong>, simply put, is a reference that isn't strong enough to force an object to remain in memory. Weak
+references allow you to leverage the garbage collector's ability to determine reachability for you, so you don't have to
+do it yourself. You create a weak reference like this:</p>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token class-name">WeakReference</span><span class="token plain"> weakWidget </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">WeakReference</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">widget</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>and then elsewhere in the code you can use <code>weakWidget.get()</code> to get the actual Widget object. Of course the weak
+reference isn't strong enough to prevent garbage collection, so you may find (if there are no strong references to the
+widget) that <code>weakWidget.get()</code> suddenly starts returning <code>null</code>.</p>
+<p>To solve the "widget serial number" problem above, the easiest thing to do is use the built-in <code>WeakHashMap</code> class.
+<code>WeakHashMap</code> works exactly like <code>HashMap</code>, except that the keys (not the values!) are referred to using weak
+references. If a <code>WeakHashMap</code> key becomes garbage, its entry is removed automatically. This avoids the pitfalls
+described earlier and requires no changes other than the switch from <code>HashMap</code> to a <code>WeakHashMap</code>. If you're following
+the standard convention of referring to your maps via the Map interface, no other code needs to even be aware of the
+change.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="reference-queues">Reference Queues<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#reference-queues" class="hash-link" aria-label="Direct link to Reference Queues" title="Direct link to Reference Queues">​</a></h2>
+<p>Once a <code>WeakReference</code> starts returning <code>null</code>, the object it pointed to has become garbage and the <code>WeakReference</code>
+object is pretty much useless. This generally means that some sort of cleanup is required; <code>WeakHashMap</code>, for example,
+has to remove such defunct entries to avoid holding onto an ever-increasing number of dead <code>WeakReferences</code>.</p>
+<p>The <code>ReferenceQueue</code> class makes it easy to keep track of dead references. If you pass a <code>ReferenceQueue</code> into a weak
+reference's constructor, the reference object will be automatically inserted into the reference queue when the object to
+which it pointed becomes garbage. You can then, at some regular interval, process the <code>ReferenceQueue</code> and perform
+whatever cleanup is needed for dead references.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="different-degrees-of-weakness">Different Degrees of Weakness<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#different-degrees-of-weakness" class="hash-link" aria-label="Direct link to Different Degrees of Weakness" title="Direct link to Different Degrees of Weakness">​</a></h2>
+<p>Up to this point I've just been referring to "weak references", but there are actually <strong>4 degrees of reference
+strength</strong> (in order from strongest to weakest):</p>
+<ol>
+<li>strong</li>
+<li>soft</li>
+<li>weak</li>
+<li>phantom</li>
+</ol>
+<p>We've already discussed strong and weak references, so let's take a look at the other two.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="soft-references">Soft References<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#soft-references" class="hash-link" aria-label="Direct link to Soft References" title="Direct link to Soft References">​</a></h2>
+<p>A <strong>soft reference</strong> is exactly like a weak reference, except that it is less eager to throw away the object to which it
+refers. An object which is only weakly reachable will be discarded at the next garbage collection cycle, but an object
+which is softly reachable will generally stick around for a while.</p>
+<p>Soft references aren't required to behave any differently than weak references, but in practice softly reachable objects
+are generally retained as long as memory is in plentiful supply. <strong>This makes them an excellent foundation for a
+cache</strong>, such as the image cache described above, since you can let the garbage collector worry about both how reachable
+the objects are and how badly it needs the memory they are consuming.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="phantom-references">Phantom References<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#phantom-references" class="hash-link" aria-label="Direct link to Phantom References" title="Direct link to Phantom References">​</a></h2>
+<p>A <strong>phantom reference</strong> is quite different than either soft reference or weak reference. Its grip on its object is so
+tenuous that you can't even retrieve the object - its <code>get()</code> method always returns <code>null</code>. <strong>The only use for such a
+reference is keeping track of when it gets enqueued into a <code>ReferenceQueue</code>, as at that point you know the object to
+which it pointed is dead</strong>. How is that different from weak reference, though?</p>
+<p>The difference is in exactly when the enqueuing happens. <code>WeakReferences</code> are enqueued as soon as the object to which
+they point becomes weakly reachable. This is before finalization or garbage collection has actually happened; in theory
+the object could even be "resurrected" by an unorthodox <code>finalize()</code> method, but the <code>WeakReference</code> would remain dead.
+<code>PhantomReferences</code> are enqueued only when the object is physically removed from memory, and the <code>get()</code> method always
+returns <code>null</code> specifically to prevent you from being able to "resurrect" an almost-dead object.</p>
+<p>What good are <code>PhantomReferences</code>? I'm only aware of two serious cases for them: first, they allow you to determine
+exactly when an object was removed from memory. They are in fact the only way to determine that. This isn't generally
+that useful, but might come in handy in certain very specific circumstances like manipulating large images: if you know
+for sure that an image should be garbage collected, you can wait until it actually is before attempting to load the next
+image, and therefore make the dreaded <code>OutOfMemoryError</code> less likely.</p>
+<p>Second, phantom references avoid a fundamental problem with finalization: <code>finalize()</code> methods can "resurrect" objects
+by creating new strong references to them. So what, you say? Well, the problem is that an object which overrides
+<code>finalize()</code> must now be determined to be garbage in at least two separate garbage collection cycles in order to be
+collected. When the first cycle determines that it is garbage, it becomes eligible for finalization. Because of the
+(slim, but unfortunately real) possibility that the object was "resurrected" during finalization, the garbage collector
+has to run again before the object can actually be removed. And because finalization might not have happened in a timely
+fashion, an arbitrary number of garbage collection cycles might have happened while the object was waiting for
+finalization. This can mean serious delays in actually cleaning up garbage objects, and is why you can get
+<code>OutOfMemoryErrors</code> even when most of the heap is garbage.</p>
+<p>With phantom reference, this situation is impossible -- when a <code>PhantomReference</code> is enqueued, there is absolutely no
+way to get a pointer to the now-dead object (which is good, because it isn't in memory any longer). Because
+<code>PhantomReference</code> cannot be used to resurrect an object, the object can be instantly cleaned up during the first
+garbage collection cycle in which it is found to be phantomly reachable. You can then dispose whatever resources you
+need to at your convenience.</p>
+<p>Arguably, the <code>finalize()</code> method should never have been provided in the first place. phantom references are definitely
+safer and more efficient to use, and eliminating <code>finalize()</code> would have made parts of the VM considerably simpler. But,
+they're also more work to implement, so I confess to still using <code>finalize()</code> most of the time. The good news is that at
+least you have a choice.</p>]]></content:encoded>
+            <category>Java</category>
+        </item>
         <item>
             <title><![CDATA[Bearer Authentication]]></title>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/bearer-authentication</link>
