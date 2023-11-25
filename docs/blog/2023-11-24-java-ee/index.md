@@ -22,8 +22,13 @@ make up Java EE. Frequently, a company will only be using a subset of the Java E
 
 A reference implementation of Java EE is [GlassFish](https://javaee.github.io/glassfish/documentation)
 
-History
--------
+Evolution of Java EE
+--------------------
+
+Ever heard of Java EE? How about Java 2EE, J2EE, or now Jakarta EE? Actually, these are all different names for the same
+thing: a set of enterprise specifications that extend Java SE. In this section, we discuss the evolution of Java EE.
+
+### History
 
 In the first version of Java, Java enterprise extensions were simply
 [a part of the core JDK](http://titanium.cs.berkeley.edu/doc/java-langspec-1.0/).
@@ -41,8 +46,7 @@ to September 2017, when **something major happened**.
 
 ![Error loading java-evolution.png](java-evolution.png)
 
-In Transition
--------------
+### In Transition
 
 Actually, the Eclipse Foundation legally _had to_ rename Java EE. That's because Oracle has the rights over the "Java"
 brand.
@@ -62,8 +66,7 @@ The transition also means [a new process for adding specifications](https://www.
 EE. To understand it better, let's take a look at what that process was like under Oracle and how it changes under the
 Eclipse Foundation in the next section.
 
-The Future
-----------
+### The Future
 
 Historically, in order for a feature to make it into "EE", we needed three things:
 
