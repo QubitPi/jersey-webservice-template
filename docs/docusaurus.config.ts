@@ -34,6 +34,7 @@ const config: Config = {
         },
         blog: {
           showReadingTime: true,
+          blogSidebarCount: 'ALL',
           editUrl: 'https://github.com/QubitPi/jersey-webservice-template/tree/master/docs/',
         },
         theme: {
