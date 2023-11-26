@@ -19,6 +19,8 @@ tags: [Java, Testing]
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
 
+<!--truncate-->
+
 Use RestAssured's JsonPath to parse the JSON file into a Map and then compare it with Hamcrest Matchers. This way the
 order didn't matter.
 

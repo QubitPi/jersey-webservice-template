@@ -36,6 +36,8 @@ make up Java EE. Frequently, a company will only be using a subset of the Java E
 
 A reference implementation of Java EE is [GlassFish](https://javaee.github.io/glassfish/documentation)
 
+<!--truncate-->
+
 Evolution of Java EE
 --------------------
 
