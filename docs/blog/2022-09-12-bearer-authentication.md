@@ -19,6 +19,8 @@ tags: [Security]
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
 
+<!--truncate-->
+
 **Bearer authentication** (also called **token authentication**) is an
 [HTTP authentication scheme][HTTP authentication scheme] that involves security tokens called bearer tokens. The name
 "Bearer authentication" can be understood as "give access to the bearer of this token." The bearer token is a cryptic

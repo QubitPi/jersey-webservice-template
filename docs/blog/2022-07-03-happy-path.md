@@ -24,6 +24,8 @@ featuring no exceptional or error conditions. For example, the happy path for a 
 would be where none of the validation rules raise an error, thus letting execution continue successfully to the end,
 generating a positive response.
 
+<!--truncate-->
+
 Process steps for a happy path are also used in the context of a [use case](https://en.wikipedia.org/wiki/Use_case). In
 contrast to the happy path, process steps for alternate paths and exception paths may also be documented.
 
