@@ -27,12 +27,12 @@ env:
   EMAIL: jack20220723@gmail.com
 
 jobs:
-  code-styles:
-    uses: QubitPi/hashicorp-aws/.github/workflows/yml-and-md-style-checks.yml
+  mk-yml-style-check:
+    uses: QubitPi/hashicorp-aws/.github/workflows/yml-and-md-style-checks.yml@master
 
   tests:
     name: Unit & Integration Tests
-    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    needs: mk-yml-style-check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
