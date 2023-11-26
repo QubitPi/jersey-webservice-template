@@ -27,30 +27,12 @@ env:
   EMAIL: jack20220723@gmail.com
 
 jobs:
-  yaml-lint:
-    name: YAML Style Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/yamllint@main
-  markdown-lint:
-    name: Markdown Style Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/markdownlint@main
-  markdown-link-check:
-    name: Markdown Link Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-verbose-mode: "yes"
+  mk-yml-style-check:
+    uses: QubitPi/hashicorp-aws/.github/workflows/yml-and-md-style-checks.yml@master
 
   tests:
     name: Unit & Integration Tests
-    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    needs: mk-yml-style-check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
