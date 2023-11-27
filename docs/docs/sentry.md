@@ -32,9 +32,9 @@ matters, solve quicker, and learn continuously about their applications.
 The logging framework has to be <b>Logback</b>, which is the logging library used in
 [jersey-webservice-template][jersey-webservice-template]
 
-![Error loading setup-sentry-1.png](./img/setup-sentry-1.png)
-![Error loading setup-sentry-2.png](./img/setup-sentry-2.png)
-![Error loading setup-sentry-3.png](./img/setup-sentry-3.png)
+![Error loading setup-sentry-1.png](img/setup-sentry-1.png)
+![Error loading setup-sentry-2.png](img/setup-sentry-2.png)
+![Error loading setup-sentry-3.png](img/setup-sentry-3.png)
 
 :::
 
