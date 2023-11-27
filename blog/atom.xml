@@ -453,6 +453,30 @@ them to a <code>LinkedHashMap</code> to get the expected result:</p>
         <category label="Java" term="Java"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[PUT v.s. POST]]></title>
+        <id>https://qubitpi.github.io/jersey-webservice-template/blog/put-vs-post</id>
+        <link href="https://qubitpi.github.io/jersey-webservice-template/blog/put-vs-post"/>
+        <updated>2021-04-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></summary>
+        <content type="html"><![CDATA[<p>We should choose between PUT and POST based on <a href="http://en.wikipedia.org/wiki/Idempotent" target="_blank" rel="noopener noreferrer">idempotence</a> of the action.</p>
+<p><strong>PUT</strong> implies putting a resource - completely replacing whatever is available at the given URL with a different thing.
+By definition, a PUT is idempotent. Do it as many times as you like, and the result is the same. <code>x=5</code> is idempotent.
+You can PUT a resource whether it previously exists, or not (eg, to Create, or to Update)!</p>
+<p>**POST updates a resource, adds a subsidiary resource, or causes a change. A POST is not idempotent, in the way that
+<code>x++</code> is not idempotent.</p>
+<p>By this argument, PUT is for creating when you know the URL of the thing you will create. POST can be used to create
+when you know the URL of the "factory" or manager for the category of things you want to create.</p>
+<p>so:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">POST /expense-report</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>or:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PUT /expense-report/10929</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>]]></content>
+        <author>
+            <name>Jack</name>
+            <uri>https://github.com/QubitPi</uri>
+        </author>
+        <category label="Webservice" term="Webservice"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[What is Java EE]]></title>
         <id>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</id>
         <link href="https://qubitpi.github.io/jersey-webservice-template/blog/java-ee"/>
