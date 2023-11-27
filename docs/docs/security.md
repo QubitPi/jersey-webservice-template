@@ -64,7 +64,7 @@ like the following
 
 :::
 
-![Error loading oauth2-filtering.png](./img/oauth2-filtering.png)
+![Error loading oauth2-filtering.png](img/oauth2-filtering.png)
 
 To define a token validator, simply implement the **AccessTokenValidator** like so:
 
