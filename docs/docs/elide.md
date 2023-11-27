@@ -38,7 +38,7 @@ otherwise, dependency injection will flaky and not right.
 
 :::
 
-![Error loading resource-binding.png](./img/resource-binding.png)
+![Error loading resource-binding.png](img/resource-binding.png)
 
 Setup
 -----
@@ -158,7 +158,7 @@ with a corresponding `~/.m2/settings.xml`:
 Lastly, if IntelliJ IDE is used for development, please make sure to let IDE pick up the `~/.m2/settings.xml` by
 unchecking the _Use settings from .mvn/maven.config_:
 
-![Error loading load-m2-settings.png](./img/load-m2-settings.png)
+![Error loading load-m2-settings.png](img/load-m2-settings.png)
 
 ### Step 2: Spinning Up Docker Compose
 
@@ -174,7 +174,7 @@ to run this Docker Compose in production!_
 
 :::
 
-![Error Loading docker-compose.png](./img/docker-compose.png)
+![Error Loading docker-compose.png](img/docker-compose.png)
 
 Simply run:
 
@@ -273,7 +273,7 @@ mutation {
 }
 ```
 
-![Error loading graphiql-mutation-example.png](./img/graphiql-mutation-example.png)
+![Error loading graphiql-mutation-example.png](img/graphiql-mutation-example.png)
 
 We can create few more books, sort and paginate them with:
 
@@ -375,7 +375,7 @@ export class Client {
 }
 ```
 
-![Error loading graphiql-query-example.png](./img/graphiql-query-example.png)
+![Error loading graphiql-query-example.png](img/graphiql-query-example.png)
 
 [AWS EC2 min size]: https://img.shields.io/badge/EC2-%E2%89%A5t2.small-FF9902?style=for-the-badge&logo=amazonec2&logoColor=white
 
