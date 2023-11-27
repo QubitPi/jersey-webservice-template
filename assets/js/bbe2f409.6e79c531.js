@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[5987],{2317:e=>{e.exports=JSON.parse('{"permalink":"/jersey-webservice-template/blog/tags/java/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":11,"previousPage":"/jersey-webservice-template/blog/tags/java","blogDescription":"Blog","blogTitle":"Blog"}')}}]);
