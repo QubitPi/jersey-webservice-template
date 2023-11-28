@@ -26,7 +26,7 @@ inputs:
     description: 'Data models repo owner, e.g. QubitPi'
     required: true
   data-models-repo-name:
-    description: 'Data models repo name, e.g. jersey-webservice-template-jpa-data-model'
+    description: 'Data models repo name, e.g. jersey-webservice-template-jpa-data-models'
     required: true
 
 runs:

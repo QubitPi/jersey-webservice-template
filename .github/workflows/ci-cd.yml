@@ -46,12 +46,12 @@ jobs:
           runbooks-repo-token: ""
           data-models-repo-token: ""
           data-models-repo-org: QubitPi
-          data-models-repo-name: jersey-webservice-template-jpa-data-model
+          data-models-repo-name: jersey-webservice-template-jpa-data-models
       - name: Generate Maven settings.xml
         uses: ./.github/actions/create-mvn-settings
         with:
           data-model-package-jar-group-id: com.qubitpi
-          data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-model
+          data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-models
           data-model-package-jar-version: 1.0.0
           data-model-server-id: N/A
           data-model-server-user: N/A
@@ -83,12 +83,12 @@ jobs:
           runbooks-repo-token: ""
           data-models-repo-token: ""
           data-models-repo-org: QubitPi
-          data-models-repo-name: jersey-webservice-template-jpa-data-model
+          data-models-repo-name: jersey-webservice-template-jpa-data-models
       - name: Generate Maven settings.xml
         uses: ./.github/actions/create-mvn-settings
         with:
           data-model-package-jar-group-id: com.qubitpi
-          data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-model
+          data-model-package-jar-artifact-id: jersey-webservice-template-jpa-data-models
           data-model-package-jar-version: 1.0.0
           data-model-server-id: N/A
           data-model-server-user: N/A
