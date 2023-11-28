@@ -57,7 +57,7 @@ Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` w
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
-   
+
     <profiles>
         <profile>
             <id>data-models</id>
