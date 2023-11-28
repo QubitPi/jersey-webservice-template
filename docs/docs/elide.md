@@ -64,7 +64,7 @@ Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` w
             <properties>
                 <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
                 <model.package.jar.artifact.id>
-                   jersey-webservice-template-jpa-data-model
+                   jersey-webservice-template-jpa-data-models
                 </model.package.jar.artifact.id>
                 <model.package.jar.version>1.0.0</model.package.jar.version>
             </properties>
@@ -385,7 +385,7 @@ export class Client {
 [Elide instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
 [Elide Standalone]: https://github.com/QubitPi/elide/tree/master/elide-standalone
 [ElideSettings instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
-[example model]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-model/blob/master/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
+[example model]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models/blob/master/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
 
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 
