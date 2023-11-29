@@ -38,6 +38,7 @@ import com.qubitpi.ws.jersey.template.models.Book
 
 import org.apache.http.HttpStatus
 
+import groovy.json.JsonBuilder
 import io.restassured.RestAssured
 import io.restassured.response.Response
 import jakarta.validation.constraints.NotNull
@@ -429,9 +430,11 @@ abstract class AbstractITSpec extends Specification {
 
     def "GraphQL API can sort and paginate (effectively fetching 1 record with some min/max attribute)"() {
         given: "3 entities are inserted into the database"
-        createBook(new Book(id: 1, title: "Pride & Prejudice"))
-        createBook(new Book(id: 2, title: "Effective Java"))
-        createBook(new Book(id: 3, title: "Critiques of Pure Reason"))
+        createBook(new Book(title: "Pride & Prejudice"))
+        createBook(new Book(title: "Effective Java"))
+        final String maxBookId = createBook(new Book(title: "Critiques of Pure Reason"))
+                .jsonPath()
+                .get("data.book.edges[0].node.id")
 
         expect: "sorting by ID in descending order and paginating to get the firsts result returns Kant's work"
         RestAssured
@@ -461,23 +464,25 @@ abstract class AbstractITSpec extends Specification {
                 )
                 .when().post().then()
                 .statusCode(200)
-                .body("", equalTo(
-                        data: [
-                                book: [
-                                        edges:[[
-                                                node: [
-                                                    id: "3",
-                                                    title:"Critiques of Pure Reason"
+                .body(equalTo(
+                        new JsonBuilder(
+                                data: [
+                                        book: [
+                                                edges:[[
+                                                               node: [
+                                                                       id: "${maxBookId}",
+                                                                       title:"Critiques of Pure Reason"
+                                                               ]
+                                                       ]],
+                                                pageInfo: [
+                                                        totalRecords: 3,
+                                                        startCursor: "0",
+                                                        endCursor: "1",
+                                                        hasNextPage:true
                                                 ]
-                                        ]],
-                                        pageInfo: [
-                                                totalRecords: 3,
-                                                startCursor: "0",
-                                                endCursor: "1",
-                                                hasNextPage:true
                                         ]
                                 ]
-                        ] as HashMap
+                        ).toString()
                 ))
     }
 
