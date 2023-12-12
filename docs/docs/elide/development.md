@@ -1,6 +1,6 @@
 ---
-sidebar_position: 4
-title: JPA through Elide Middleware
+sidebar_position: 11
+title: Development
 ---
 
 [//]: # (Copyright Jiaqi Liu)
@@ -17,7 +17,11 @@ title: JPA through Elide Middleware
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
 
-[![AWS EC2 min size][AWS EC2 min size]](https://aws.amazon.com/ec2/instance-types/)
+The following guide is intended to help developers who maintain or want to make changes to the
+[Jersey Webservice Template].
+
+Overview
+--------
 
 [Jersey Webservice Template] (_JWT_) delegates JPA capabilities to [Elide] and configures Elide through 2 required
 Elide [bindings][what is binding]:
@@ -40,8 +44,8 @@ otherwise, dependency injection will flaky and not right.
 
 ![Error loading resource-binding.png](img/resource-binding.png)
 
-Setup
------
+Running Tests
+-------------
 
 The IT tests will run against an [example model] so make sure the following environment variable is set to point to this
 model:
@@ -50,7 +54,21 @@ model:
 export TEST_MODEL_PACKAGE_NAME=com.qubitpi.ws.jersey.template.models
 ```
 
-Next, download the model to _CLASSPATH_ by setting up the `~/.m2/settings.xml` with
+<!-- markdown-link-check-disable -->
+Next, download the [data model](data-model) to _CLASSPATH_ by setting up the following `~/.m2/settings.xml`
+<!-- markdown-link-check-enable -->
+
+:::tip
+
+[JWT] ships with an example `settings.xml` which contains exactly the same settings as the one below. As an
+alternative, we could simply run
+
+```bash
+cd jersey-webservice-template
+cp settings.xml.example ~/.m2/settings.xml
+```
+
+:::
 
 ```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -83,6 +101,22 @@ Then execute the following commands to run both unit and integration tests:
 mvn clean verify
 ```
 
+For IT tests, we use [Testcontainers] instead of [jcabi-mysql] because the latter is hard to configure and debug and
+[Testcontainers] support more types of db, such as mongo
+
+Packaging
+---------
+
+```bash
+mvn clean package
+```
+
+<!-- markdown-link-check-disable -->
+A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **astraios-1.0-SNAPSHOT.war** will
+be generated under _target_ directory for
+[running in Jetty](../development#running-webservice-in-standalone-jetty-production)
+<!-- markdown-link-check-enable -->
+
 Running Webservice in Docker Compose
 ------------------------------------
 
@@ -90,12 +124,11 @@ Running Webservice in Docker Compose
 
 To inject [Elide model package](https://github.com/yahoo/elide/tree/master/elide-standalone#create-models), simply put
 the models in a separate JAR and include it as a dependency in POM. If the model package is internal and cannot be
-visible publicly, either make project private, or make public with model package dependency info
+visible publicly, either make project private or public with model package dependency info
 [injected via settings.xml](https://maven.apache.org/examples/injecting-properties-via-settings.html), for example:
 
 ```xml
 <project>
-
     ...
 
     <dependencies>
@@ -107,17 +140,6 @@ visible publicly, either make project private, or make public with model package
     </dependencies>
 
     ...
-
-    <repositories>
-        <repository>
-            <id>${model.package.repo.id}</id>
-            <name>Data model pacakge JAR repository</name>
-            <url>${model.package.repo.url}</url>
-        </repository>
-    </repositories>
-
-    ...
-
 </project>
 ```
 
@@ -136,10 +158,6 @@ with a corresponding `~/.m2/settings.xml`:
                 <model.package.jar.group.id>com.mycompnay</model.package.jar.group.id>
                 <model.package.jar.artifact.id>my-model-package</model.package.jar.artifact.id>
                 <model.package.jar.version>1.0.7</model.package.jar.version>
-                <model.package.repo.id>mycompany-maven-repo-id</model.package.repo.id>
-                <model.package.repo.url>
-                    https://private.mvnrepository.com/artifact/com.company/my-model-package
-                </model.package.repo.url>
             </properties>
         </profile>
     </profiles>
@@ -155,7 +173,7 @@ with a corresponding `~/.m2/settings.xml`:
 </settings>
 ```
 
-Lastly, if IntelliJ IDE is used for development, please make sure to let IDE pick up the `~/.m2/settings.xml` by
+Lastly, if IntelliJ IDE is used for developing [JWT], please make sure to let IDE pick up the `~/.m2/settings.xml` by
 unchecking the _Use settings from .mvn/maven.config_:
 
 ![Error loading load-m2-settings.png](img/load-m2-settings.png)
@@ -377,8 +395,6 @@ export class Client {
 
 ![Error loading graphiql-query-example.png](img/graphiql-query-example.png)
 
-[AWS EC2 min size]: https://img.shields.io/badge/EC2-%E2%89%A5t2.small-FF9902?style=for-the-badge&logo=amazonec2&logoColor=white
-
 [Docker Compose]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/docker-compose.yml
 
 [Elide]: https://qubitpi.github.io/elide-doc/
@@ -387,6 +403,11 @@ export class Client {
 [ElideSettings instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 [example model]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models/blob/master/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
 
+[jcabi-mysql]: https://mysql.jcabi.com/
+
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+[JWT]: https://qubitpi.github.io/jersey-webservice-template/
+
+[Testcontainers]: https://qubitpi.github.io/testcontainers-java/
 
 [what is binding]: https://qubitpi.github.io/jersey/ioc.html

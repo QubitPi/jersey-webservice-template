@@ -1,0 +1,4 @@
+secret:
+  # Exclude files and paths by globbing
+  ignored-paths:
+    - 'hashicorp/images/ssl-cert-key-file.example'
