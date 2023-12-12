@@ -92,22 +92,10 @@ settings by importing the [jersey-webservice-template-Project-intellij-code-styl
 of the repo. The setting for the project will appear as a new Scheme named "jersey-webservice-template-Project" under
 IDE's `Editor -> Code Style` section.
 
-Modifying Templates
--------------------
-
-1. Renaming `src` package
-2. Setup SonarCloud Project and replace all `QubitPi_jersey-webservice-template` with project ID accordingly
-3. Update links by replacing all `jersey-webservice-template`, `Jersey Webservice Template`, and `QubitPi` (including
-   cases) accordingly
-4. Update [endpoint package] accordingly
-5. Update Copyright holder "Jiaqi Liu"
-
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
 
 [Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
-
-[endpoint package]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/main/java/com/qubitpi/ws/jersey/template/application/ResourceConfig.java
 
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 [jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile

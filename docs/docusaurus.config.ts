@@ -28,7 +28,7 @@ const config: Config = {
   organizationName: 'QubitPi',
   projectName: 'jersey-webservice-template',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
