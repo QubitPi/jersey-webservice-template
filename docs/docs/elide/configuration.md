@@ -37,8 +37,8 @@ The following configurations can be placed in the properties file called **appli
 
 - **MODEL_PACKAGE_NAME**: The fully qualified package name that contains a set of Elide JPA models
 
-(Elide) JPA DataStore
----------------------
+JPA DataStore
+-------------
 
 :::note
 
@@ -51,6 +51,24 @@ The following configurations can be placed in the properties file called **jpada
 - **DB_URL**: The persistence DB URL, such as "jdbc:mysql://localhost/elide?serverTimezone=UTC".
 - **DB_DRIVER**: The SQL DB driver class name, such as "com.mysql.jdbc.Driver".
 - **DB_DIALECT**: The SQL DB dialect name, such as "org.hibernate.dialect.MySQLDialect".
+
+CI/CD
+-----
+
+<!-- markdown-link-check-disable -->
+In addition to the ones mentioned in [general CI/CD configs](../configuration#cicd), these
+[GitHub Action Secrets][GitHub Action - How to set up] needs to be setup:
+<!-- markdown-link-check-enable -->
+
+| Secret Name                    | Definition                                                                                                                          | How to Get                                                                                                                                                                                                         |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| APPLICATION_PROPERTIES         | The contents of the `src/main/resources/application.properties` mentioned above                                                     | See [Core Properties](#core-properties) section above                                                                                                                                                              |
+| JPADATASTORE_PROPERTIES        | The contents of the `src/main/resources/jpadatastore.properties` mentioned above                                                    | See [JPA DataStore](#jpa-datastore) section above                                                                                                                                                                  |
+| DATA_MODELS_PRIVATE_REPO_TOKEN | The GitHub Fine-grained token with at least "Read access to code and metadata" repository permissions to the Elide data models repo | [Creating a fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) |
+| DATA_MODELS_PRIVATE_REPO_ORG   | The org/user name of the GitHub repo for Elide data models                                                                          | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_ORG is "QubitPi"                                                                               |
+| DATA_MODELS_PRIVATE_REPO_NAME  | The name of the GitHub repo for Elide data models                                                                                   | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_NAME is "jersey-webservice-template"                                                           |
+
+[GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
 
