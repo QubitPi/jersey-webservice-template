@@ -112,7 +112,7 @@ mvn clean package
 ```
 
 <!-- markdown-link-check-disable -->
-A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **astraios-1.0-SNAPSHOT.war** will
+A [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) named **jersey-webservice-template-1.0-SNAPSHOT.war** will
 be generated under _target_ directory for
 [running in Jetty](../development#running-webservice-in-standalone-jetty-production)
 <!-- markdown-link-check-enable -->
