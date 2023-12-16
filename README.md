@@ -42,7 +42,7 @@ JWT seamlessly combines development and deployment of a Webservice API with
    [fully automates the API deployment onto
    AWS](https://qubitpi.github.io/hashicorp-aws/)
 
-At the end of the day, Astraios helps organization to **improve the velocity and quality of their teams' work**
+At the end of the day, JWT helps organization to **improve the velocity and quality of their teams' work**
 
 Spinning Up and Deploying Webservice on JWTCP
 ---------------------------------------------
