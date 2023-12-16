@@ -55,8 +55,10 @@ The following configurations can be placed in the properties file called **jpada
 CI/CD
 -----
 
+<!-- markdown-link-check-disable -->
 In addition to the ones mentioned in [general CI/CD configs](../configuration#cicd), these
 [GitHub Action Secrets][GitHub Action - How to set up] needs to be setup:
+<!-- markdown-link-check-enable -->
 
 | Secret Name                    | Definition                                                                                                                          | How to Get                                                                                                                                                                                                         |
 |--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
