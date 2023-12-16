@@ -37,8 +37,8 @@ The following configurations can be placed in the properties file called **appli
 
 - **MODEL_PACKAGE_NAME**: The fully qualified package name that contains a set of Elide JPA models
 
-(Elide) JPA DataStore
----------------------
+JPA DataStore
+-------------
 
 :::note
 

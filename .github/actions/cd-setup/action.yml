@@ -39,10 +39,7 @@ inputs:
     description: 'Production Maven settings.xml'
     required: true
   oauth-properties:
-    description: 'WS config property file - https://paion-data.github.io/astraios/docs/configuration#oauth-2'
-    required: true
-  application-properties:
-    description: 'WS config property file - https://paion-data.github.io/astraios/docs/configuration#core-properties'
+    description: 'WS config property file - https://qubitpi.github.io/jersey-webservice-template/docs/configuration#security'
     required: true
 
 runs:
@@ -79,4 +76,3 @@ runs:
       shell: bash
       run: |
         echo '${{ inputs.oauth-properties }}' > src/main/resources/oauth.properties
-        echo '${{ inputs.application-properties }}' > src/main/resources/application.properties
