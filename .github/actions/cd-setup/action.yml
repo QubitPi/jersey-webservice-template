@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'setup'
-description: 'CI/CD setup, such as installing JDK and hashicorp-aws'
+name: 'CD Setup'
+description: 'Environment setup for CD phase such as installing JDK and hashicorp-aws'
 
 inputs:
   aws-ws-pkrvars-hcl:
@@ -39,10 +39,22 @@ inputs:
     description: 'Production Maven settings.xml'
     required: true
   oauth-properties:
-    description: 'WS config property file - https://paion-data.github.io/astraios/docs/configuration#oauth-2'
+    description: 'WS config property file - https://qubitpi.github.io/jersey-webservice-template/docs/configuration#security'
     required: true
   application-properties:
-    description: 'WS config property file - https://paion-data.github.io/astraios/docs/configuration#core-properties'
+    description: 'WS config property file - https://qubitpi.github.io/jersey-webservice-template/docs/elide/configuration#core-properties'
+    required: true
+  jpadatastore-properties:
+    description: 'WS config property file - https://qubitpi.github.io/jersey-webservice-template/docs/elide/configuration#jpa-datastore'
+    required: true
+  data-models-repo-token:
+    description: 'Elide data models repo fine-grained PAT token;'
+    required: true
+  data-models-repo-org:
+    description: 'Elide data models repo owner, e.g. my-org'
+    required: true
+  data-models-repo-name:
+    description: 'Elide data models repo name, e.g. my-jpa-data-model'
     required: true
 
 runs:
@@ -80,3 +92,10 @@ runs:
       run: |
         echo '${{ inputs.oauth-properties }}' > src/main/resources/oauth.properties
         echo '${{ inputs.application-properties }}' > src/main/resources/application.properties
+        echo '${{ inputs.jpadatastore-properties }}' > src/main/resources/jpadatastore.properties
+    - name: Install data models
+      shell: bash
+      run: |
+        git clone https://${{ inputs.data-models-repo-token }}@github.com/${{ inputs.data-models-repo-org }}/${{ inputs.data-models-repo-name }}.git ../jpa-models
+        cd ../jpa-models
+        mvn clean install

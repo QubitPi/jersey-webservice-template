@@ -40,6 +40,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Test environment setup
         uses: ./.github/actions/ci-setup
+        with:
+          data-models-repo-org: QubitPi
+          data-models-repo-name: jersey-webservice-template-jpa-data-models
       - name: Set up Docker for Integration Tests
         uses: docker-practice/actions-setup-docker@master
       - name: Run unit & integration tests
@@ -61,6 +64,9 @@ jobs:
           node-version: 18
       - name: Test environment setup
         uses: ./.github/actions/ci-setup
+        with:
+          data-models-repo-org: QubitPi
+          data-models-repo-name: jersey-webservice-template-jpa-data-models
       - name: Install dependencies
         working-directory: docs
         run: yarn
@@ -102,13 +108,14 @@ jobs:
           maven-settings-xml: ${{ secrets.MAVEN_SETTINGS_XML }}
           oauth-properties: ${{ secrets.OAUTH_PROPERTIES }}
           application-properties: ${{ secrets.APPLICATION_PROPERTIES }}
+          jpadatastore-properties: ${{ secrets.JPADATASTORE_PROPERTIES }}
           data-models-repo-token: ${{ secrets.DATA_MODELS_PRIVATE_REPO_TOKEN }}
           data-models-repo-org: private-data-model-repo-org
           data-models-repo-name: private-data-model-repo-name
       - name: Generate webservice WAR file
         run: mvn -B clean package
       - name: Move WAR file to a location for HashiCorp deployment to pickup
-        run: mv target/astraios-1.0-SNAPSHOT.war ../hashicorp-aws/hashicorp/webservice/images/
+        run: mv target/jersey-webservice-template-1.0-SNAPSHOT.war ../hashicorp-aws/hashicorp/webservice/images/
       - name: QubitPi/hashicorp-aws
         uses: QubitPi/hashicorp-aws@master
         with:
