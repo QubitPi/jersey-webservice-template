@@ -104,9 +104,9 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/jersey',
-            }
+              label: 'Discussions',
+              href: 'https://github.com/QubitPi/jersey-webservice-template/discussions',
+            },
           ],
         },
         {
@@ -129,6 +129,11 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ["java", "bash", "json"]
+    },
+    algolia: {
+      appId: '9U0KDRI80N',
+      apiKey: 'b52ee70139e257c524de98470565cdb4',
+      indexName: 'jersey-webservice-template'
     },
   } satisfies Preset.ThemeConfig,
 };

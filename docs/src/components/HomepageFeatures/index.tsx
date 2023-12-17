@@ -16,6 +16,7 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import { useColorMode } from '@docusaurus/theme-common'
 
 type FeatureItem = {
   title: string;
@@ -27,6 +28,8 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Immutable Infrastructure',
     Svg: require('@site/static/img/hashicorp-logo.svg').default,
+    scale: 1,
+    id: 'hashicorp-logo',
     description: (
       <>
         JWT has first-class support for HashiCorp as CI/CD deployment and was designed to be easily deployed and
@@ -37,6 +40,8 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Focus on What Matters',
     Svg: require('@site/static/img/business.svg').default,
+    scale: 1,
+    id: 'not-used',
     description: (
       <>
         JWT lets us focus on our business logics, and the template will do the chores.
@@ -44,84 +49,77 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Powered by Jetty',
-    Svg: require('@site/static/img/jetty-logo.svg').default,
+    title: 'Production Quality',
+    Svg: require('@site/static/img/high-quality.svg').default,
+    scale: 0.75,
+    id: 'production-quality',
     description: (
       <>
-        JWT runs in standalone Jetty container, which standardize webservice runtime.
+        Quickly build and deploy production quality web services that expose organization data as a service. Our APIs
+        support complex filtering rules, sorting, pagination, subscriptions, and text search.
       </>
     ),
   },
   {
-    title: 'Swagger Documentation',
-    Svg: require('@site/static/img/swagger-logo.svg').default,
+    title: 'Open API',
+    Svg: require('@site/static/img/openapi-logo.svg').default,
+    scale: 0.8,
+    id: 'not-used',
     description: (
       <>
-
+        Explore, understand, and compose queries against our CRUD API through generated OpenAPI documentation or GraphQL
+        schema.
       </>
     ),
   },
   {
-    title: 'Healthcheck Endpoint',
-    Svg: require('@site/static/img/healthcheck.svg').default,
+    title: 'Caring for Developers',
+    Svg: require('@site/static/img/developer.svg').default,
+    scale: 1,
+    id: 'not-used',
     description: (
       <>
-
+        We understand a good business product is backed by developers who love their works. We let them free to do what
+        they want to: add business value by writing code.
       </>
     ),
   },
   {
-    title: 'CORS Filter',
-    Svg: require('@site/static/img/cors.svg').default,
+    title: 'Open Source',
+    Svg: require('@site/static/img/apache.svg').default,
+    scale: 0.7,
+    id: 'not-used',
     description: (
       <>
-
-      </>
-    ),
-  },
-  {
-    title: 'Groovy Spock Testing',
-    Svg: require('@site/static/img/groovy.svg').default,
-    description: (
-      <>
-
-      </>
-    ),
-  },
-  {
-    title: 'Docker-based Dev Environment & Integration Tests',
-    Svg: require('@site/static/img/docker.svg').default,
-    description: (
-      <>
-
-      </>
-    ),
-  },
-  {
-    title: 'Easy Config Management',
-    Svg: require('@site/static/img/config.svg').default,
-    description: (
-      <>
-
-      </>
-    ),
-  },
-  {
-    title: 'ELK Support',
-    Svg: require('@site/static/img/elastic.svg').default,
-    description: (
-      <>
-
+        JWT is 100% open source and available on <a href="https://github.com/QubitPi/jersey-webservice-template">Github</a>. Released
+        under the commercial-friendly
+        <a href="http://www.apache.org/licenses/LICENSE-2.0.html"> Apache License, Version 2.0.</a>
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, Svg, scale, id, description}: FeatureItem) {
+  const {colorMode} = useColorMode()
+
+  let fill = undefined
+
+  if ( id === 'hashicorp-logo' && colorMode === 'light' ) {
+    fill = 'black'
+  } else if ( id === 'hashicorp-logo' && colorMode === 'dark') {
+    fill = 'white'
+  }
+
+  if ( id === 'production-quality' && colorMode === 'light' ) {
+    fill = 'black'
+  } else if ( id === 'production-quality' && colorMode === 'dark') {
+    fill = 'white'
+  }
+
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <Svg className={styles.featureSvg} transform={"scale(" + scale + ")"} fill={fill} id={id} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
