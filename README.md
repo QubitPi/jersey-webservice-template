@@ -44,13 +44,19 @@ JWT seamlessly combines development and deployment of a Webservice API with
 
 At the end of the day, JWT helps organization to **improve the velocity and quality of their teams' work**
 
-Spinning Up and Deploying Webservice on JWTCP
----------------------------------------------
+Spinning Up and Deploying Webservice on JCP
+-------------------------------------------
 
 Coming Soon!
 
 Documentation
 -------------
+
+JWT supports 3 kinds of webservice templates:
+
+- [A general scaffolding without any vertical-business logics](https://qubitpi.github.io/jersey-webservice-template/docs/intro)
+- [A JPA webservice template backed by yahoo/elide](https://qubitpi.github.io/jersey-webservice-template/docs/category/elide-library)
+- An async jobstore webservice template similar to yahoo/fili's JobStore design (Developing...)
 
 Comprehensive documentation is viewable on our [website][Documentation]
 
