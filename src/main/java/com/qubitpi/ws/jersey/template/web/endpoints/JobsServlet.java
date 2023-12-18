@@ -28,14 +28,14 @@ import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
 
 /**
- * Endpoint that contains a basic sanity-check.
+ * {@link JobsServlet} is a combination of fili's JobsServlet (READ) and DataServlet (Write)
  */
 @Singleton
 @Immutable
 @ThreadSafe
-@Path("/data")
+@Path("/jobs")
 @Produces(MediaType.APPLICATION_JSON)
-public class DataServlet {
+public class JobsServlet {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
@@ -43,7 +43,7 @@ public class DataServlet {
      * Constructor for dependency injection.
      */
     @Inject
-    public DataServlet() {
+    public JobsServlet() {
         // intentionally left blank
     }
 
