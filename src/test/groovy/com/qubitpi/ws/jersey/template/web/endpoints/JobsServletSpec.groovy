@@ -25,7 +25,7 @@ import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import spock.lang.Specification
 
-class DataServletSpec extends Specification {
+class JobsServletSpec extends Specification {
 
     static final int PORT = 8080
 

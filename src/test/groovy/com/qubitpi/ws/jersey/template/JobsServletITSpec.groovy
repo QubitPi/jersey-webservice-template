@@ -40,7 +40,7 @@ import java.nio.file.Paths
  * see https://www.testcontainers.org/test_framework_integration/spock/#testcontainers-class-annotation
  */
 @Testcontainers
-class DataServletITSpec extends Specification {
+class JobsServletITSpec extends Specification {
 
     static final int SUCCESS = 0
     static final List<String> LOCAL_ENVS = ["Mac OS X", "windows"]
