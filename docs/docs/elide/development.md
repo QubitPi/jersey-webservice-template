@@ -120,6 +120,24 @@ be generated under _target_ directory for
 Running Webservice in Docker Compose
 ------------------------------------
 
+Jersey Webservice Template can run in [Docker Compose] for the following purposes
+
+1. Decoupling frontend and backend developments
+2. Making it easy to run E2E testing of Jersey Webservice Template-backed application in CI/CD
+
+:::caution
+
+Docker Compose designed here is intended for local development and testing purposes ONLY! _It is strongly discouraged
+to run this Docker Compose in production!_
+
+:::
+
+import DockerCompose from './img/docker-compose.png';
+
+<div align="center">
+   <img src={DockerCompose} width="50%" alt="Error Loading docker-compose.png" />
+</div>
+
 ### Step 1: Defining Data Models
 
 To inject [Elide model package](https://github.com/yahoo/elide/tree/master/elide-standalone#create-models), simply put
@@ -180,20 +198,6 @@ unchecking the _Use settings from .mvn/maven.config_:
 
 ### Step 2: Spinning Up Docker Compose
 
-Jersey Webservice Template can run in [Docker Compose] for the following purposes
-
-1. Decoupling frontend and backend developments
-2. Making it easy to run E2E testing of Jersey Webservice Template-backed application in CI/CD
-
-:::caution
-
-Docker Compose designed here is intended for local development and testing purposes ONLY! _It is strongly discouraged
-to run this Docker Compose in production!_
-
-:::
-
-![Error Loading docker-compose.png](img/docker-compose.png)
-
 Simply run:
 
 ```bash
@@ -212,6 +216,20 @@ export MODEL_PACKAGE_NAME=com.mycompany.data.models
 ```
 
 The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
+
+:::tip
+
+Although not needed as in development, one can turn on OAuth feature in Docker Compose (for example in acceptance tests)
+by
+
+```bash
+export $OAUTH_ENABLED=true
+export $JWKS_URL=https://8is478.logto.app/oidc/jwks # this is an example URL :)
+```
+
+Note that OAuth feature is disabled by default in Docker Compose (i.e. OAUTH_ENABLED=false)
+
+:::
 
 :::tip
 
