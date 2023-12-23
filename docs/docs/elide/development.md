@@ -397,10 +397,10 @@ export class Client {
 
 [Docker Compose]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/docker-compose.yml
 
-[Elide]: https://qubitpi.github.io/elide-doc/
-[Elide instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
-[Elide Standalone]: https://github.com/QubitPi/elide/tree/master/elide-standalone
-[ElideSettings instance class]: https://github.com/QubitPi/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
+[Elide]: https://elide.io/
+[Elide instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/Elide.java
+[Elide Standalone]: https://github.com/yahoo/elide/tree/master/elide-standalone
+[ElideSettings instance class]: https://github.com/yahoo/elide/blob/master/elide-core/src/main/java/com/yahoo/elide/ElideSettings.java
 [example model]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models/blob/master/src/main/java/com/qubitpi/ws/jersey/template/models/Book.java
 
 [jcabi-mysql]: https://mysql.jcabi.com/
