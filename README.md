@@ -8,28 +8,6 @@ Jersey Webservice Template <sup>![Java Version Badge][Java Version Badge]</sup>
 ![HashiCorp Packer Badge][HashiCorp Packer Badge]
 ![HashiCorp Terraform Badge][HashiCorp Terraform Badge]
 
-<a href="https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template">
-    <img
-        align="left"
-        width="17%"
-        alt="SonarCloud Quality Gate"
-        src="https://sonarcloud.io/api/project_badges/quality_gate?project=QubitPi_jersey-webservice-template"
-    >
-</a>
-
-[![Bugs][Sonar Bugs]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Vulnerabilities][Sonar Vulnerabilities]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Security Rating][Sonar Security Rating]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-
-[![Coverage][Sonar Coverage]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Code Smells][Sonar Code Smells]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Maintainability Rating][Sonar Maintainability Rating]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-
-[![Lines of Code][Sonar Lines of Code]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Duplicated Lines (%)][Sonar Duplicated Lines (%)]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Reliability Rating][Sonar Reliability Rating]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-[![Technical Debt][Sonar Technical Debt]](https://sonarcloud.io/summary/new_code?id=QubitPi_jersey-webservice-template)
-
 [Jersey Webservice Template (JWT)][jersey-webservice-template] is a [JSR 370] web service **template** that lets us
 spin up Java web service quickly through [Golden Paths] approach.
 
@@ -89,16 +67,5 @@ The use and distribution terms for [jersey-webservice-template] are covered by t
 [Javadoc]: https://qubitpi.github.io/jersey-webservice-template/apidocs/
 [jersey-webservice-template]: https://qubitpi.github.io/jersey-webservice-template/
 [JSR 370]: https://jcp.org/en/jsr/detail?id=370
-
-[Sonar Bugs]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=bugs
-[Sonar Vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=vulnerabilities
-[Sonar Security Rating]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=security_rating
-[Sonar Coverage]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=coverage
-[Sonar Code Smells]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=code_smells
-[Sonar Maintainability Rating]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=sqale_rating
-[Sonar Lines of Code]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=ncloc
-[Sonar Duplicated Lines (%)]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=duplicated_lines_density
-[Sonar Reliability Rating]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=reliability_rating
-[Sonar Technical Debt]: https://sonarcloud.io/api/project_badges/measure?project=QubitPi_jersey-webservice-template&metric=sqale_index
 
 [The Technology Acceptance Model (TAM)]: https://open.ncl.ac.uk/theories/1/technology-acceptance-model/
