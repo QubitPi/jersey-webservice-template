@@ -17,6 +17,16 @@ title: Setup
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
 
+:::caution
+
+Before proceeding, it is important to note that **we DO NOT support Spring/Spring Boot paradigm**.
+[Jersey Webservice Template] runs as a **[JAX-RS]** webservice ONLY backed by its reference implementation [Jersey]
+running as a WAR inside [Jetty] container.
+
+More info about difference between JAX-RS and Spring can be found in [this thread](https://stackoverflow.com/a/42955575)
+
+:::
+
 This section discusses the one-time setup in order to develop [Jersey Webservice Template].
 
 Prepare for Local Development
@@ -97,7 +107,10 @@ IDE's `Editor -> Code Style` section.
 
 [Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
 
+[JAX-RS]: https://jcp.org/en/jsr/detail?id=370
+[Jersey]: https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/index.html
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 [jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
+[Jetty]: https://eclipse.dev/jetty/
 
 [style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Jersey-Webservice-Template-Project-intellij-code-style.xml
