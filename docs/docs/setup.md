@@ -20,8 +20,8 @@ title: Setup
 :::caution
 
 Before proceeding, it is important to note that **we DO NOT support Spring/Spring Boot paradigm**.
-[Jersey Webservice Template] runs as a **[JAX-RS]** webservice ONLY backed by its reference implementation [Jersey]
-running as a WAR inside [Jetty] container.
+[Jersey Webservice Template] runs as a **[JAX-RS]** webservice backed by its reference implementation [Jersey] running
+as a WAR inside [Jetty] container.
 
 More info about difference between JAX-RS and Spring can be found in [this thread](https://stackoverflow.com/a/42955575)
 
