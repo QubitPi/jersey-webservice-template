@@ -83,6 +83,19 @@ jobs:
           user_name: ${{ env.USER }}
           user_email: ${{ env.EMAIL }}
 
+  triggering:
+    name: Triggering data model CI/CD
+    needs: tests
+    if: github.ref == 'refs/heads/jpa-elide'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data model CI/CD
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.JWT_JPA_ELIDE_DATA_MODEL_CICD_TRIGGER }}
+          repository: QubitPi/jersey-webservice-template-jpa-data-models
+          event-type: jersey-webservice-template-jpa-elide-changes
+
   hashicorp:
     name: Generated Webservice WAR in GitHub Action, and Publish Template AMI Image and Deploy it to EC2 through HashiCorp
     if: ${{ github.event.repository.name != 'jersey-webservice-template' }} # change this to "if: github.ref == 'refs/heads/master'" in fork
