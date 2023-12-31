@@ -102,7 +102,7 @@ settings by importing the [jersey-webservice-template-Project-intellij-code-styl
 of the repo. The setting for the project will appear as a new Scheme named "jersey-webservice-template-Project" under
 IDE's **Editor** -> **Code Style** section.
 
-Please also enable "remove unused imports" by **Editor -> **General** -> **Auto Import** -> **Optimize Imports on the Fly**, which will automatically remove unused imports.
+Please also enable "remove unused imports" by **Editor** -> **General** -> **Auto Import** -> **Optimize Imports on the Fly**, which will automatically remove unused imports.
 
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
