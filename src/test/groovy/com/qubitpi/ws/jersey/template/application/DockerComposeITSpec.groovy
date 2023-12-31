@@ -15,16 +15,11 @@
  */
 package com.qubitpi.ws.jersey.template.application
 
-import org.hamcrest.Matchers
 import org.testcontainers.containers.DockerComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.spock.Testcontainers
 
-import io.restassured.RestAssured
-import spock.lang.IgnoreIf
-
 @Testcontainers
-@IgnoreIf({System.getenv().get("MODEL_PACKAGE_NAME") == null})
 class DockerComposeITSpec extends AbstractITSpec {
 
     final DockerComposeContainer COMPOSE = new DockerComposeContainer(new File("docker-compose.yml"))
