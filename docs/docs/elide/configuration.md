@@ -80,19 +80,32 @@ The triggering of its direct downstream project is done through GitHub Actions. 
 
 ```yaml
   triggering:
-    name: Triggering data model CI/CD
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger data model CI/CD
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
-          repository: my-org/my-data-model-repo
-          event-type: my-webservice-repo-changes
+     name: Triggering data model CI/CD
+     runs-on: ubuntu-latest
+     steps:
+        - name: Trigger data model CI/CD
+          uses: peter-evans/repository-dispatch@v2
+          with:
+             token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
+             repository: my-org/my-data-model-repo
+             event-type: my-webservice-repo-changes
 ```
+
+For **MY_DATA_MODEL_CICD_TRIGGER** token, it is recommended to use a
+[fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+with the following permissions on the target repository (i.e. _my-data-model-repo_):
+
+- contents: read & write
+- metadata: read only (automatically selected when selecting the contents permission)
+
+[CI/CD definition file]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/.github/workflows/ci-cd.yml
 
 [GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
+[jersey-webservice-template-jpa-data-models]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models
+[jersey-webservice-template-jpa-data-models-acceptance-tests]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models-acceptance-tests
 
 [operating system's environment variables]: https://docs.oracle.com/javase/tutorial/essential/environment/env.html
+
+[peter-evans/repository-dispatch]: https://github.com/peter-evans/repository-dispatch
