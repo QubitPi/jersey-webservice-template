@@ -68,6 +68,29 @@ In addition to the ones mentioned in [general CI/CD configs](../configuration#ci
 | DATA_MODELS_PRIVATE_REPO_ORG   | The org/user name of the GitHub repo for Elide data models                                                                          | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_ORG is "QubitPi"                                                                               |
 | DATA_MODELS_PRIVATE_REPO_NAME  | The name of the GitHub repo for Elide data models                                                                                   | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_NAME is "jersey-webservice-template"                                                           |
 
+### CI/CD Chain
+
+Jersey Webservice Templates adopts the best CI/CD strategies by incorporating its sister projects, [jersey-webservice-template-jpa-data-models] and
+[jersey-webservice-template-jpa-data-models-acceptance-tests], into its CI/CD pipeline. Any PR merge into `jpa-elide` branch will trigger the
+[CI/CD of its data model](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models/actions), which then triggers
+[CI/CD of data model's acceptance tests](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models-acceptance-tests/actions).
+
+The triggering of its direct downstream project is done through GitHub Actions. See the **triggering** job in [CI/CD definition file]. Basically, the triggering is proxied to
+[peter-evans/repository-dispatch]:
+
+```yaml
+  triggering:
+    name: Triggering data model CI/CD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data model CI/CD
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
+          repository: my-org/my-data-model-repo
+          event-type: my-webservice-repo-changes
+```
+
 [GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
