@@ -80,15 +80,15 @@ The triggering of its direct downstream project is done through GitHub Actions. 
 
 ```yaml
   triggering:
-     name: Triggering data model CI/CD
-     runs-on: ubuntu-latest
-     steps:
-        - name: Trigger data model CI/CD
-          uses: peter-evans/repository-dispatch@v2
-          with:
-             token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
-             repository: my-org/my-data-model-repo
-             event-type: my-webservice-repo-changes
+    name: Triggering data model CI/CD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data model CI/CD
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
+          repository: my-org/my-data-model-repo
+          event-type: my-webservice-repo-changes
 ```
 
 For **MY_DATA_MODEL_CICD_TRIGGER** token, it is recommended to use a
