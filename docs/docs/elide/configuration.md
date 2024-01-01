@@ -98,6 +98,17 @@ with the following permissions on the target repository (i.e. _my-data-model-rep
 - contents: read & write
 - metadata: read only (automatically selected when selecting the contents permission)
 
+In downstream project CI/CD workflow, add the following to the
+[on-clause](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on):
+
+```yaml
+"on":
+  repository_dispatch:
+    types: [my-webservice-repo-changes]
+```
+
+Note that how `my-webservice-repo-changes` is used to bridge the event dispatcher (Jersey Webservice Template) and event subscriber (data model project).
+
 [CI/CD definition file]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/.github/workflows/ci-cd.yml
 
 [GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
