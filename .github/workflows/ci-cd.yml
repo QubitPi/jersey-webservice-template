@@ -92,7 +92,7 @@ jobs:
       - name: Trigger data model CI/CD
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.JWT_JPA_ELIDE_DATA_MODEL_CICD_TRIGGER }}
+          token: ${{ secrets.JWT_DOWNSTREAM_CICD_TRIGGER_TOKEN }}
           repository: QubitPi/jersey-webservice-template-jpa-data-models
           event-type: jersey-webservice-template-jpa-elide-changes
 
