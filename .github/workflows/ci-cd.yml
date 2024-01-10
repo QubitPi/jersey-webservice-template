@@ -105,7 +105,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Deployment environment setup
-        uses: ./.github/actions/cd-setup
+        uses: QubitPi/hashicorp-aws/hashicorp/webservice/auxiliary/github/actions/cd-setup@master
         with:
           aws-ws-pkrvars-hcl: ${{ secrets.AWS_WS_PKRVARS_HCL }}
           ssl-certificate: ${{ secrets.SSL_CERTIFICATE }}
@@ -113,13 +113,21 @@ jobs:
           nginx-config-file: ${{ secrets.NGINX_CONFIG_FILE }}
           filebeat-config-file: ${{ secrets.FILEBEAT_CONFIG_FILE }}
           aws-ws-tfvars: ${{ secrets.AWS_WS_TFVARS }}
-          maven-settings-xml: ${{ secrets.MAVEN_SETTINGS_XML }}
-          oauth-properties: ${{ secrets.OAUTH_PROPERTIES }}
-          application-properties: ${{ secrets.APPLICATION_PROPERTIES }}
-          jpadatastore-properties: ${{ secrets.JPADATASTORE_PROPERTIES }}
-          data-models-repo-token: ${{ secrets.DATA_MODELS_PRIVATE_REPO_TOKEN }}
-          data-models-repo-org: ${{ secrets.DATA_MODELS_PRIVATE_REPO_ORG }}
-          data-models-repo-name: ${{ secrets.DATA_MODELS_PRIVATE_REPO_NAME }}
+      - name: Load Maven settings.xml
+        run: echo '${{ secrets.MAVEN_SETTINGS_XML }}' > ~/.m2/settings.xml
+      - name: Load webservice properties files
+        shell: bash
+        run: |
+            echo '${{ secrets.OAUTH_PROPERTIES }}' > src/main/resources/oauth.properties
+            echo '${{ secrets.APPLICATION_PROPERTIES }}' > src/main/resources/application.properties
+            echo '${{ secrets.JPADATASTORE_PROPERTIES }}' > src/main/resources/jpadatastore.properties
+      - name: Install data models
+        shell: bash
+        run: |
+            git clone https://${{ secrets.DATA_MODELS_PRIVATE_REPO_TOKEN }}@github.com/${{ secrets.DATA_MODELS_PRIVATE_REPO_ORG }}/${{ secrets.DATA_MODELS_PRIVATE_REPO_NAME }}.git ../jpa-models
+            cd ../jpa-models
+            mvn clean install
+
       - name: Generate webservice WAR file
         run: mvn -B clean package
       - name: Move WAR file to a location for HashiCorp deployment to pickup
