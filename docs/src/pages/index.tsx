@@ -30,7 +30,9 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          Improving the <b><em>Quality</em></b> and <b><em>Velocity</em></b> of Your Webservice Project
+        </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
