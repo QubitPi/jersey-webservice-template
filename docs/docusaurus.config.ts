@@ -19,7 +19,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Jersey Webservice Template',
-  tagline: 'Avoiding boilerplate code',
+  tagline: 'Improving the Quality and Velocity of Your Data API Project',
   favicon: 'img/favicon.ico',
 
   url: 'https://qubitpi.github.io',
