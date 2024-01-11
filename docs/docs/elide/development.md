@@ -127,8 +127,8 @@ Jersey Webservice Template can run in [Docker Compose] for the following purpose
 
 :::caution
 
-Docker Compose designed here is intended for local development and testing purposes ONLY! _It is strongly discouraged
-to run this Docker Compose in production!_
+Docker Compose is intended for local development and testing purposes ONLY! _It is strongly discouraged to run it in
+production!_
 
 :::
 
@@ -205,31 +205,31 @@ git clone https://github.com/QubitPi/jersey-webservice-template.git
 cd jersey-webservice-template
 git checkout jpa-elide
 mvn clean package
-MODEL_PACKAGE_NAME=$MODEL_PACKAGE_NAME docker compose up --build --force-recreate
+MODEL_PACKAGE_NAME=com.mycompany.models docker compose up --build --force-recreate
 ```
 
-where the value of `$MODEL_PACKAGE_NAME` variable is the package in config JAR that contains all
-[elide models](https://elide.io/pages/guide/v7/02-data-model.html). It can be set, for example, at command line with:
+The following [Docker Compose environment variables] can be [passed](https://stackoverflow.com/a/58900415) into Docker
+Compose file:
 
-```bash
-export MODEL_PACKAGE_NAME=com.mycompany.data.models
-```
+- (**required**) `MODEL_PACKAGE_NAME` is the package in config JAR that contains all
+  [elide models](https://elide.io/pages/guide/v7/02-data-model.html). In the example above, we assign the package
+  `com.mycompany.models` to it
+- (optional) `OAUTH_ENABLED` & `JWKS_URL` allow us to turn on OAuth feature in Docker Compose. For example, we might
+  need it in acceptance tests. The two variables are set in pair:
 
-The variable will be [passed](https://stackoverflow.com/a/58900415) into Docker Compose file.
+  ```bash
+  export $OAUTH_ENABLED=true
+  export $JWKS_URL=https://8is478.logto.app/oidc/jwks # this is an example URL :)
+  ```
 
-:::tip
+  _Note that OAuth feature is disabled by default in Docker Compose (i.e. OAUTH_ENABLED=false)_
 
-Although not needed as in development, one can turn on OAuth feature in Docker Compose (for example in acceptance tests)
-by
-
-```bash
-export $OAUTH_ENABLED=true
-export $JWKS_URL=https://8is478.logto.app/oidc/jwks # this is an example URL :)
-```
-
-Note that OAuth feature is disabled by default in Docker Compose (i.e. OAUTH_ENABLED=false)
-
-:::
+- (optional) `MYSQL_INIT_SCRIPT_PATH` is the path (absolute or relative) to the
+  [MySQL init script](https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/mysql-init.sql). _By
+  default, its value is `./mysql-init.sql`_. This option is very useful when Docker Compose is running inside Docker
+  (Docker-in-Docker), in which case `MYSQL_INIT_SCRIPT_PATH` is not the path in Docker but the path on the host
+  machine. Exposing this mount source allows Docker Compose to successfully pick up the MySQL init script from within
+  the Docker-in-Docker.
 
 :::tip
 
