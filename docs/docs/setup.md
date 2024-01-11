@@ -102,7 +102,34 @@ settings by importing the [jersey-webservice-template-Project-intellij-code-styl
 of the repo. The setting for the project will appear as a new Scheme named "jersey-webservice-template-Project" under
 IDE's **Editor** -> **Code Style** section.
 
-Please also enable "remove unused imports" by **Editor** -> **General** -> **Auto Import** -> **Optimize Imports on the Fly**, which will automatically remove unused imports.
+Please also enable "remove unused imports" by **Editor** -> **General** -> **Auto Import** -> **Optimize Imports on the
+Fly**, which will automatically remove unused imports.
+
+#### IntelliJ Troubleshooting
+
+##### IntelliJ Cannot READ Resource File
+
+We sometimes see errors when we run unit tests in IntelliJ, saying "some resource file" cannot be found. We know the
+path is absolutely right. If this is the case, it's simply a IntelliJ issue which is solved by simply loading those
+resources explicitly by telling IntelliJ where those resources are:
+
+![Error loading intelliJ-find-resource.png](img/intelliJ-find-resource.png)
+
+##### Tab Width
+
+We use 4-space as tab. This can be configured at **Code Style** -> **Java** -> **Tabs and Indents** with the following
+settings:
+
+Tab size: 4
+Indent: 4
+Continuation indent: 8
+
+If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
+
+1. "Settings | Editor | Code Style" -- try disabling "Detect and use existing file indents for editing" in case if you
+   have it enabled (it is by default). NOTE: re-opening file in editor may be required.
+2. Do you have any .editorconfig files anywhere in the path of that file? Settings from .editorconfig
+   ("Settings | Editor | Code Style") have priority (will overwrite) over your IDE settings.
 
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
