@@ -132,7 +132,7 @@ If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
    ("Settings | Editor | Code Style") have priority (will overwrite) over your IDE settings.
 
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
-[Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/com/qubitpi/ws/jersey/template/cache
+[Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/org/qubitpi/ws/jersey/template/cache
 
 [Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DataServletITSpec.groovy
 
