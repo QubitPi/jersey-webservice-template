@@ -1,6 +1,7 @@
 ---
 sidebar_position: 3
 title: Data Models
+description: Creating CRUD data models (create, read, update, and delete) in the backend using Elide
 ---
 
 [//]: # (Copyright Jiaqi Liu)

@@ -1,6 +1,7 @@
 ---
-sidebar_position: 11
+sidebar_position: 10
 title: Development
+description: For developers who maintain or want to make changes to the Jersey Webservice Template
 ---
 
 [//]: # (Copyright Jiaqi Liu)
