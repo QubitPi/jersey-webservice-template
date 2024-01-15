@@ -66,25 +66,44 @@ CI/CD
 
 The following [GitHub Action Secrets][GitHub Action - How to set up] needs to be setup:
 
-| **Secret Name**       | **Definition**                                                                                                                                                                     | **How to Get**                                                                                                                                                        |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| DOCKERHUB_USERNAME    | You Docker Hub username                                                                                                                                                            | For example, [this user](https://hub.docker.com/u/jack20191124)'s is `jack20191124`                                                                                   |
-| DOCKERHUB_TOKEN       |  A personal access token (PAT) to use as an Docker CLI authentication from within GitHub Action                                                                                    | [Creating an access token](https://docs.docker.com/security/for-developers/access-tokens/#create-an-access-token)                                                     |
-| AWS_WS_PKRVARS_HCL    | The HashiCorp Packer variable [values file](https://qubitpi.github.io/hashicorp-packer/packer/guides/hcl/variables#from-a-file) contents                                           | [hashicorp-aws](https://qubitpi.github.io/hashicorp-aws/docs/webservice)                                                                                              |
-| SSL_CERTIFICATE       | SSL cert file for exposing webservice API via secure HTTPS                                                                                                                         | [Installing Free SSL Certificates with Certbot running on Nginx](https://qubitpi.github.io/hashicorp-aws/docs/setup#step-1---store-ssl-certificate-in-github-secrets) |
-| SSL_CERTIFICATE_KEY   | SSL cert key file for exposing webservice API via secure HTTPS                                                                                                                     | [Installing Free SSL Certificates with Certbot running on Nginx](https://qubitpi.github.io/hashicorp-aws/docs/setup#step-1---store-ssl-certificate-in-github-secrets) |
-| NGINX_CONFIG_FILE     | Config file for Nginx as a HTTPS reverse proxy                                                                                                                                     | [Define Nginx Reverse Proxy Config File](https://qubitpi.github.io/hashicorp-aws/docs/setup#step-3---define-nginx-reverse-proxy-config-file)                          |
-| AWS_WS_TFVARS         | The HashiCorp Terraform variable [values file](https://qubitpi.github.io/hashicorp-terraform/terraform/language/values/variables#variable-definitions-tfvars-files) contents       | [hashicorp-aws](https://qubitpi.github.io/hashicorp-aws/docs/webservice)                                                                                              |
-| MAVEN_SETTINGS_XML    | A [Maven settings file](https://maven.apache.org/settings.html) for the Webservice project                                                                                         | The exact settings.xml contents containing [these meta tags](https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/settings.xml.example)               |
-| OAUTH_PROPERTIES      | The contents of the `src/main/resources/oauth.properties` mentioned above                                                                                                          | See [Security](#oauth-2) section above                                                                                                                                |
-| AWS_ACCESS_KEY_ID     | The exact same AWS_ACCESS_KEY_ID as mentioned in [Environment variables to configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)     | [How to create and configure AWS credentials for Amazon Keyspaces](https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html)                     |
-| AWS_SECRET_ACCESS_KEY | The exact same AWS_SECRET_ACCESS_KEY as mentioned in [Environment variables to configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) | [How to create and configure AWS credentials for Amazon Keyspaces](https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html)                     |
-| AWS_REGION            | The exact same AWS_REGION as mentioned in [Environment variables to configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)            | [How to create and configure AWS credentials for Amazon Keyspaces](https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html)                     |
+| **Secret Name**       | **Definition**                                                                                        | **How to Get**                                                                           |
+|-----------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| DOCKERHUB_USERNAME    | You Docker Hub username                                                                               | For example, [this user][Docker - an user example]'s is `jack20191124`                   |
+| DOCKERHUB_TOKEN       | A personal access token (PAT) to use as an Docker CLI authentication from within GitHub Action        | [Creating an access token][Docker - Creating an access token]                            |
+| AWS_WS_PKRVARS_HCL    | The [HashiCorp Packer variable values file] contents                                                  | [hashicorp-aws][hashicorp-aws webservice]                                                |
+| SSL_CERTIFICATE       | SSL cert file for exposing webservice API via secure HTTPS                                            | [Installing Free SSL Certificates with Certbot running on Nginx]                         |
+| SSL_CERTIFICATE_KEY   | SSL cert key file for exposing webservice API via secure HTTPS                                        | [Installing Free SSL Certificates with Certbot running on Nginx]                         |
+| NGINX_CONFIG_FILE     | Config file for Nginx as a HTTPS reverse proxy                                                        | [Define Nginx Reverse Proxy Config File]                                                 |
+| FILEBEAT_CONFIG_FILE  | The standard filebeat.yml file contents                                                               | [Configure Filebeat]                                                                     |
+| AWS_WS_TFVARS         | The [HashiCorp Terraform variable values file] contents                                               | [hashicorp-aws][hashicorp-aws webservice]                                                |
+| MAVEN_SETTINGS_XML    | The contents of [Maven settings file] for the Webservice project                                      | The exact settings.xml contents containing [these meta tags][JWT JPA Maven setting tags] |
+| OAUTH_PROPERTIES      | The contents of the `src/main/resources/oauth.properties` mentioned above                             | See [Security](#oauth-2) section above                                                   |
+| AWS_ACCESS_KEY_ID     | The exact same AWS_ACCESS_KEY_ID as mentioned in [Environment variables to configure the AWS CLI]     | [How to create and configure AWS credentials for Amazon Keyspaces]                       |
+| AWS_SECRET_ACCESS_KEY | The exact same AWS_SECRET_ACCESS_KEY as mentioned in [Environment variables to configure the AWS CLI] | [How to create and configure AWS credentials for Amazon Keyspaces]                       |
+| AWS_REGION            | The exact same AWS_REGION as mentioned in [Environment variables to configure the AWS CLI]            | [How to create and configure AWS credentials for Amazon Keyspaces]                       |
 
 [GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
+[Configure Filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html
+
+[Define Nginx Reverse Proxy Config File]: https://qubitpi.github.io/hashicorp-aws/docs/setup#step-3---define-nginx-reverse-proxy-config-file
+[Docker - Creating an access token]: https://docs.docker.com/security/for-developers/access-tokens/#create-an-access-token
+[Docker - an user example]: https://hub.docker.com/u/jack20191124
+
+[Environment variables to configure the AWS CLI]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
+
+[hashicorp-aws webservice]: https://qubitpi.github.io/hashicorp-aws/docs/webservice
+[HashiCorp Packer variable values file]: https://qubitpi.github.io/hashicorp-packer/packer/guides/hcl/variables#from-a-file
+[HashiCorp Terraform variable values file]: https://qubitpi.github.io/hashicorp-terraform/terraform/language/values/variables#variable-definitions-tfvars-files
+[How to create and configure AWS credentials for Amazon Keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html
+
+[Installing Free SSL Certificates with Certbot running on Nginx]: https://qubitpi.github.io/hashicorp-aws/docs/setup#step-1---store-ssl-certificate-in-github-secrets
+
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
+[JWT JPA Maven setting tags]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/settings.xml.example
 [JWKS]: https://datatracker.ietf.org/doc/html/rfc7517
+
+[Maven settings file]: https://maven.apache.org/settings.html
 
 [OAuthFilter]: https://qubitpi.github.io/jersey-webservice-template/apidocs/com/qubitpi/ws/jersey/template/web/filters/OAuthFilter.html
 [operating system's environment variables]: https://docs.oracle.com/javase/tutorial/essential/environment/env.html
