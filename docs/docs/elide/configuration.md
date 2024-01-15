@@ -1,6 +1,7 @@
 ---
 sidebar_position: 9
 title: Configuration
+description: Configurations specific to JPA through yahoo/elide
 ---
 
 [//]: # (Copyright Jiaqi Liu)
@@ -60,13 +61,13 @@ In addition to the ones mentioned in [general CI/CD configs](../configuration#ci
 [GitHub Action Secrets][GitHub Action - How to set up] needs to be setup:
 <!-- markdown-link-check-enable -->
 
-| Secret Name                    | Definition                                                                                                                          | How to Get                                                                                                                                                                                                         |
-|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| APPLICATION_PROPERTIES         | The contents of the `src/main/resources/application.properties` mentioned above                                                     | See [Core Properties](#core-properties) section above                                                                                                                                                              |
-| JPADATASTORE_PROPERTIES        | The contents of the `src/main/resources/jpadatastore.properties` mentioned above                                                    | See [JPA DataStore](#jpa-datastore) section above                                                                                                                                                                  |
-| DATA_MODELS_PRIVATE_REPO_TOKEN | The GitHub Fine-grained token with at least "Read access to code and metadata" repository permissions to the Elide data models repo | [Creating a fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) |
-| DATA_MODELS_PRIVATE_REPO_ORG   | The org/user name of the GitHub repo for Elide data models                                                                          | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_ORG is "QubitPi"                                                                               |
-| DATA_MODELS_PRIVATE_REPO_NAME  | The name of the GitHub repo for Elide data models                                                                                   | For [this example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models), DATA_MODELS_PRIVATE_REPO_NAME is "jersey-webservice-template"                                                           |
+| Secret Name                    | Definition                                                                                                                          | How to Get                                                                                                                    |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| APPLICATION_PROPERTIES         | The contents of the `src/main/resources/application.properties` mentioned above                                                     | See [Core Properties](#core-properties) section above                                                                         |
+| JPADATASTORE_PROPERTIES        | The contents of the `src/main/resources/jpadatastore.properties` mentioned above                                                    | See [JPA DataStore](#jpa-datastore) section above                                                                             |
+| DATA_MODELS_PRIVATE_REPO_TOKEN | The GitHub Fine-grained token with at least "Read access to code and metadata" repository permissions to the Elide data models repo | [Creating a fine-grained personal access token]                                                                               |
+| DATA_MODELS_PRIVATE_REPO_ORG   | The org/user name of the GitHub repo for Elide data models                                                                          | For [this example][jersey-webservice-template-jpa-data-models], DATA_MODELS_PRIVATE_REPO_ORG is "QubitPi"                     |
+| DATA_MODELS_PRIVATE_REPO_NAME  | The name of the GitHub repo for Elide data models                                                                                   | For [this example][jersey-webservice-template-jpa-data-models], DATA_MODELS_PRIVATE_REPO_NAME is "jersey-webservice-template" |
 
 ### CI/CD Chain
 
@@ -110,6 +111,7 @@ In downstream project CI/CD workflow, add the following to the
 Note that how `my-webservice-repo-changes` is used to bridge the event dispatcher (Jersey Webservice Template) and event subscriber (data model project).
 
 [CI/CD definition file]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/.github/workflows/ci-cd.yml
+[Creating a fine-grained personal access token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token
 
 [GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
