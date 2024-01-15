@@ -33,7 +33,7 @@ Documentation
 JWT supports 3 kinds of webservice templates:
 
 - [A general scaffolding without any vertical-business logics](https://qubitpi.github.io/jersey-webservice-template/docs/intro)
-- [A JPA webservice template backed by yahoo/elide](https://qubitpi.github.io/jersey-webservice-template/docs/category/elide-library)
+- [A JPA webservice template backed by yahoo/elide](https://qubitpi.github.io/jersey-webservice-template/docs/category/jpa-through-yahooelide)
 - An async jobstore webservice template similar to yahoo/fili's JobStore design (Developing...)
 
 Comprehensive documentation is viewable on our [website][Documentation]
