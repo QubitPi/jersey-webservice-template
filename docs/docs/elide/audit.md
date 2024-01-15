@@ -1,6 +1,7 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 title: Logging & Audit
+description: Configuring logging & audit
 ---
 
 [//]: # (Copyright Jiaqi Liu)

@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 title: Features
+description: An overview of Elide features and links to their respective documentations.
 ---
 
 [//]: # (Copyright Jiaqi Liu)
@@ -16,10 +17,6 @@ title: Features
 [//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
-
-The following guide provides an overview of Elide features and links to their respective documentation.
-
-<!--truncate-->
 
 Common API Features
 -------------------
