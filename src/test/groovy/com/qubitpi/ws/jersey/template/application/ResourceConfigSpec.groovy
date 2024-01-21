@@ -32,7 +32,7 @@ class ResourceConfigSpec extends Specification {
         binderFactory.buildBinder() >> Mock(Binder)
 
         when: "injecting resources"
-        org.glassfish.jersey.server.ResourceConfig resourceConfig = new ResourceConfig(true)
+        org.glassfish.jersey.server.ResourceConfig resourceConfig = new ResourceConfig()
 
         then: "all request & response filters are injected"
         resourceConfig.classes.containsAll(ALWAYS_REGISTERED_FILTERS)
