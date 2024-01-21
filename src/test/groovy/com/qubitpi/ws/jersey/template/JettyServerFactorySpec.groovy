@@ -15,8 +15,6 @@
  */
 package com.qubitpi.ws.jersey.template
 
-import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
-
 import org.eclipse.jetty.server.Server
 import org.glassfish.jersey.server.ResourceConfig
 
@@ -50,11 +48,6 @@ class JettyServerFactorySpec extends Specification {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = PORT
         RestAssured.basePath = "/v1"
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .addHeader(
-                        OAuthFilter.AUTHORIZATION_HEADER,
-                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken")
-                .build()
     }
 
     def "Factory produces Jsersey-Jetty applications"() {

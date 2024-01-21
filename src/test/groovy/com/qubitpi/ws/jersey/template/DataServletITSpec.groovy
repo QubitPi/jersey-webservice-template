@@ -15,8 +15,6 @@
  */
 package com.qubitpi.ws.jersey.template
 
-import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
-
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.PullPolicy
 import org.testcontainers.images.builder.ImageFromDockerfile
@@ -74,12 +72,6 @@ class DataServletITSpec extends Specification {
         RestAssured.baseURI = "http://" + container.host
         RestAssured.port = container.firstMappedPort
         RestAssured.basePath = "/v1"
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .addHeader(
-                        OAuthFilter.AUTHORIZATION_HEADER,
-                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken"
-                )
-                .build()
     }
 
     @Unroll

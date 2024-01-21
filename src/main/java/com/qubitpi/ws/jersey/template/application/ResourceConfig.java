@@ -15,11 +15,8 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
-import com.qubitpi.ws.jersey.template.config.OAuthConfig;
 import com.qubitpi.ws.jersey.template.web.filters.CorsFilter;
-import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter;
 
-import org.aeonbits.owner.ConfigFactory;
 import org.glassfish.hk2.utilities.Binder;
 
 import jakarta.inject.Inject;
@@ -36,28 +33,15 @@ import net.jcip.annotations.ThreadSafe;
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
     private static final String ENDPOINT_PACKAGE = "com.qubitpi.ws.jersey.template.web.endpoints";
-    private static final OAuthConfig OAUTH_CONFIG = ConfigFactory.create(OAuthConfig.class);
 
     /**
-     * DI Constructor.
+     * DI Constructor that allows for finer dependency injection control.
      */
     @Inject
     public ResourceConfig() {
-        this(OAUTH_CONFIG.authEnabled());
-    }
-
-    /**
-     * Constructor that allows for finer dependency injection control.
-     *
-     * @param oauthEnabled  Flag on whether or not to enable auth feature, mainly for differentiating dev/test and prod
-     */
-    public ResourceConfig(final boolean oauthEnabled) {
         packages(ENDPOINT_PACKAGE);
 
         register(CorsFilter.class);
-        if (oauthEnabled) {
-            register(OAuthFilter.class);
-        }
 
         final Binder binder = new BinderFactory().buildBinder();
         register(binder);
