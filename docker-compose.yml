@@ -26,6 +26,7 @@ services:
       - DB_URL=jdbc:mysql://db/elide?serverTimezone=UTC
       - OAUTH_ENABLED=${OAUTH_ENABLED:-false}
       - JWKS_URL=${JWKS_URL}
+      - HIBERNATE_HBM2DDL_AUTO=create
     depends_on:
       db:
         condition: service_healthy
