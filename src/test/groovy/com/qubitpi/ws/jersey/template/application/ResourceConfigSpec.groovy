@@ -16,12 +16,10 @@
 package com.qubitpi.ws.jersey.template.application
 
 import com.qubitpi.ws.jersey.template.web.filters.CorsFilter
-import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
 
 import org.glassfish.jersey.internal.inject.Binder
 
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class ResourceConfigSpec extends Specification {
 
@@ -38,26 +36,5 @@ class ResourceConfigSpec extends Specification {
 
         then: "all request & response filters are injected"
         resourceConfig.classes.containsAll(ALWAYS_REGISTERED_FILTERS)
-    }
-
-    @Unroll
-    @SuppressWarnings('GroovyAccessibility')
-    def "When OAUTH_ENABLED = #oauthTurnedOn, OAuth filter is #registered"() {
-        setup: "binder is mocked out"
-        BinderFactory binderFactory = Mock(BinderFactory)
-        binderFactory.buildBinder() >> Mock(Binder)
-
-        when: "injecting resources"
-        org.glassfish.jersey.server.ResourceConfig resourceConfig = new ResourceConfig(oauthTurnedOn)
-
-        then: "OAuth filter is injected according to configuration"
-        resourceConfig.classes.contains(OAuthFilter) == containsOAuthFilter
-
-        where:
-        oauthTurnedOn || containsOAuthFilter
-        true          || true
-        false         || false
-
-        registered = oauthTurnedOn ? "registered" : "not registered"
     }
 }

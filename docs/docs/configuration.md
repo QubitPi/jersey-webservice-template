@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 5
 title: Configuration
 ---
 
@@ -23,43 +23,14 @@ import TabItem from '@theme/TabItem';
 The configurations in this page can be set from several sources in the following order:
 
 1. the [operating system's environment variables]; for instance, an environment variable can be set with
-   `export OAUTH_ENABLED="true"`
+   `export DB_URL="jdbc:mysql://db/elide?serverTimezone=UTC"`
 2. the [Java system properties]; for example, a Java system property can be set using
-   `System.setProperty("OAUTH_ENABLED", "true")`
+   `System.setProperty("DB_URL", "jdbc:mysql://db/elide?serverTimezone=UTC")`
 3. a **.properties** file placed under CLASSPATH. This file can be put under `src/main/resources` source directory with
-   contents, for example, `OAUTH_ENABLED=true`
+   contents, for example, `DB_URL=jdbc:mysql://db/elide?serverTimezone=UTC`
 
 Note that environment config has higher priority than Java system properties. Java system properties have higher
 priority than file based configuration.
-
-OAuth 2
--------
-
-:::info
-
-The following configurations can be placed in the properties file called **src/main/resources/oauth.properties**
-
-:::
-
-- **OAUTH_ENABLED**: Whether or not to enable [OAuthFilter] container request filter.
-- **JWKS_URL**: (**Required if `OAUTH_ENABLED` is set to `true`**) A standard [JWKS] URL that, on GET, returns a json
-  object such as
-
-  ```json
-  {
-      "keys": [
-          {
-              "kty": "EC",
-              "use": "sig",
-              "kid": "eTERknhur9q8gisdaf_dfrqrgdfsg",
-              "alg": "ES384",
-              "crv": "P-384",
-              "x": "sdfrgHGYF...",
-              "y": "sdfuUIG&8..."
-          }
-      ]
-  }
-  ```
 
 CI/CD
 -----
@@ -101,9 +72,7 @@ The following [GitHub Action Secrets][GitHub Action - How to set up] needs to be
 
 [Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
 [JWT JPA Maven setting tags]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/settings.xml.example
-[JWKS]: https://datatracker.ietf.org/doc/html/rfc7517
 
 [Maven settings file]: https://maven.apache.org/settings.html
 
-[OAuthFilter]: https://qubitpi.github.io/jersey-webservice-template/apidocs/com/qubitpi/ws/jersey/template/web/filters/OAuthFilter.html
 [operating system's environment variables]: https://docs.oracle.com/javase/tutorial/essential/environment/env.html

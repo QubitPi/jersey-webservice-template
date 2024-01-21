@@ -15,10 +15,6 @@
  */
 package com.qubitpi.ws.jersey.template.application;
 
-import com.qubitpi.ws.jersey.template.config.OAuthConfig;
-import com.qubitpi.ws.jersey.template.web.filters.oauth.AccessTokenValidator;
-
-import org.aeonbits.owner.ConfigFactory;
 import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
@@ -36,8 +32,6 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class BinderFactory {
 
-    private static final OAuthConfig OAUTH_CONFIG = ConfigFactory.create(OAuthConfig.class);
-
     /**
      * Builds a hk2 Binder instance.
      * <p>
@@ -51,14 +45,7 @@ public class BinderFactory {
         return new AbstractBinder() {
             @Override
             protected void configure() {
-                if (OAUTH_CONFIG.authEnabled()) {
-                    bind(new AccessTokenValidator() {
-                        @Override
-                        public boolean validate(final String accessToken) {
-                            return true;
-                        }
-                    }).to(AccessTokenValidator.class);
-                }
+                // intentionally left blank
             }
         };
     }

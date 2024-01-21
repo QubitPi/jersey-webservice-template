@@ -17,7 +17,6 @@ package com.qubitpi.ws.jersey.template.web.endpoints
 
 import com.qubitpi.ws.jersey.template.JettyServerFactory
 import com.qubitpi.ws.jersey.template.application.ResourceConfig
-import com.qubitpi.ws.jersey.template.web.filters.OAuthFilter
 
 import org.eclipse.jetty.server.Server
 
@@ -33,12 +32,6 @@ class DataServletSpec extends Specification {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = PORT
         RestAssured.basePath = "/v1"
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .addHeader(
-                        OAuthFilter.AUTHORIZATION_HEADER,
-                        OAuthFilter.AUTHORIZATION_SCHEME + " " + "someAccessToken"
-                )
-                .build()
     }
 
     def "Healthchecking endpoints returns 200"() {
