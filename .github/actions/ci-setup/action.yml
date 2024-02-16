@@ -19,4 +19,4 @@ runs:
   using: "composite"
   steps:
     - name: Set up JDK
-      uses: QubitPi/hashicorp-aws/.github/actions/jdk-setup@master
+      uses: QubitPi/jersey-webservice-deployment-actions/.github/actions/jdk-setup@master

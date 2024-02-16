@@ -31,7 +31,7 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">
-          Improving the <b><em>Quality</em></b> and <b><em>Velocity</em></b> of Your Webservice Project
+          You can <b><em>innovate</em></b> given the <b><em>right technology</em></b>
         </p>
         <div className={styles.buttons}>
           <Link
