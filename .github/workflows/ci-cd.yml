@@ -51,6 +51,9 @@ jobs:
   documentation:
     name: Test & Release Documentation (including Javadoc)
     needs: tests
+    outputs:
+      outcome: ${{ job.status }}
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -83,9 +86,19 @@ jobs:
           user_name: ${{ env.USER }}
           user_email: ${{ env.EMAIL }}
 
+  slack-notification-pr:
+    name: Send Slack Notification
+    if: ${{ (github.event_name == 'pull_request') && always() }}
+    needs: documentation
+    uses: QubitPi/hashicorp-aws/.github/workflows/slack-notification.yml@master
+    with:
+      job-status: ${{ needs.documentation.outputs.outcome }}
+    secrets:
+      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
   triggering:
     name: Triggering data model CI/CD
-    needs: tests
+    needs: documentation
     if: github.ref == 'refs/heads/jpa-elide'
     runs-on: ubuntu-latest
     steps:
@@ -95,3 +108,13 @@ jobs:
           token: ${{ secrets.JWT_DOWNSTREAM_CICD_TRIGGER_TOKEN }}
           repository: QubitPi/jersey-webservice-template-jpa-data-models
           event-type: jersey-webservice-template-jpa-elide-changes
+
+  slack-notification-jpa-elide-branch-commit:
+    name: Send Slack Notification
+    if: ${{ (github.ref == 'refs/heads/jpa-elide') && always() }}
+    needs: triggering
+    uses: QubitPi/hashicorp-aws/.github/workflows/slack-notification.yml@master
+    with:
+      job-status: ${{ needs.triggering.outputs.outcome }}
+    secrets:
+      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
