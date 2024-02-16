@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[6486],{18:e=>{e.exports=JSON.parse('{"label":"Standard","permalink":"/jersey-webservice-template/blog/tags/standard","allTagsPath":"/jersey-webservice-template/blog/tags","count":1,"unlisted":false}')}}]);
