@@ -100,6 +100,9 @@ jobs:
     name: Triggering data model CI/CD
     needs: documentation
     if: github.ref == 'refs/heads/jpa-elide'
+    outputs:
+      outcome: ${{ job.status }}
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Trigger data model CI/CD
