@@ -185,6 +185,12 @@
 
         <!-- Testing -->
         <dependency>
+            <groupId>io.github.qubitpi</groupId>
+            <artifactId>jersey-webservice-template-jpa-data-models</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
             <scope>test</scope>

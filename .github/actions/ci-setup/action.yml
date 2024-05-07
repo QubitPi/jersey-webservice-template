@@ -31,9 +31,3 @@ runs:
     - name: Load Maven settings.xml
       shell: bash
       run: cp settings.xml.example ~/.m2/settings.xml
-    - name: Install data models
-      shell: bash
-      run: |
-        git clone https://github.com/${{ inputs.data-models-repo-org }}/${{ inputs.data-models-repo-name }}.git ../jpa-models
-        cd ../jpa-models
-        mvn clean install

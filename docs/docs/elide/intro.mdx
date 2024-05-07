@@ -111,9 +111,9 @@ load [data models](#creating-models) via Maven config file, i.e. **~/.m2/setting
         <profile>
             <id>jwt-data-models</id>
             <properties>
-                <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
+                <model.package.jar.group.id>io.github.qubitpi</model.package.jar.group.id>
                 <model.package.jar.artifact.id>jersey-webservice-template-jpa-data-models</model.package.jar.artifact.id>
-                <model.package.jar.version>1.0.0</model.package.jar.version>
+                <model.package.jar.version>1.0.1</model.package.jar.version>
             </properties>
         </profile>
     </profiles>
@@ -132,12 +132,12 @@ With data models defined, can run _my-webservice_
 ```bash
 cd my-webservice
 mvn clean package
-MODEL_PACKAGE_NAME=com.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
+MODEL_PACKAGE_NAME=io.github.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
 ```
 
 :::info
 
-`com.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
+`io.github.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
 [data model project][jersey-webservice-template-jpa-data-models]
 
 :::

@@ -34,11 +34,10 @@ import static org.hamcrest.Matchers.equalTo
 
 import com.yahoo.elide.jsonapi.JsonApi
 
-import com.qubitpi.ws.jersey.template.models.Book
-
 import org.apache.http.HttpStatus
 
 import groovy.json.JsonBuilder
+import io.github.qubitpi.ws.jersey.template.models.Book
 import io.restassured.RestAssured
 import io.restassured.response.Response
 import jakarta.validation.constraints.NotNull

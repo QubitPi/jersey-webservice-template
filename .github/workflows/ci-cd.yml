@@ -26,15 +26,15 @@ env:
   JDK_DISTRIBUTION: 'adopt'
   USER: QubitPi
   EMAIL: jack20220723@gmail.com
-  MODEL_PACKAGE_NAME: 'com.qubitpi.ws.jersey.template.models'
+  MODEL_PACKAGE_NAME: 'io.github.qubitpi.ws.jersey.template.models'
 
 jobs:
-  mk-yml-style-check:
-    uses: QubitPi/hashicorp-aws/.github/workflows/yml-and-md-style-checks.yml@master
+  yml-md-style-and-link-checks:
+    uses: QubitPi/hashicorp-aws/.github/workflows/yml-md-style-and-link-checks.yml@master
 
   tests:
     name: Unit & Integration Tests
-    needs: mk-yml-style-check
+    needs: yml-md-style-and-link-checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
