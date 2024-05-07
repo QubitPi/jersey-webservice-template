@@ -41,8 +41,8 @@ Please visit [JWT GitHub] and either
 1. clone the repo with `git clone https://github.com/QubitPi/jersey-webservice-template.git`, or
 2. make it a template instantiation with our own webservice name by doing the following:
 
-  ![Error loading instantiation-1.png](./img/instantiation-1.png)
-  ![Error loading instantiation-2.png](./img/instantiation-2.png)
+   ![Error loading instantiation-1.png](./img/instantiation-1.png)
+   ![Error loading instantiation-2.png](./img/instantiation-2.png)
 
 Creating Models
 ---------------
@@ -111,9 +111,9 @@ load [data models](#creating-models) via Maven config file, i.e. **~/.m2/setting
         <profile>
             <id>jwt-data-models</id>
             <properties>
-                <model.package.jar.group.id>com.qubitpi</model.package.jar.group.id>
+                <model.package.jar.group.id>io.github.qubitpi</model.package.jar.group.id>
                 <model.package.jar.artifact.id>jersey-webservice-template-jpa-data-models</model.package.jar.artifact.id>
-                <model.package.jar.version>1.0.0</model.package.jar.version>
+                <model.package.jar.version>1.0.1</model.package.jar.version>
             </properties>
         </profile>
     </profiles>
@@ -132,12 +132,12 @@ With data models defined, can run _my-webservice_
 ```bash
 cd my-webservice
 mvn clean package
-MODEL_PACKAGE_NAME=com.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
+MODEL_PACKAGE_NAME=io.github.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
 ```
 
 :::info
 
-`com.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
+`io.github.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
 [data model project][jersey-webservice-template-jpa-data-models]
 
 :::
@@ -309,4 +309,3 @@ our users is just as easy as it is to add new data. Let's update our model with 
 [JWT GitHub]: https://github.com/QubitPi/jersey-webservice-template
 
 [jersey-webservice-template-jpa-data-models]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models
-
