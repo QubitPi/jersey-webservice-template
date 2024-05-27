@@ -259,7 +259,7 @@ To optionally disable GraphQL endpoints, exclude corresponding dependencies in P
         <dependency>
             <groupId>com.yahoo.elide</groupId>
             <artifactId>elide-core</artifactId>
-            <version>7.0.0-pr6</version>
+            <version>7.0.5</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.yahoo.elide</groupId>
