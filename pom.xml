@@ -33,7 +33,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-        <version.elide>7.0.0-pr6</version.elide>
+        <version.elide>7.0.5</version.elide>
         <version.validation.api>3.0.1</version.validation.api>
         <version.jersey>3.1.1</version.jersey>
         <hibernate.version>6.2.4.Final</hibernate.version>

@@ -17,7 +17,6 @@ package com.qubitpi.ws.jersey.template.application;
 
 import com.yahoo.elide.Elide;
 import com.yahoo.elide.ElideSettings;
-import com.yahoo.elide.ElideSettingsBuilder;
 import com.yahoo.elide.core.TransactionRegistry;
 import com.yahoo.elide.core.datastore.DataStore;
 import com.yahoo.elide.core.dictionary.EntityDictionary;
@@ -94,7 +93,7 @@ public class BinderFactory {
 
                 bind(buildElide(elideSettings)).to(Elide.class).named("elide");
                 bind(elideSettings).to(ElideSettings.class);
-                bind(elideSettings.getDictionary()).to(EntityDictionary.class);
+                bind(elideSettings.getEntityDictionary()).to(EntityDictionary.class);
                 bind(elideSettings.getDataStore()).to(DataStore.class).named("elideDataStore");
             }
 
@@ -110,7 +109,7 @@ public class BinderFactory {
                 return new Elide(
                         elideSettings,
                         new TransactionRegistry(),
-                        elideSettings.getDictionary().getScanner(),
+                        elideSettings.getEntityDictionary().getScanner(),
                         false
                 );
             }
@@ -122,8 +121,9 @@ public class BinderFactory {
              */
             @NotNull
             private ElideSettings buildElideSettings() {
-                return new ElideSettingsBuilder(buildDataStore(buildEntityManagerFactory()))
-                        .withEntityDictionary(buildEntityDictionary(injector))
+                return new ElideSettings.ElideSettingsBuilder()
+                        .dataStore(buildDataStore(buildEntityManagerFactory()))
+                        .entityDictionary(buildEntityDictionary(injector))
                         .build();
             }
 
