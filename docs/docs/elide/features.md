@@ -1,27 +1,15 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Features
 description: An overview of Elide features and links to their respective documentations.
 ---
 
-[//]: # (Copyright Jiaqi Liu)
+The following guide provides an overview of Elide features and links to their respective documentation.
 
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
+<!--truncate-->
 
 Common API Features
 -------------------
-
-<!-- markdown-link-check-disable -->
 
 - **Rich Filter Support** - Support for complex filter predicates including conjunction (logical and), disjunction
   (logical OR) and parenthetic expressions for both [GraphQL](graphql#filtering) and [JSON-API](jsonapi#filtering).
@@ -101,5 +89,10 @@ Operability Features
 --------------------
 
 - **Logging** - Elide supports rich [native logging](audit) for query generation and security rules.
-
-<!-- markdown-link-check-enable -->
+- **Spring Integration** - Elide integrates with [Spring Boot](https://spring.io/projects/spring-boot) including an
+  [example project](https://github.com/QubitPi/elide-spring-boot-example) and
+  [starter package](https://github.com/paion-data/elide/tree/master/elide-spring).
+- **Elide Standalone Integration** - Elide includes
+  [JAX-RS](https://download.oracle.com/otndocs/jcp/jaxrs-2_0-fr-eval-spec/index.html) endpoints and can run as a
+  [standalone](https://github.com/QubitPi/elide-standalone-example) embedded Jetty service.
+- **Java 17** - Elide compiles with Java 17.

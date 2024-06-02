@@ -4,31 +4,16 @@ title: Client APIs
 description: JSON API and GraphQL Client APIs
 ---
 
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Supported APIs
 --------------
 
 Elide supports the two most widely adopted standards for graph APIs:
 
-<!-- markdown-link-check-disable -->
-
 - [JSON-API](jsonapi)
 - [GraphQL](graphql)
-
-<!-- markdown-link-check-enable -->
 
 :::tip
 
@@ -68,8 +53,9 @@ All Elide APIs share a common set of concepts:
 
 ### API Versioning
 
-Elide allows multiple versions of the same models to coexist and for clients to request a particular instance. Elide
-JAX-RS endpoints support an API version that can be set to match the model annotation (`@ApiVersion`) version.
+Elide allows multiple versions of the same models to coexist and for clients to request a particular instance. Elide 
+JAX-RS endpoints (elide-standalone) and Spring controllers (Spring) support an API version that can be set to match the
+model annotation (`@ApiVersion`) version.
 
 If no version is specified by the client, Elide only exposes the models that lack an `@ApiVersion` annotation.
 
@@ -83,19 +69,39 @@ Elide includes implementations for the following API Versioning Strategies
 - Parameters
 - Media Type Profile
 
-This can be customized by implementing and registering a `com.yahoo.elide.core.request.route.RouteResolver`.
+This can be customized by implementing and registering a `com.paiondata.elide.core.request.route.RouteResolver`.
+
+The default in Elide Spring Boot uses the Path strategy. The Path strategy is the only one that is supported when 
+integrating with Springdoc as the other strategies are difficult to document with OpenAPI.
+
+This can be configured using `application.yaml`.
+
+```yaml
+elide:
+  api-versioning-strategy:
+    path:
+      enabled: false
+    header:
+      enabled: true
+      header-name:
+      - ApiVersion
+```
+
+The default in Elide Standalone now accepts all the strategies.
+
+This can be configured by overriding `ElideStandaloneSettings`.
 
 ```java
-@Override
-public RouteResolver getRouteResolver() {
-    new HeaderRouteResolver("ApiVersion");
+public abstract class Settings implements ElideStandaloneSettings {
+    @Override
+    public RouteResolver getRouteResolver() {
+        new HeaderRouteResolver("ApiVersion");
+    }
 }
 ```
 
-<!-- markdown-link-check-disable -->
-Details of how to version Elide models can be found [here](data-model#api-versions). Details of how to configure
-versioned OpenAPI documents can be found [here](openapi#api-versions).
-<!-- markdown-link-check-enable -->
+Details of how to version Elide models can be found [here](../data-model#api-versions). Details of how to configure
+versioned OpenAPI documents can be found [here](../openapi#api-versions).
 
 ### Type Coercion
 
@@ -160,7 +166,25 @@ Elide has built-in support for either:
 - [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) based dates (serialized as a String
   `yyyy-MM-dd'T'HH:mm'Z')
 
-Elide defaults to ISO8601 dates. This can be toggled by overriding the following binding
+##### Spring Boot Configuration
+
+[Elide Spring Boot][elide-spring] is configured by default to use ISO8601 dates.
+
+This can be toggled by creating a `ElideSettingsBuilderCustomizer` bean:
+
+```java
+@Configuration
+public class ElideConfiguration {
+    @Bean
+    ElideSettingsBuilderCustomizer elideSettingsBuilderCustomizer() {
+        return builder -> builder.serdes(serdes -> serdes.withEpochDates());
+    }
+}
+```
+
+##### Elide Standalone Configuration
+
+[Elide Standalone][elide-standalone] defaults to ISO8601 dates. This can be toggled by overriding the following binding
 
 ```java
 /**
@@ -257,26 +281,56 @@ and
 [`DefaultGraphQLExceptionHandler`](https://github.com/yahoo/elide/blob/master/elide-graphql/src/main/java/com/yahoo/elide/graphql/DefaultGraphQLExceptionHandler.java)
 using the `JsonApiErrorMapper` and `GraphQLErrorMapper`.
 
-You can configure a custom `ExceptionMapper` as follows:
+We can configure a custom `ExceptionMapper` as follows:
 
-```java
-@Override
-public ExceptionMappers getExceptionMappers() {
-    return BasicExceptionMappers.builder().register(new InvalidEntityBodyExceptionMapper()).build();
-}
-```
+<Tabs>
+  <TabItem value="Spring" label="Spring" default>
+
+  Create a `@Configuration` class that defines our custom implementation as a `@Bean`. In the following example the 
+  `InvalidEntityBodyExceptionMapper` is the custom implementation.
+
+  ```java
+  @Configuration
+  public class ElideConfiguration {
+      @Bean
+      public ExceptionMapper exceptionMapper() {
+          return new InvalidEntityBodyExceptionMapper();
+      }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="Elide Standalone" label="Elide Standalone">
+
+  Override ElideStandaloneSettings. In the following example the `InvalidEntityBodyExceptionMapper` is the custom 
+  implementation being registered.
+
+  ```java
+  public abstract class Settings implements ElideStandaloneSettings {
+      @Override
+      public ExceptionMappers getExceptionMappers() {
+          return BasicExceptionMappers.builder().register(new InvalidEntityBodyExceptionMapper()).build();
+      }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 The following is the relationship between `ElideError` and `JsonApiError` and `GraphQLError`.
 
-|Elide Error            |JsonApi Error          |GraphQL Error          |
-|-----------------------|-----------------------|-----------------------|
-|`message`              |`details`              |`message`              |
-|`attributes`           |`meta`                 |`extensions`           |
-|`attributes.id`        |`id`                   |`extensions.id`        |
-|`attributes.status`    |`status`               |`extensions.status`    |
-|`attributes.code`      |`code`                 |`extensions.code`      |
-|`attributes.title`     |`title`                |`extensions.title`     |
-|`attributes.source`    |`source`               |`extensions.source`    |
-|`attributes.links`     |`links`                |`extensions.links`     |
-|`attributes.path`      |`meta.path`            |`path`                 |
-|`attributes.locations` |`meta.locations`       |`locations`            |
+|Elide Error            |JsonApi Error    |GraphQL Error       |
+|-----------------------|-----------------|--------------------|
+|`message`              |`details`        |`message`           |
+|`attributes`           |`meta`           |`extensions`        |
+|`attributes.id`        |`id`             |`extensions.id`     |
+|`attributes.status`    |`status`         |`extensions.status` |
+|`attributes.code`      |`code`           |`extensions.code`   |
+|`attributes.title`     |`title`          |`extensions.title`  |
+|`attributes.source`    |`source`         |`extensions.source` |
+|`attributes.links`     |`links`          |`extensions.links`  |
+|`attributes.path`      |`meta.path`      |`path`              |
+|`attributes.locations` |`meta.locations` |`locations`         |
+
+[elide-spring]: https://github.com/paion-data/elide/tree/master/elide-spring/elide-spring-boot-autoconfigure
+[elide-standalone]: https://github.com/paion-data/elide/tree/master/elide-standalone

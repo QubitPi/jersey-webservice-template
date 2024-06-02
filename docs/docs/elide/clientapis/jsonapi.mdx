@@ -4,20 +4,6 @@ title: JSON API
 description: Querying webservice using JSON API
 ---
 
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -341,7 +327,19 @@ The operators `hasmember`, `hasnomember`, `subsetof`, `notsubsetof`, `supersetof
 ##### FIQL Default Behaviour
 
 By default, the FIQL operators `=in=`, `=out=`, `==` are case sensitive. This can be reverted to case insensitive by
-changing the case sensitive strategy.
+changing the case sensitive strategy:
+
+```java
+@Configuration
+public class ElideConfiguration {
+    @Bean
+    public JsonApiSettingsBuilderCustomizer jsonApiSettingsBuilderCustomizer() {
+        return builder -> builder
+            .joinFilterDialect(new RSQLFilterDialect(dictionary), new CaseSensitivityStrategy.FIQLCompliant())
+            .subqueryFilterDialect(new RSQLFilterDialect(dictionary), new CaseSensitivityStrategy.FIQLCompliant());
+    }
+}
+```
 
 #### Values & Type Coercion
 
@@ -1028,9 +1026,44 @@ single request:
 Links
 -----
 
-JSON-API links are disabled by default. We can, however, enable links by configure the bindings:
+JSON-API links are disabled by default. They can be enabled in `application.yaml`:
 
-(TBA)
+```yaml
+elide:
+  base-url: 'https://my-elide.com'
+  json-api:
+    enabled: true
+    path: /json
+    links:
+      enabled: true
+```
+
+The `elide.json-api.links.enabled` property switches the feature on.  The `base-url` property provides the URL schema,
+host, and port our clients use to connect to our service. The `path` property provides the route where the JSON-API
+controller is rooted. All link URLs using the above configuration would be prefixed with 'https://my-elide.com/json'.
+
+If `base-url` is not provided, Elide will generate the link URL prefix using the client HTTP request.
+
+For Elide standalone, we can enable links by overriding `ElideStandaloneSettings` and configure the settings:
+
+```java
+public abstract class Settings implements ElideStandaloneSettings {
+    @Override
+    public String getBaseUrl() {
+        return "https://elide.io";
+    }
+
+    @Override
+    public JsonApiSettingsBuilder getJsonApiSettingsBuilder(EntityDictionary dictionary, JsonApiMapper mapper) {
+        String jsonApiBaseUrl = getBaseUrl()
+                + getJsonApiPathSpec().replace("/*", "")
+                + "/";
+
+        return ElideStandaloneSettings.super.getJsonApiSettingsBuilder(dictionary, mapper)
+                .links(links -> links.enabled(true).jsonApiLinks(new DefaultJsonApiLinks(jsonApiBaseUrl)));
+    }
+}
+```
 
 Enabling JSON-API links will result in payload responses that look like:
 
@@ -1060,6 +1093,17 @@ Enabling JSON-API links will result in payload responses that look like:
             }
         }
     ]
+}
+```
+
+We can customize the links that are returned by registering our own implementation of `JsonApiLinks` with
+`ElideSettings`:
+
+```java
+public interface JsonApiLinks {
+    Map<String, String> getResourceLevelLinks(PersistentResource var1);
+
+    Map<String, String> getRelationshipLinks(PersistentResource var1, String var2);
 }
 ```
 

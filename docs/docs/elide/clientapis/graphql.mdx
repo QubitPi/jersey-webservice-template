@@ -4,20 +4,6 @@ title: GraphQL Queries & Mutations
 description: Querying webservice using GraphQL
 ---
 
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -90,14 +76,14 @@ other entities in the graph.
 Input objects just contain attributes and relationship with names directly matching the property names in the JPA
 annotated model:
 
-![GraphQL Input Object UML](img/graphql_input_object_uml.png)
+<div align="center"> ![GraphQL Input Object UML](img/graphql_input_object_uml.png) </div>
 
 ### Query Objects
 
 Query Objects are more complex than Input Objects since they do more than simply describe data; they must
 support filtering, sorting, and pagination. Elide's GraphQL structure for queries and mutations is depicted below:
 
-![GraphQL Query Object UML](img/graphql_query_object_uml.png)
+<div align="center"> ![GraphQL Query Object UML](img/graphql_query_object_uml.png) </div>
 
 Every GraphQL schema must define a root document which represents the root of the graph. In Elide, entities can be
 marked if they are directly navigable from the root of the graph. Elide's GraphQL root documents consist of
@@ -281,7 +267,25 @@ The operators 'hasmember' and 'hasnomember' can be applied to collections (book.
 #### FIQL Default Behaviour
 
 By default, the FIQL operators `=in=`, `=out=`, `==` are case sensitive. This can be reverted to case insensitive by
-changing the case sensitive strategy.
+changing the case sensitive strategy:
+
+```java
+    @Bean
+    @ConditionalOnMissingBean
+    public Elide initializeElide(EntityDictionary dictionary,
+            DataStore dataStore, ElideConfigProperties settings) {
+
+        ElideSettingsBuilder builder = new ElideSettingsBuilder(dataStore)
+                .withEntityDictionary(dictionary)
+                .withDefaultMaxPageSize(settings.getMaxPageSize())
+                .withDefaultPageSize(settings.getPageSize())
+                .withGraphQLDialect(new RSQLFilterDialect(dictionary), new CaseSensitivityStrategy.FIQLCompliant())
+                .withAuditLogger(new Slf4jLogger())
+                .withISO8601Dates("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"));
+
+        return new Elide(builder.build());
+    }
+```
 
 ### Attribute arguments.
 
@@ -861,6 +865,7 @@ response. For each updated book, only the title is returned.
 
 <Tabs>
   <TabItem value="upsert-to-modify-request" label="Request" default>
+
     ```graphql
     mutation {
       author(ids: ["1"]) {
@@ -880,8 +885,10 @@ response. For each updated book, only the title is returned.
       }
     }
     ```
+
   </TabItem>
   <TabItem value="upsert-to-modify-response" label="Response">
+
     ```json
     {
         "author":{
@@ -905,6 +912,7 @@ response. For each updated book, only the title is returned.
         }
     }
     ```
+
   </TabItem>
 </Tabs>
 

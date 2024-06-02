@@ -1,22 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Security
 description: Authorization support
 ---
-
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -69,7 +55,7 @@ the relationships to prune the graph can eliminate invalid access patterns. To b
 security is applied, consider the data model depicted in Figure below consisting of articles where each contains zero or
 more comments.
 
-![Security Article Comment UML](img/security-article-comment-uml.png)
+<div align="center"> ![Security Article Comment UML](img/security-article-comment-uml.png) </div>
 
 The request to update a specific comment of a particular article involves the following permission checks:
 
@@ -204,7 +190,14 @@ Each request is associated with a `User` object. The User is simply an object th
 2. Extract the underlying principal.
 3. Check if the user belongs to a particular role.
 
-The `User` objects wraps the Jakarta
+### Spring Boot User Object
+
+When using Spring Boot, the `User` object always wraps the `org.springframework.security.core.Authentication` extracted
+by Spring Security.
+
+### Elide Standalone User Object
+
+When using elide standalone, the `User` objects wraps the Jakarta
 [SecurityContext](https://qubitpi.github.io/jakartaee-rest/jaxrs-api/target/apidocs/jakarta.ws.rs/jakarta/ws/rs/core/SecurityContext.html)
 -object.
 
@@ -386,8 +379,8 @@ Registering Checks in Elide
 Once an Elide data model has been annotated with Permission annotations, the textual descriptions of the checks must be
 tied to actual check classes and registered in Elide. This can be done in one of two ways:
 
-1. Automatically by marking the `Check` classes with a `SecurityCheck` annotation. Elide will automatically scan for
-   `SecurityCheck` classes and bind them.
+1. Automatically by marking the `Check` classes with a `SecurityCheck` annotation. Elide Spring Boot and Standalone will
+   automatically scan for `SecurityCheck` classes and bind them.
 2. Manually by creating a `Map<String, Class<? extends Check>>` where they key is the description and the value is the
    Check class. This is then passed to the constructor of the `EntityDictionary`.
 
@@ -409,4 +402,37 @@ public class AdminCheck extends UserCheck {
 ```
 
 The `EntityDictionary` must be told to scan for checks (by calling `dictionary.scanForSecurityChecks`). This is done
-automatically in Elide at startup.
+automatically in elide spring boot and elide standalone at startup.
+
+### Manual Registration
+
+If not using Elide spring boot or standalone, we can register checks when creating the `Elide` instance:
+
+```java
+//Create the check mappings
+Map<String, Class<? extends Check>> checkMappings = new HashMap<>();
+checkMappings.put("User is an admin", AdminCheck.class);
+
+//Bind them in the dictionary
+EntityDictionary dictionary = new EntityDictionary(checkMappings, beanFactory::autowireBean);
+
+//Create a data store
+DataStore dataStore = ...
+
+//Configure Elide settings
+ElideSettingsBuilder builder = ElideSettings.builder()
+    .dataStore(dataStore)
+    .entityDictionary(dictionary)
+    .settings(JsonApiSettings.builder()
+        .joinFilterDialect(new RSQLFilterDialect(dictionary))
+        .subqueryFilterDialect(new RSQLFilterDialect(dictionary)))
+    .settings(GraphQLSettings.builder()
+        .filterDialect(new RSQLFilterDialect(dictionary)))
+    .serdes(serdes -> serdes.withISO8601Dates("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC")))
+    .auditLogger(new Slf4jLogger());
+
+//Create the Elide instance
+Elide elide = new Elide(builder.build());
+```
+
+[source-grammar]: https://github.com/paion-data/elide/blob/master/elide-core/src/main/antlr4/com/paiondata/elide/generated/parsers/Expression.g4
