@@ -1,22 +1,8 @@
 ---
-sidebar_position: 9
+sidebar_position: 12
 title: Performance
 description: Tips on improving webservice performance
 ---
-
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
 
 N+1 Problem
 -----------
@@ -182,6 +168,49 @@ For the cache to apply to a query, there are two requirements:
 
 1. The `AggregationDataStore` must be supplied with a cache implementation.
 2. The query being executed doesn't have `bypassingCache` set.
+
+### With Spring Configuration
+
+The configuration property `elide.aggregation-store.query-cache.max-size` controls the size of the default cache
+implementation. Setting the value to be zero or negative disables the cache.
+
+The configuration property `elide-aggregation-store.query-cache.expiration` sets the default item expiration.
+
+```yaml
+elide:
+  aggregation-store:
+    enabled: true
+    query-cache:
+      enabled: true
+      max-size: 1000
+      expiration: 10m
+```
+
+To provide our own cache implementation, inject it as a `com.paiondata.elide.datastores.aggregation.cache.Cache` bean.
+
+### With Standalone Configuration
+
+To control the default size of the cache or the item expiration, override the following `ElideStandaloneSettings` methods:
+
+```java
+public abstract class Settings implements ElideStandaloneSettings {
+    @Override
+    public ElideStandaloneAnalyticSettings getAnalyticProperties() {
+        return new ElideStandaloneAnalyticSettings() {
+            @Override
+            public Integer getQueryCacheMaximumEntries() {
+                return 1000;
+            }
+            @Override
+            public Long getDefaultCacheExpirationMinutes() {
+                return 10L;
+            }
+        };
+    }
+}
+```
+
+To provide our own cache implementation, override `ElideStandaloneSettings.getQueryCache`.
 
 ### Query Versions
 

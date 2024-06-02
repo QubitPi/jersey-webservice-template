@@ -1,22 +1,8 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Async API
 description: Async support for both JSON API and GraphQL
 ---
-
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -154,28 +140,181 @@ database. Feel free to modify the query/result column sizes if needed.
 | `elide.async.enabled`             | Enable the Async API feature.                                                                                              | `false`    |
 | `elide.async.cleanup.enabled`     | Enable cleaning up of Async API requests history, update the status of interrupted/timedout requests, and cancel requests. | `false`    |
 
+<Tabs>
+  <TabItem value="Spring" label="Spring" default>
+
+  Configure in `application.yaml`.
+
+  If we rely on Spring to autodiscover the entities which are placed in the same package/sub-package as the application
+  class with `@SpringBootApplication` annotation, we will have to add the `@EntityScan` annotation to that application
+  class for those entities to be discovered after async is enabled.
+
+  ```yaml
+  elide:
+    async:
+      enabled: true
+      cleanup:
+        enabled: true
+  ```
+
+  </TabItem>
+  <TabItem value="Elide Standalone" label="Elide Standalone">
+
+  Override `ElideStandaloneSettings`.
+
+  ```java
+  public abstract class Settings implements ElideStandaloneSettings {
+      @Override
+      public ElideStandaloneAsyncSettings getAsyncProperties() {
+          ElideStandaloneAsyncSettings asyncProperties = new ElideStandaloneAsyncSettings() {
+              @Override
+              public boolean enabled() {
+                  return true;
+              }
+  
+              @Override
+              public boolean enableCleanup() {
+                  return true;
+              }
+          }
+          return asyncProperties;
+      }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
 ### Additional Configuration
 
 These additional configuration settings control timeouts, cleanup, export end-point, resultStorageEngine and the sizes of thread pools.
 
-| Name                                                       | Description                                                                                            | Default Value
-|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|---------------
-|`elide.async.enabled`                                       | Whether or not the async feature is enabled.                                                           | `false`
-|`elide.async.thread-pool-size`                              | Default thread pool size.                                                                              | `5`
-|`elide.async.max-async-after`                               | Default maximum permissible time to wait synchronously for the query to complete before switching to asynchronous mode. | `10s`
-|`elide.async.cleanup.enabled`                               | Whether or not the cleanup is enabled.                                                                 | `false`
-|`elide.async.cleanup.query-max-run-time`                    | Maximum query run time.                                                                                | `3600s`
-|`elide.async.cleanup.query-retention-duration`              | Retention period of async query and results before being cleaned up.                                   | `7d`
-|`elide.async.cleanup.query-cancellation-interval`           | Polling interval to identify async queries that should be canceled.                                    | `300s`
-|`elide.async.export.enabled`                                | Whether or not the controller is enabled.                                                              | `false`
-|`elide.async.export.path`                                   | The URL path prefix for the controller.                                                                | `/export`
-|`elide.async.export.append-file-extension`                  | Enable Adding Extension to table export attachments.                                                   | `false`
-|`elide.async.export.storage-destination`                    | Storage engine destination.                                                                            | `/tmp`
-|`elide.async.export.format.csv.write-header`                | Generates the header in a CSV formatted export.                                                        | `true`
-| `exportAsyncResponseTimeout`        | Default timeout for TableExport's result download end-point.                | `30s`    |
-| `exportAsyncResponseExecutor`       | Executor for executing TableExport's result download request asynchronously.| A java.util.concurrent.ExecutorService instance|
+| Name                                              | Description                                                                                                             | Default Value
+|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------
+| `elide.async.enabled`                             | Whether or not the async feature is enabled.                                                                            | `false`
+| `elide.async.thread-pool-size`                    | Default thread pool size.                                                                                               | `5` 
+| `elide.async.max-async-after`                     | Default maximum permissible time to wait synchronously for the query to complete before switching to asynchronous mode. | `10s`
+| `elide.async.cleanup.enabled`                     | Whether or not the cleanup is enabled.                                                                                  | `false`
+| `elide.async.cleanup.query-max-run-time`          | Maximum query run time.                                                                                                 | `3600s`
+| `elide.async.cleanup.query-retention-duration`    | Retention period of async query and results before being cleaned up.                                                    | `7d`
+| `elide.async.cleanup.query-cancellation-interval` | Polling interval to identify async queries that should be canceled.                                                     | `300s`
+| `elide.async.export.enabled`                      | Whether or not the controller is enabled.                                                                               | `false`
+| `elide.async.export.path`                         | The URL path prefix for the controller.                                                                                 | `/export`
+| `elide.async.export.append-file-extension`        | Enable Adding Extension to table export attachments.                                                                    | `false`
+| `elide.async.export.storage-destination`          | Storage engine destination.                                                                                             | `/tmp`
+| `elide.async.export.format.csv.write-header`      | Generates the header in a CSV formatted export.                                                                         | `true`
 
-## Running
+These additional configuration settings are only applicable for Elide’s Standalone module. When using Spring, please
+configure the TaskExecutor used by Spring MVC for executing and managing the asynchronous requests.
+
+| Name                          | Description                                                                   | Default Value                                   
+|-------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------
+| `exportAsyncResponseTimeout`  | Default timeout for TableExport's result download end-point.                  | `30s`                                           |
+| `exportAsyncResponseExecutor` | Executor for executing TableExport's result download request asynchronously.  | A java.util.concurrent.ExecutorService instance |
+
+<Tabs>
+  <TabItem value="Spring" label="Spring" default>
+
+  Configure in `application.yaml`.
+
+  ```yaml
+  elide:
+    async:
+      thread-pool-size: 10
+      max-async-after: 30s
+      cleanup:
+        enabled: true
+          query-max-run-time: 120s
+          query-retention-duration: 10d
+          query-cancellation-check-interval: 600s
+      export:
+        enabled: true
+        path: /export
+        storage-destination: /tmp
+        format:
+          csv:
+            write-header: true
+  ```
+
+  </TabItem>
+  <TabItem value="Elide Standalone" label="Elide Standalone">
+
+  Override `ElideStandaloneSettings`.
+
+  ```java
+  public abstract class Settings implements ElideStandaloneSettings {
+      @Override
+      public ElideStandaloneAsyncSettings getAsyncProperties() {
+          ElideStandaloneAsyncSettings asyncProperties = new ElideStandaloneAsyncSettings() {
+              @Override
+              public Integer getThreadSize() {
+                  return 10;
+              }
+  
+              @Override
+              public Duration getQueryMaxRunTime() {
+                  return Duration.ofSeconds(120L);
+              }
+  
+              @Override
+              public Duration getQueryRetentionDuration() {
+                  return Duration.ofDays(10L);
+              }
+  
+              @Override
+              public Duration getQueryCancellationCheckInterval() {
+                  return Duration.ofSeconds(600L);
+              }
+  
+              @Override
+              public Duration getMaxAsyncAfter() {
+                  return Duration.ofSeconds(30L);
+              }
+  
+              @Override
+              public String getExportApiPathSpec() {
+                  return "/export/*";
+              }
+  
+              @Override
+              boolean enableExport() {
+                  return false;
+              }
+  
+              @Override
+              public boolean appendFileExtension() {
+                  return true;
+              }
+  
+              @Override
+              public boolean csvWriteHeader() {
+                  return false;
+              }
+  
+              @Override
+              public String getStorageDestination() {
+                  return "/tmp";
+              }
+  
+              @Override
+              public Duration getExportAsyncResponseTimeout() {
+                  return Duration.ofSeconds(30L);
+              }
+  
+              @Override
+              public ExecutorService getExportAsyncResponseExecutor() {
+                  return enableExport() ? Executors.newFixedThreadPool(getThreadSize() == null ? 6 : getThreadSize()) : null;
+              }
+          }
+          return asyncProperties;
+      }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Running
 
 After configuring and starting our service, the following commands illustrate how to make asynchronous requests. Don't
 forget to change `localhost:8080` accordingly. The example below makes use of the models and sample data that the
@@ -551,12 +690,104 @@ The Async API interacts with the persistence layer through an abstraction - the 
 cleanup, etc. This can be customized by providing our own implementation. Elide provides a default implementation of
 [AsyncApiDao][default-async-api-dao].
 
+<Tabs>
+  <TabItem value="Spring" label="Spring" default>
+
+  Create a `@Configuration` class that defines our custom implementation as a `@Bean`.
+
+  ```java
+  @Configuration
+  public class ElideConfiguration {
+      /**
+       * Configure the AsyncApiDao used by async requests.
+       * @return an AsyncApiDao object.
+       */
+      @Bean
+      public AsyncApiDao asyncApiDao() {
+          return new CustomAsyncApiDao();
+      }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="Elide Standalone" label="Elide Standalone">
+
+  Override ElideStandaloneSettings.
+
+  ```java
+  public abstract class Settings implements ElideStandaloneSettings {
+      @Override
+      public ElideStandaloneAsyncSettings getAsyncProperties() {
+          ElideStandaloneAsyncSettings asyncProperties = new ElideStandaloneAsyncSettings() {
+              /**
+               * Implementation of AsyncApiDao to use.
+               * @return AsyncApiDao type object.
+               */
+              @Override
+              public AsyncApiDao getAsyncApiDao() {
+                  return new CustomAsyncApiDao();
+              }
+          }
+          return asyncProperties;
+      }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
 Overriding the ResultStorageEngine
 ----------------------------------
 
 Table exports leverage a reactive abstraction (ResultStorageEngine) for streaming results to and from a persistence
 backend. This can be customized by providing our own implementation. Elide provides default implementation of
 [ResultStorageEngine][file-result-storage-engine].
+
+<Tabs>
+  <TabItem value="Spring" label="Spring" default>
+
+  Create a `@Configuration` class that defines our custom implementation as a `@Bean`.
+
+  ```java
+  @Configuration
+  public class ElideConfiguration {
+      /**
+       * Configure the ResultStorageEngine used by TableExport requests.
+       * @return a ResultStorageEngine object.
+       */
+      @Bean
+      public ResultStorageEngine resultStorageEngine() {
+          return new CustomResultStorageEngine();
+      }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="Elide Standalone" label="Elide Standalone">
+
+  Override ElideStandaloneSettings.
+
+  ```java
+  public abstract class Settings implements ElideStandaloneSettings {
+      @Override
+      public ElideStandaloneAsyncSettings getAsyncProperties() {
+          ElideStandaloneAsyncSettings asyncProperties = new ElideStandaloneAsyncSettings() {
+              /**
+               * Implementation of ResultStorageEngine to use.
+               * @return ResultStorageEngine type object.
+               */
+              @Override
+              public ResultStorageEngine getResultStorageEngine() {
+                  return new CustomResultStorageEngine();
+              }
+          }
+          return asyncProperties;
+      }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 Internals
 ---------

@@ -1,22 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: GraphQL Federation
 description: Beta support for GraphQL Federation
 ---
-
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
 
 What is GraphQL Federation
 --------------------------
@@ -74,7 +60,12 @@ Elide supports GraphQL Federation. This feature needs to be enabled to be used.
 
 ### Enabling GraphQL Federation
 
-TBA
+```yaml
+elide:
+  graphql:
+    federation:
+      enabled: true
+```
 
 ### Schema Introspection Queries
 
@@ -94,8 +85,10 @@ should typically be restricted only to the federated graph routers.
 
 ### Implementing Federated Graphs
 
-Elide generates its GraphQL schema programatically and cannot be used to define federated entities. This will need to
-be done in another subgraph implementation using a different subgraph library
+Elide generates its GraphQL schema programatically and cannot be used to define federated entities.
+
+This will need to be done in another subgraph implementation using a different subgraph library, for instance Spring
+GraphQL.
 
 #### Extending an Elide entity
 
@@ -148,6 +141,27 @@ query {
     }
   }
 }
+```
+
+For Spring GraphQL the representations can be configured as shown below.
+
+The mapping for the representations to the `Group` is configured in the entity data fetcher for instance in
+`com.example.reviews.config.GraphQLConfiguration`.
+
+```java
+DataFetcher<?> entityDataFetcher = env -> {
+  List<Map<String, Object>> representations = env.getArgument(_Entity.argumentName);
+  return representations.stream().map(representation -> {
+    // Assume only a single id key and no composite keys
+    String idKey = representation.keySet().stream().filter(key -> !"__typename".equals(key)).findFirst()
+        .orElse(null);
+    String id = (String) representation.get(idKey);
+    if (GROUP_TYPE.equals(representation.get("__typename"))) {
+      return new Group(id);
+    }
+    return null;
+  }).toList();
+};
 ```
 
 #### Including Elide entities
@@ -220,9 +234,54 @@ The `EntityTypeResolver` will map the `NodeContainer` to the appropriate `GraphQ
 
 #### Defining the DeferredID scalar
 
-Elide uses a custom scalar `DeferredID` instead of `ID`. This needs to be registered with the subgraph implementation.
+Elide uses a custom scalar `DeferredID` instead of `ID`.
+
+This needs to be registered with the subgraph implementation.
+
 The following is the schema definition.
 
 ```graphql
 scalar DeferredID
 ```
+
+For Spring GraphQL this can be configured as shown below.
+
+The following is the Java code for the `GraphQLScalarType`.
+
+```java
+public class GraphQLScalars {
+  public static GraphQLScalarType DEFERRED_ID = GraphQLScalarType.newScalar().name("DeferredID")
+      .description("The DeferredID scalar type represents a unique identifier.")
+      .coercing(new Coercing<Object, String>() {
+        @Override
+        public String serialize(Object o) {
+          return o.toString();
+        }
+
+        @Override
+        public String parseValue(Object o) {
+          return o.toString();
+        }
+
+        @Override
+        public String parseLiteral(Object o) {
+          if (o instanceof StringValue stringValue) {
+            return stringValue.getValue();
+          }
+          if (o instanceof IntValue intValue) {
+            return intValue.getValue().toString();
+          }
+          return o.toString();
+        }
+      }).build();
+}
+```
+
+The following is the Java code for registering the scalar in `GraphQLConfiguration`.
+
+```java
+@Bean
+public GraphQlSourceBuilderCustomizer graphqlSourceBuilderCustomizer() {
+  return schemaResourceBuilder -> schemaResourceBuilder
+    .configureRuntimeWiring(runtimeWiring -> runtimeWiring.scalar(GraphQLScalars.DEFERRED_ID));
+}

@@ -1,8 +1,0 @@
-{
-  "label": "JPA through yahoo/elide",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Jersey Webservice Template delegates persistence logics to yahoo/elide"
-  }
-}

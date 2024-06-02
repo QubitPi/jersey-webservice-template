@@ -1,22 +1,8 @@
 ---
-sidebar_position: 8
+sidebar_position: 10
 title: OpenAPI
 description: JSON API documentations
 ---
-
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
 
 Overview
 --------
@@ -31,8 +17,8 @@ Only JSON-API endpoints are documented. The GraphQL API schema can be explored d
 Features Supported
 ------------------
 
-- **JaxRS Endpoint** - Elide ships with a customizable JaxRS endpoints that can publish one or more OpenAPI documents
-  in both JSON or YAML.
+- **JaxRS & Spring Endpoint** - Elide ships with a customizable JaxRS endpoints that can publish one or more OpenAPI
+  documents in both JSON or YAML.
 - **Path Discovery** - Given a set of entities to explore, Elide will generate the minimum, cycle-free, de-duplicated
   set of URL paths in the OpenAPI document.
 - **Filter by Primitive Attributes** - All _GET_ requests on entity collections include filter parameters for each
@@ -48,6 +34,206 @@ Features Supported
 
 Getting Started
 ---------------
+
+### Maven
+
+If we are not using [Elide Spring Starter][elide-spring] or [Elide Standalone][elide-standalone] (which package
+swagger as a dependency), we will need to pull in the following elide dependencies :
+
+```xml
+<dependency>
+  <groupId>com.yahoo.elide</groupId>
+  <artifactId>elide-swagger</artifactId>
+</dependency>
+
+<dependency>
+  <groupId>com.yahoo.elide</groupId>
+  <artifactId>elide-core</artifactId>
+</dependency>
+```
+
+Pull in swagger core:
+
+```xml
+<dependency>
+  <groupId>io.swagger</groupId>
+  <artifactId>swagger-core-jakarta</artifactId>
+</dependency>
+```
+
+#### Spring Boot Configuration
+
+If we are using
+[Elide Spring Autoconfigure](https://github.com/paion-data/elide/tree/master/elide-spring/elide-spring-boot-autoconfigure),
+we can customize the `OpenAPI` document by using a `OpenApiDocumentCustomizer` bean:
+
+```java
+@Configuration
+public class ElideConfiguration {
+
+    @Bean
+    public OpenApiDocumentCustomizer openApiDocumentCustomizer() {
+        return openApi -> {
+            Info info = new Info().title("My Title");
+            openApi.setInfo(info);
+        };
+    }
+}
+```
+
+The application YAML file has settings:
+
+- to enable the OpenAPI document endpoint
+- to set the URL path for the OpenAPI document endpoint
+- to set the OpenAPI specification version to generate either 3.0 or 3.1
+
+For example:
+
+```yaml
+elide:
+  api-docs:
+    enabled: true
+    path: /doc
+    version: openapi_3_0
+```
+
+#### Supporting OAuth
+
+If we want Swagger UI to acquire & use a bearer token from an OAuth identity provider, we can configure the OpenAPI
+document by using annotations:
+
+```java
+@SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "My Title"), security = @SecurityRequirement(name = "bearerAuth"))
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+    )
+public class App {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(App.class, args);
+    }
+}
+```
+
+#### SpringDoc Integration
+
+Elide contributes to [Springdoc](https://springdoc.org)'s OpenAPI document by exposing a Springdoc `OpenApiCustomizer`
+bean.
+
+If API Versioning is used, only the Path strategy is supported when integrating with Springdoc as the other strategies
+are difficult to document with OpenAPI.
+
+The default implementation is implemented in `DefaultElideOpenApiCustomizer`. To override the behavior a
+`ElideOpenApiCustomizer` bean can be created which will cause the `DefaultElideOpenApiCustomizer` not to be configured.
+
+```java
+@Configuration
+public class ElideConfiguration {
+    @Bean
+    public ElideOpenApiCustomizer elideOpenApiCustomizer() {
+        return new MyCustomElideOpenApiCustomizer();
+    }
+}
+```
+
+When `GroupedOpenApi` is used, the `ElideOpenApiCustomizer` is not applied to the groups. Instead Elide has a
+`DefaultElideGroupedOpenApiCustomizer` that will customize the `GroupedOpenApi` to set the appropriate
+`OpenApiCustomizers` on the `GroupedOpenApi` that matches the paths to match and exclude. To override the behavior a
+`ElideGroupedOpenApiCustomizer` can be defined that will need to process the `OpenApiCustomizers` and remove the ones
+automatically added by Elide.
+
+```java
+@Configuration
+public class ElideConfiguration {
+    @Bean
+    public ElideGroupedOpenApiCustomizer elideGroupedOpenApiCustomizer() {
+        return new MyCustomElideGroupedOpenApiCustomizer();
+    }
+}
+```
+
+#### Elide Standalone Configuration
+
+If we are using [Elide Standalone](https://github.com/paion-data/elide/tree/master/elide-standalone), we can extend
+`ElideStandaloneSettings` to:
+
+- Enable the OpenAPI document endpoint.
+- Configure the URL Path for the OpenAPI document.
+- Configure the OpenAPI document version.
+- Configure the service name.
+- Construct OpenAPI documents for your service.
+
+```java
+public abstract class Settings implements ElideStandaloneSettings {
+    /**
+     * Enable OpenAPI documentation.
+     * @return whether OpenAPI is enabled;
+     */
+    @Override
+    public boolean enableApiDocs() {
+        return true;
+    }
+
+    /**
+     * API root path specification for the OpenAPI endpoint. Namely, this is the root uri for OpenAPI docs.
+     *
+     * @return Default: /api-docs/*
+     */
+    @Override
+    public String getApiDocsPathSpec() {
+        return "/api-docs/*";
+    }
+
+    /**
+     * OpenAPI documentation requires an API name.
+     * @return open api service name;
+     */
+    @Override
+    public String getApiTitle() {
+        return "Elide Service";
+    }
+
+    /**
+     * The OpenAPI Specification Version to generate.
+     * @return the OpenAPI Specification Version to generate
+     */
+    @Override
+    public OpenApiVersion getOpenApiVersion() {
+        return OpenApiVersion.OPENAPI_3_0;
+    }
+
+    /**
+     * Creates a singular OpenAPI document for JSON-API.
+     * @param dictionary Contains the static metadata about Elide models. .
+     * @return list of OpenAPI registration objects.
+     */
+    @Override
+    public List<ApiDocsEndpoint.ApiDocsRegistration> buildApiDocs(EntityDictionary dictionary) {
+        List<ApiDocsEndpoint.ApiDocsRegistration> docs = new ArrayList<>();
+
+        dictionary.getApiVersions().stream().forEach(apiVersion -> {
+            Info info = new Info()
+                    .title(getApiTitle())
+                    .version(apiVersion);
+            OpenApiBuilder builder = new OpenApiBuilder(dictionary).apiVersion(apiVersion);
+            String moduleBasePath = getJsonApiPathSpec().replace("/*", "");
+            OpenAPI openApi = builder.build().info(info).addServersItem(new Server().url(moduleBasePath));
+            docs.add(new ApiDocsEndpoint.ApiDocsRegistration("test", () -> openApi, getOpenApiVersion().getValue(),
+                    apiVersion));
+        });
+
+        return docs;
+    }
+}
+```
+
+### Elide Library Configuration
+
+If we are using Elide directly as a library (and not using Elide Standalone), follow these instructions:
 
 Create and initialize an entity dictionary.
 
@@ -77,7 +263,7 @@ Build the OpenAPI document
 OpenAPI document = builder.build().info(info);
 ```
 
-### Converting OpenAPI to JSON or YAML
+#### Converting OpenAPI to JSON or YAML
 
 We can directly convert to JSON:
 
@@ -93,7 +279,7 @@ OpenApiDocument openApiDocument = new OpenApiDocument(document, OpenApiDocument.
 String jsonOutput = openApiDocument.of(OpenApiDocument.MediaType.APPLICATION_YAML);
 ```
 
-### Configure JAX-RS Endpoint
+#### Configure JAX-RS Endpoint
 
 Or we can use the OpenAPI document directly to configure the [provided JAX-RS Endpoint](https://github.com/yahoo/elide/blob/master/elide-swagger/src/main/java/com/yahoo/elide/swagger/resources/ApiDocsEndpoint.java):
 
@@ -222,3 +408,6 @@ to match the API version of the models it will describe:
 OpenApiBuilder builder = new OpenApiBuilder(dictionary).apiVersion("1");
 OpenAPI openApi = builder.build();
 ```
+
+[elide-spring]: https://github.com/paion-data/elide/tree/master/elide-spring/elide-spring-boot-autoconfigure
+[elide-standalone]: https://github.com/paion-data/elide/tree/master/elide-standalone

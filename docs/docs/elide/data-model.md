@@ -1,34 +1,17 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: Data Models
 description: Creating CRUD data models (create, read, update, and delete) in the backend using Elide
 ---
 
-[//]: # (Copyright Jiaqi Liu)
-
-[//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
-[//]: # (you may not use this file except in compliance with the License.)
-[//]: # (You may obtain a copy of the License at)
-
-[//]: # (    http://www.apache.org/licenses/LICENSE-2.0)
-
-[//]: # (Unless required by applicable law or agreed to in writing, software)
-[//]: # (distributed under the License is distributed on an "AS IS" BASIS,)
-[//]: # (WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.)
-[//]: # (See the License for the specific language governing permissions and)
-[//]: # (limitations under the License.)
-
 :::note
 
-<!-- markdown-link-check-disable -->
 This page is a description on how to _create_ CRUD data models (create, read, update, and delete) in the backend
 using Elide. For more information on _interacting_ with an Elide API, please see the
 [API usage documentation](clientapis). More information for creating analytic models can be found [here](analytics).
-<!-- markdown-link-check-enable -->
 
 :::
 
-<!-- markdown-link-check-disable -->
 Elide generates its API entirely based on the concept of **data models**. Data models are JVM classes that represent
 both a concept to our application and the _schema_ of an exposed web service endpoint. Data models are intended to be a
 _view_ on top of the [data store](datastores) or the set of data stores which support our Elide-based service.
@@ -37,7 +20,6 @@ All Elide models have an identifier field that identifies a unique instance of t
 optional attributes and relationships. **Attribute** are properties of the model. **Relationships** are simply links to
 other related Elide models. Annotations are used to declare that a class is an Elide model, that a relationship exists
 between two models, to denote which field is the identifier field, and to [secure the model](security).
-<!-- markdown-link-check-enable -->
 
 Annotations
 -----------
@@ -66,7 +48,7 @@ However, JPA is not required and Elide supports its own set of annotations for d
 | Mark an identifier field | `@Id`, `@EmbeddedId`        |                   |
 
 Much of the Elide per-model configuration is done via annotations. For a full description of all
-Elide-supported annotations, please check out the annotation JavaDoc.
+Elide-supported annotations, please check out the annotation Javadoc.
 
 Exposing a Model as an Elide Endpoint
 -------------------------------------
@@ -376,7 +358,8 @@ EntityDictionary dictionary = new EntityDictionary(
 );
 ```
 
-In Elide, dependency injection is set up using Jetty's `ServiceLocator`.
+If we're using the `elide-spring-boot*` artifacts, dependency injection is already setup using Spring. If we're using
+the [elide-standalone](elide-standalone) artifact, dependency injection is already setup using Jetty's `ServiceLocator`
 
 Validation
 ----------
