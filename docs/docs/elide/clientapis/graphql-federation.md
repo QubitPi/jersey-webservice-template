@@ -134,7 +134,7 @@ entity.
 
 ```graphql
 query {
-  _entities(representations: [{__typename: "Group", name: "com.yahoo.elide"}]) {
+  _entities(representations: [{__typename: "Group", name: "com.paiondata.elide"}]) {
     ... on Group {
       stars
       text
@@ -210,7 +210,7 @@ After calling to retrieve the `GroupReview` entites on the subgraph, the router 
 
 ```graphql
 query {
-  _entities(representations: [{__typename: "Group", name: "com.yahoo.elide"}]) {
+  _entities(representations: [{__typename: "Group", name: "com.paiondata.elide"}]) {
     ... on Group {
       name
       commonName

@@ -23,17 +23,17 @@ To enable logging to see these queries, set the following property (based on the
 
 ```xml
 <!-- Log JPA Datastore JPQL Statements -->
-<logger name="com.yahoo.elide.datastores.jpql.query.DefaultQueryLogger" level="DEBUG" />
+<logger name="com.paiondata.elide.datastores.jpql.query.DefaultQueryLogger" level="DEBUG" />
 ```
 
 ```xml
 <!-- Log Hibernate 5 Datastore HQL Statements -->
-<logger name="com.yahoo.elide.datastores.hibernate5.porting.SessionWrapper level="DEBUG" />
+<logger name="com.paiondata.elide.datastores.hibernate5.porting.SessionWrapper level="DEBUG" />
 ```
 
 ```xml
 <!-- Log Hibernate 3 Datastore HQL Statements -->
-<logger name="com.yahoo.elide.datastores.hibernate3.porting.SessionWrapper level="DEBUG" />
+<logger name="com.paiondata.elide.datastores.hibernate3.porting.SessionWrapper level="DEBUG" />
 ```
 
 This will enable logs similar to:
@@ -48,7 +48,7 @@ To get information about how long Elide JPQL or analytic queries are taking, we 
 
 ```xml
 <!-- Log SQL/JPQL Query Latencies -->
-<logger name="com.yahoo.elide.core.utils.TimedFunction" level="DEBUG" />
+<logger name="com.paiondata.elide.core.utils.TimedFunction" level="DEBUG" />
 ```
 
 This will enable logs similar to:
@@ -65,8 +65,8 @@ To get extra information why a particular error was returned to a client, enable
 
 ```xml
 <!-- Log HTTP Error Explanations -->
-<logger name="com.yahoo.elide.graphql.QueryRunner" level="DEBUG" />
-<logger name="com.yahoo.elide.Elide" level="DEBUG" />
+<logger name="com.paiondata.elide.graphql.QueryRunner" level="DEBUG" />
+<logger name="com.paiondata.elide.Elide" level="DEBUG" />
 ```
 
 This is particularly helpful to understand what permissions in a complex permission rule have passed, failed, or were
@@ -141,7 +141,7 @@ This will produce logs like:
 select products0_.group_name as group_na4_1_0_, products0_.name as name1_1_0_, products0_.name as name1_1_1_,
 products0_.commonName as commonNa2_1_1_, products0_.description as descript3_1_1_, products0_.group_name as
 group_na4_1_1_ from ArtifactProduct products0_ where products0_.group_name=?
-binding parameter [1] as [VARCHAR] - [com.yahoo.elide]
+binding parameter [1] as [VARCHAR] - [com.paiondata.elide]
 ```
 
 Be sure to configure Hibernate to show SQL in the JDBC configuration as well:
@@ -246,7 +246,7 @@ like:
 ```console
 2019-12-14:15:48:53 -0600 0:0:0:0:0:0:0:1 - GET /api/v1/group HTTP/1.1 200 496 385 0000000000000005  {"data":[
 {"type":"group","id":"com.example.repository","attributes":{"commonName":"Example Repository","description":"The code
-for this project"},"relationships":{"products":{"data":[]}}},{"type":"group","id":"com.yahoo.elide","attributes":
+for this project"},"relationships":{"products":{"data":[]}}},{"type":"group","id":"com.paiondata.elide","attributes":
 {"commonName":"Elide","description":"The magical library powering this project"},"relationships":{"products":{"data":[
 {"type":"product","id":"elide-core"},{"type":"product","id":"elide-standalone"},{"type":"product",
 "id":"elide-datastore-hibernate5"}]}}}]}
@@ -306,11 +306,11 @@ The following logback-spring.xml file can be added to your classpath.  It does t
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
 
     <!-- Log JPA Datastore HQL Statements -->
-    <logger name="com.yahoo.elide.datastores.jpa.porting.EntityManagerWrapper" level="DEBUG" />
+    <logger name="com.paiondata.elide.datastores.jpa.porting.EntityManagerWrapper" level="DEBUG" />
 
     <!-- Log HTTP Error Explanations -->
-    <logger name="com.yahoo.elide.graphql.QueryRunner" level="DEBUG" />
-    <logger name="com.yahoo.elide.Elide" level="DEBUG" />
+    <logger name="com.paiondata.elide.graphql.QueryRunner" level="DEBUG" />
+    <logger name="com.paiondata.elide.Elide" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="STDOUT" />
@@ -333,7 +333,7 @@ enable the following property to DEBUG:
 
 ```xml
 <!-- Log Analytic SQL Queries -->
-<logger name="com.yahoo.elide.datastores.aggregation.core.Slf4jQueryLogger" level="DEBUG" />
+<logger name="com.paiondata.elide.datastores.aggregation.core.Slf4jQueryLogger" level="DEBUG" />
 ```
 
 Result log files will look like:
