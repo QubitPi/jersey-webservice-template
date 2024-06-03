@@ -26,13 +26,13 @@ The example leverages:
 
 ```xml
 <dependency>
-    <groupId>com.yahoo.elide</groupId>
+    <groupId>com.paiondata.elide</groupId>
     <artifactId>elide-spring-boot-starter</artifactId>
     <version>${elide.version}</version>
 </dependency>
 
 <dependency>
-    <groupId>com.yahoo.elide</groupId>
+    <groupId>com.paiondata.elide</groupId>
     <artifactId>elide-test-helpers</artifactId>
     <version>${elide.version}</version>
     <scope>test</scope>
@@ -152,7 +152,7 @@ like this:
             "INSERT INTO ArtifactGroup (name, commonName, description) VALUES\n" +
                     "\t\t('com.example.repository','Example Repository','The code for this project');",
             "INSERT INTO ArtifactGroup (name, commonName, description) VALUES\n" +
-                    "\t\t('com.yahoo.elide','Elide','The magical library powering this project');"
+                    "\t\t('com.paiondata.elide','Elide','The magical library powering this project');"
     })
     void graphqlTest() {
         given()
@@ -185,7 +185,7 @@ like this:
                             field("description", "The code for this project")
                         ),
                         selections(
-                            field("name", "com.yahoo.elide"),
+                            field("name", "com.paiondata.elide"),
                             field( "commonName", "Elide"),
                             field("description", "The magical library powering this project")
                         )

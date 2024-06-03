@@ -42,12 +42,12 @@ swagger as a dependency), we will need to pull in the following elide dependenci
 
 ```xml
 <dependency>
-  <groupId>com.yahoo.elide</groupId>
+  <groupId>com.paiondata.elide</groupId>
   <artifactId>elide-swagger</artifactId>
 </dependency>
 
 <dependency>
-  <groupId>com.yahoo.elide</groupId>
+  <groupId>com.paiondata.elide</groupId>
   <artifactId>elide-core</artifactId>
 </dependency>
 ```
@@ -281,7 +281,7 @@ String jsonOutput = openApiDocument.of(OpenApiDocument.MediaType.APPLICATION_YAM
 
 #### Configure JAX-RS Endpoint
 
-Or we can use the OpenAPI document directly to configure the [provided JAX-RS Endpoint](https://github.com/yahoo/elide/blob/master/elide-swagger/src/main/java/com/yahoo/elide/swagger/resources/ApiDocsEndpoint.java):
+Or we can use the OpenAPI document directly to configure the [provided JAX-RS Endpoint](https://github.com/paion-data/elide/blob/master/elide-swagger/src/main/java/com/paiondata/elide/swagger/resources/ApiDocsEndpoint.java):
 
 ```java
 List<ApiDocsEndpoint.ApiDocsRegistration> apiDocs = new ArrayList<>();

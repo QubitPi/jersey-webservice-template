@@ -307,7 +307,7 @@ The configuration for the Elide Standalone is implemented using interfaces.
 
 | Interface                                                               | Description                                                                                          |
 |-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| `com.yahoo.elide.standalone.config.ElideStandaloneSettings`             | Elide core configuration and JSON-API, GraphQL and OpenAPI API Documentation and all other settings. |
-| `com.yahoo.elide.standalone.config.ElideStandaloneSubscriptionSettings` | GraphQL Subscriptions configuration.                                                                 |
-| `com.yahoo.elide.standalone.config.ElideStandaloneAnalyticSettings`     | Analytic configuration.                                                                              |
-| `com.yahoo.elide.standalone.config.ElideStandaloneAsyncSettings`        | Async configuration.                                                                                 |
+| `com.paiondata.elide.standalone.config.ElideStandaloneSettings`             | Elide core configuration and JSON-API, GraphQL and OpenAPI API Documentation and all other settings. |
+| `com.paiondata.elide.standalone.config.ElideStandaloneSubscriptionSettings` | GraphQL Subscriptions configuration.                                                                 |
+| `com.paiondata.elide.standalone.config.ElideStandaloneAnalyticSettings`     | Analytic configuration.                                                                              |
+| `com.paiondata.elide.standalone.config.ElideStandaloneAsyncSettings`        | Async configuration.                                                                                 |
