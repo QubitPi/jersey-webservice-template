@@ -24,10 +24,18 @@ Instantiating the Template
 
 Please visit [JWT GitHub] and either
 
-1. clone the repo with `git clone https://github.com/QubitPi/jersey-webservice-template.git`, or
+1. clone the repo with `git clone https://github.com/QubitPi/jersey-webservice-template.git` and switch to the
+   `jpa-elide` branch using `git checkout jpa-elide`, or
 2. make it a template instantiation with our own webservice name by doing the following:
 
    ![Error loading instantiation-1.png](./img/instantiation-1.png)
+
+   :::note
+
+   Please make sure the "__Include all branches__" is checked
+
+   :::
+
    ![Error loading instantiation-2.png](./img/instantiation-2.png)
 
 Creating Models
@@ -71,7 +79,8 @@ In the end, run `mvn clean install` to install our model
 
 :::info
 
-From this point on, we assume [this example data model][jersey-webservice-template-jpa-data-models] is used
+From this point on, we assume [this example data model][jersey-webservice-template-jpa-data-models] is used, which can
+be installed locally using the following commands:
 
 ```bash
 git clone https://github.com/QubitPi/jersey-webservice-template-jpa-data-models.git
@@ -85,7 +94,7 @@ Loading Data Models
 -------------------
 
 So now we have some models, but without an API it is not very useful. Now we need to instruct our _my-webservice_ to
-load [data models](#creating-models) via Maven config file, i.e. **~/.m2/settings.xml**:
+load [data models](#creating-models) via Maven config file, i.e. __settings.xml__:
 
 ```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -117,9 +126,11 @@ With data models defined, can run _my-webservice_
 
 ```bash
 cd my-webservice
-mvn clean package
+mvn clean package --settings settings.xml
 MODEL_PACKAGE_NAME=io.github.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
 ```
+
+Note that the `settings.xml` is the [Maven config file for loading the data model](#loading-data-models)
 
 :::info
 
