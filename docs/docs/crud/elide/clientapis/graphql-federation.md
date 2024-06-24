@@ -14,7 +14,7 @@ A client makes a request to the single entry point of the federated graph called
 orchestrates and distributes the request across your APIs and returns a unified response. For a client, the request and
 response cycle of querying the router looks the same as querying any GraphQL server.
 
-![Error loading graphql-federation.png](./img/graphql-federation.png)
+![Error loading graphql-federation.png](img/graphql-federation.png)
 
 ### Benefits of Federation
 
@@ -32,12 +32,12 @@ when an organization adopting GraphQL has multiple teams developing APIs indepen
 that provides the data used by that team. For example, a travel app may have separate GraphQL APIs for users, flights,
 and hotels:
 
-![Error loading multiple-graphql-apis.png](./img/multiple-graphql-apis.png)
+![Error loading multiple-graphql-apis.png](img/multiple-graphql-apis.png)
 
 With a single federated graph, we preserve a powerful advantage of GraphQL over traditional REST APIs: the ability to
 fetch all the data we need in a single request.
 
-![Error loading multiple-graphql-apis-federated.png](./img/multiple-graphql-apis-federated.png)
+![Error loading multiple-graphql-apis-federated.png](img/multiple-graphql-apis-federated.png)
 
 The router intelligently calls all the APIs it needs to complete requests rather than simply forwarding them. For
 performance and security reasons, clients should only query the router, and only the router should query the constituent
