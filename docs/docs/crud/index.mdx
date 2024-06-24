@@ -139,6 +139,24 @@ Note that the `settings.xml` is the [Maven config file for loading the data mode
 
 :::
 
+If everything runs successfully, we should be able to see the following output at end of the command line output:
+
+```console
+web-1  | 2024-06-24 06:55:18.427:INFO :oejsh.ContextHandler:main: Started o.e.j.w.WebAppContext@2892dae4{ROOT.war,/,file:///tmp/jetty-0_0_0_0-8080-ROOT_war-_-any-18385652298504253014/webapp/,AVAILABLE}{/jetty-base/webapps/ROOT.war}
+web-1  | 2024-06-24 06:55:18.447:INFO :oejs.AbstractConnector:main: Started ServerConnector@56b48163{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+web-1  | 2024-06-24 06:55:18.459:INFO :oejs.Server:main: Started Server@71d44a3{STARTING}[11.0.15,sto=5000] @13768ms
+```
+
+:::tip
+
+A MySQL database container has also started alongside and is accessible via
+
+```console
+`mysql -h localhost -D minerva -P 3306 --protocol=tcp -u root -proot`
+```
+
+:::
+
 Writing Data
 ------------
 
@@ -299,6 +317,14 @@ our users is just as easy as it is to add new data. Let's update our model with 
     ```
   </TabItem>
 </Tabs>
+
+Troubleshooting
+---------------
+
+### Invalid API Version
+
+This could be the Elide version difference between used data model repository and Jersey Webservice Template. Ideally
+they should use the exact same Elide version
 
 [AWS EC2 min size]: https://img.shields.io/badge/EC2-%E2%89%A5t2.small-FF9902?style=for-the-badge&logo=amazonec2&logoColor=white
 
