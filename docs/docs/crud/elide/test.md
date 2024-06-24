@@ -198,5 +198,5 @@ like this:
 
 The complete set of static DSL operators for GraphQL can be found [here](https://github.com/paion-data/elide/blob/master/elide-test/src/main/java/com/paiondata/elide/test/graphql/GraphQLDSL.java).
 
-[elide-demo]: https://github.com/QubitPi/elide-spring-boot-example
+[elide-demo]: https://github.com/paion-data/elide-spring-boot-example
 [elide-spring]: https://github.com/paion-data/elide/tree/master/elide-spring/elide-spring-boot-starter

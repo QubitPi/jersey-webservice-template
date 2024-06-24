@@ -46,7 +46,7 @@ The following diagram represents a high level component breakout of Elide. Names
 whereas other names represent functional blocks (made up of many classes).  Gray arrows represent client request and
 response flow through the system.
 
-![High Level Design](./img/high-level-design.png)
+![High Level Design](img/high-level-design.png)
 
 Elide can be broken down into the following layers:
 

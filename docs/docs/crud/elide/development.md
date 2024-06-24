@@ -57,4 +57,4 @@ to:
 
 The following screenshot demonstrates configuring these two settings for the 'FilterIT' tests in IntelliJ:
 
-![Configuring IT Tests In Intellij](./img/intellij-config.png)
+![Configuring IT Tests In Intellij](img/intellij-config.png)
