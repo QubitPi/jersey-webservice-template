@@ -7,6 +7,16 @@ description: Standing up a CRUD webservice in a minute
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::caution
+
+Before proceeding, it is important to note that **we DO NOT support Spring/Spring Boot paradigm**.
+[Jersey Webservice Template] runs as a **[JAX-RS]** webservice backed by its reference implementation [Jersey] running
+as a WAR inside [Jetty] container.
+
+More info about difference between JAX-RS and Spring can be found in [this thread](https://stackoverflow.com/a/42955575)
+
+:::
+
 [![AWS EC2 min size][AWS EC2 min size]](https://aws.amazon.com/ec2/instance-types/)
 
 So You Want An API?
@@ -328,7 +338,10 @@ they should use the exact same Elide version
 
 [AWS EC2 min size]: https://img.shields.io/badge/EC2-%E2%89%A5t2.small-FF9902?style=for-the-badge&logo=amazonec2&logoColor=white
 
+[JAX-RS]: https://jcp.org/en/jsr/detail?id=370
+[Jersey]: https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/index.html
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+[Jetty]: https://eclipse.dev/jetty/
 [JWT GitHub]: https://github.com/QubitPi/jersey-webservice-template
 
 [jersey-webservice-template-jpa-data-models]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models
