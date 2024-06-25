@@ -64,7 +64,6 @@ class DataServletITSpec extends Specification {
     GenericContainer container = new GenericContainer<>(
             new ImageFromDockerfile().withDockerfile(Paths.get(DOCKERFILE_ABS_PATH))
     )
-            .withEnv("OAUTH_ENABLED", "true")
             .withExposedPorts(8080)
             .withImagePullPolicy(PullPolicy.defaultPolicy())
 

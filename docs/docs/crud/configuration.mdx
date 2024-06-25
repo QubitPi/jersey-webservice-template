@@ -1,0 +1,124 @@
+---
+sidebar_position: 2
+title: Configuration
+description: Configurations specific to JPA through yahoo/elide
+---
+
+The configurations in this page can be set from several sources in the following order:
+
+1. the [operating system's environment variables]; for instance, an environment variable can be set with
+   `export DB_URL="jdbc:mysql://db/elide?serverTimezone=UTC"`
+2. the [Java system properties]; for example, a Java system property can be set using
+   `System.setProperty("DB_URL", "jdbc:mysql://db/elide?serverTimezone=UTC")`
+3. a **.properties** file placed under CLASSPATH. This file can be put under `src/main/resources` source directory with
+   contents, for example, `DB_URL=jdbc:mysql://db/elide?serverTimezone=UTC`
+
+Core Properties
+---------------
+
+:::note
+
+The following configurations can be placed in the properties file called **application.properties**
+
+:::
+
+- __MODEL_PACKAGE_NAME__: The fully qualified package name that contains a set of Elide JPA models
+
+JPA DataStore
+-------------
+
+:::note
+
+The following configurations can be placed in the properties file called **jpadatastore.properties**
+
+:::
+
+- **DB_USER**: Persistence DB username (needs have both Read and Write permissions).
+- **DB_PASSWORD**: The persistence DB user password.
+- **DB_URL**: The persistence DB URL, such as "jdbc:mysql://localhost/elide?serverTimezone=UTC".
+- **DB_DRIVER**: The SQL DB driver class name, such as "com.mysql.jdbc.Driver".
+- **DB_DIALECT**: The SQL DB dialect name, such as "org.hibernate.dialect.MySQLDialect".
+- **HIBERNATE_HBM2DDL_AUTO**: What to do with existing JPA database when webservice starts; can be one of the 4 values:
+
+    1. _validate_: validate that the schema matches, make no changes to the schema of the database. _This is the default
+       value of **HIBERNATE_HBM2DDL_AUTO**_
+    2. _update_: update the schema to reflect the entities being persisted
+    3. _create_: creates the schema necessary for your entities, destroying any previous data.
+    4. _create-drop_: create the schema as in create above, but also drop the schema at the end of the session. This is
+       great in development or for testing.
+
+  :::note
+
+  This property is exactly the same as [Hibernate `hibernate.hbm2ddl.auto` property].
+
+  :::
+
+CI/CD
+-----
+
+In addition to the ones mentioned in [general CI/CD configs](../configuration#cicd), these
+[GitHub Action Secrets][GitHub Action - How to set up] needs to be setup:
+
+| Secret Name                    | Definition                                                                                                                          | How to Get                                                                                                                    |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| APPLICATION_PROPERTIES         | The contents of the `src/main/resources/application.properties` mentioned above                                                     | See [Core Properties](#core-properties) section above                                                                         |
+| JPADATASTORE_PROPERTIES        | The contents of the `src/main/resources/jpadatastore.properties` mentioned above                                                    | See [JPA DataStore](#jpa-datastore) section above                                                                             |
+| DATA_MODELS_PRIVATE_REPO_TOKEN | The GitHub Fine-grained token with at least "Read access to code and metadata" repository permissions to the Elide data models repo | [Creating a fine-grained personal access token]                                                                               |
+| DATA_MODELS_PRIVATE_REPO_ORG   | The org/user name of the GitHub repo for Elide data models                                                                          | For [this example][jersey-webservice-template-jpa-data-models], DATA_MODELS_PRIVATE_REPO_ORG is "QubitPi"                     |
+| DATA_MODELS_PRIVATE_REPO_NAME  | The name of the GitHub repo for Elide data models                                                                                   | For [this example][jersey-webservice-template-jpa-data-models], DATA_MODELS_PRIVATE_REPO_NAME is "jersey-webservice-template" |
+
+### CI/CD Chain
+
+Jersey Webservice Templates adopts the best CI/CD strategies by incorporating its sister projects, [jersey-webservice-template-jpa-data-models] and
+[jersey-webservice-template-jpa-data-models-acceptance-tests], into its CI/CD pipeline. Any PR merge into `jpa-elide` branch will trigger the
+[CI/CD of its data model](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models/actions), which then triggers
+[CI/CD of data model's acceptance tests](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models-acceptance-tests/actions).
+
+The triggering of its direct downstream project is done through GitHub Actions. See the **triggering** job in [CI/CD definition file]. Basically, the triggering is proxied to
+[peter-evans/repository-dispatch]:
+
+```yaml
+  triggering:
+    name: Triggering data model CI/CD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data model CI/CD
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.MY_DATA_MODEL_CICD_TRIGGER }}
+          repository: my-org/my-data-model-repo
+          event-type: my-webservice-repo-changes
+```
+
+For **MY_DATA_MODEL_CICD_TRIGGER** token, it is recommended to use a
+[fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+with the following permissions on the target repository (i.e. _my-data-model-repo_):
+
+- contents: read & write
+- metadata: read only (automatically selected when selecting the contents permission)
+
+In downstream project CI/CD workflow, add the following to the
+[on-clause](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on):
+
+```yaml
+"on":
+  repository_dispatch:
+    types: [my-webservice-repo-changes]
+```
+
+Note that how `my-webservice-repo-changes` is used to bridge the event dispatcher (Jersey Webservice Template) and event subscriber (data model project).
+
+[CI/CD definition file]: https://github.com/QubitPi/jersey-webservice-template/blob/jpa-elide/.github/workflows/ci-cd.yml
+[Creating a fine-grained personal access token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token
+
+[GitHub Action - How to set up]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
+[Hibernate `hibernate.hbm2ddl.auto` property]: https://stackoverflow.com/questions/18077327/hibernate-hbm2ddl-auto-possible-values-and-what-they-do
+
+[Java system properties]: https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
+[jersey-webservice-template-jpa-data-models]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models
+[jersey-webservice-template-jpa-data-models-acceptance-tests]: https://github.com/QubitPi/jersey-webservice-template-jpa-data-models-acceptance-tests
+
+[operating system's environment variables]: https://docs.oracle.com/javase/tutorial/essential/environment/env.html
+
+[peter-evans/repository-dispatch]: https://github.com/peter-evans/repository-dispatch
