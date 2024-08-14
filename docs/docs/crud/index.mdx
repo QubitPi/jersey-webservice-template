@@ -34,8 +34,8 @@ Instantiating the Template
 
 Please visit [JWT GitHub] and either
 
-1. clone the repo with `git clone https://github.com/QubitPi/jersey-webservice-template.git` and switch to the
-   `jpa-elide` branch using `git checkout jpa-elide`, or
+1. clone the repo with `git clone git@github.com:QubitPi/jersey-webservice-template.git` and switch to the `jpa-elide`
+   branch using `git checkout jpa-elide`, or
 2. make it a template instantiation with our own webservice name by doing the following:
 
    ![Error loading instantiation-1.png](./img/instantiation-1.png)
@@ -93,41 +93,12 @@ From this point on, we assume [this example data model][jersey-webservice-templa
 be installed locally using the following commands:
 
 ```bash
-git clone https://github.com/QubitPi/jersey-webservice-template-jpa-data-models.git
+git clone git@github.com:QubitPi/jersey-webservice-template-jpa-data-models.git
 cd jersey-webservice-template-jpa-data-models
 mvn clean install
 ```
 
 :::
-
-Loading Data Models
--------------------
-
-So now we have some models, but without an API it is not very useful. Now we need to instruct our _my-webservice_ to
-load [data models](#creating-models) via Maven config file, i.e. __settings.xml__:
-
-```xml
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
-    <profiles>
-        <profile>
-            <id>jwt-data-models</id>
-            <properties>
-                <model.package.jar.group.id>io.github.qubitpi</model.package.jar.group.id>
-                <model.package.jar.artifact.id>jersey-webservice-template-jpa-data-models</model.package.jar.artifact.id>
-                <model.package.jar.version>1.0.1</model.package.jar.version>
-            </properties>
-        </profile>
-    </profiles>
-
-    <activeProfiles>
-        <activeProfile>jwt-data-models</activeProfile>
-    </activeProfiles>
-</settings>
-```
 
 Running
 -------
@@ -136,7 +107,7 @@ With data models defined, can run _my-webservice_
 
 ```bash
 cd my-webservice
-mvn clean package --settings settings.xml
+mvn clean package --settings settings.xml.example
 MODEL_PACKAGE_NAME=io.github.qubitpi.ws.jersey.template.models docker compose up --build --force-recreate
 ```
 
@@ -144,8 +115,10 @@ Note that the `settings.xml` is the [Maven config file for loading the data mode
 
 :::info
 
-`io.github.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
+- `io.github.qubitpi.ws.jersey.template.models` is the name of the model in the aforementioned
 [data model project][jersey-webservice-template-jpa-data-models]
+- The data model is loaded via a special-purpose Maven settings file called `settings.xml.example`, which instructs
+  _my-webservice_ to load [data models](#creating-models). It's essentially the regular __~/.m2/settings.xml__:
 
 :::
 
