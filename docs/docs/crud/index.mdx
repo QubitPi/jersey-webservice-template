@@ -53,52 +53,10 @@ Creating Models
 
 [Jersey Webservice Template] models are some of the most important code in any webservice project. Our models are the
 view of our data that we wish to expose. In this example we will be modeling a _book_ since most people have a
-high-level familiarity with books in life.
-
-Our _Book_ model looks something like this:
-
-```java
-import com.yahoo.elide.annotation.Include;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "book")
-@Include(rootLevel = true, name = "book", description = "book entity", friendlyName = "book")
-public class Book {
-
-    @Id
-    @GeneratedValue
-    public long id;
-
-    public String title = "";
-}
-```
-
-:::tip
-
-Models are usually packaged as **JAR** file in a separate Maven project. Here is a complete
-[example](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models)
-
-:::
-
-In the end, run `mvn clean install` to install our model
-
-:::info
-
-From this point on, we assume [this example data model][jersey-webservice-template-jpa-data-models] is used, which can
-be installed locally using the following commands:
-
-```bash
-git clone git@github.com:QubitPi/jersey-webservice-template-jpa-data-models.git
-cd jersey-webservice-template-jpa-data-models
-mvn clean install
-```
-
-:::
+high-level familiarity with books in life. Our _Book_ model has been packaged as a **JAR** file in a
+[separate Maven project](https://github.com/QubitPi/jersey-webservice-template-jpa-data-models). It has already been
+published to Maven Central and will be installed in this tutorial by default so that user don't need to do anything
+to set up the data model at this moment <img width="70px" src="https://github.com/QubitPi/QubitPi/blob/master/img/可莉-21.png?raw=true" />
 
 Running
 -------
