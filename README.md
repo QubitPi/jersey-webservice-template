@@ -59,6 +59,7 @@ The use and distribution terms for [jersey-webservice-template] are covered by t
 
 [GitHub Actions Badge]: https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
 [GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/jersey-webservice-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
+[Golden Paths]: https://www.hashicorp.com/blog/maturing-your-terraform-workflow#golden-paths
 
 [HashiCorp Packer Badge]: https://img.shields.io/badge/Packer-02A8EF?style=for-the-badge&logo=Packer&logoColor=white
 [HashiCorp Terraform Badge]: https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white

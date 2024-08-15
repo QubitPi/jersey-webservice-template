@@ -1172,3 +1172,138 @@ Custom Error Responses
 ----------------------
 
 Configuring custom error responses is documented [here](clientapis#custom-error-responses).
+
+Field Description in GraphQL Schema Introspection
+-------------------------------------------------
+
+Elide supports showing field descriptions in [schema introspection](https://graphql.org/learn/introspection/), such as
+the one shown on the right side of the Documentation Explorer of [GraphiQL](https://github.com/graphql/graphiql):
+
+![Error loading field-description.png](./img/field-description.png)
+
+This will be very helpful for our GraphQL API users. We can accomplish such using
+[`@GraphQLDescription` annotation]
+(https://github.com/Enigmatis/graphql-java-annotations/blob/master/src/main/java/graphql/annotations/annotationTypes/GraphQLDescription.java)
+in data model. Here is an example:
+
+```java
+@Entity
+@Table(name = "book")
+@Include(rootLevel = true)
+public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public long id;
+
+    /**
+     * The book title.
+     */
+    @GraphQLDescription("The title of the book")
+    public String title;
+
+    /**
+     * Book authors.
+     */
+    @OneToMany
+    @GraphQLDescription("All co-authors of this book")
+    public Set<Author> authors;
+}
+```
+
+The resource bindings for Jersey and Spring are listed below:
+
+:::tip[What's the point of customizer?]
+
+Elide has the notion of "customizer" that comes into play when configuring Elide instance programmatically. It is very
+similar to the established _Builder_ pattern. The difference is that builder gives the explicit control while
+customizers grants implicit control over dependencies.
+
+The customizers allow us to customize defaults. If we just create a builder then it is expected that we fully configure
+it by ourselves, which backs off all defaults, but typically it usually results in a lot of copy and paste of the
+defaults with the added changes. With customizer, we only need to write out the code for those added changes.
+
+:::
+
+<Tabs>
+  <TabItem value="jersey" label="Jersey" default>
+    ```java
+    import graphql.annotations.annotationTypes.GraphQLDescription;
+    
+    /**
+     * A binder factory builds a custom binder for the Jersey application.
+     * <p>
+     * The factory makes the component object instance that will eventually be passed to
+     * {@link org.glassfish.jersey.server.ResourceConfig#register(Object)}.
+     */
+    public class BinderFactory {
+    
+        /**
+         * Custom GraphQLFieldDefinitionCustomizer that uses {@link GraphQLDescription} as a source of field documentation.
+         */
+        private static class GraphQLFieldDefinitionCustomizer extends AnnotationGraphQLFieldDefinitionDescriptionCustomizer<GraphQLDescription> {
+    
+            private static final GraphQLFieldDefinitionCustomizer INSTANCE = new GraphQLFieldDefinitionCustomizer();
+    
+            /**
+             * Custom GraphQLFieldDefinitionCustomizer that uses {@link GraphQLDescription} as a source of field documentation.
+             */
+            private GraphQLFieldDefinitionCustomizer() {
+                super(GraphQLDescription.class, GraphQLDescription::value);
+            }
+        }
+    
+        /**
+         * Builds a hk2 Binder instance.
+         * <p>
+         * This binder should bind all relevant resources for runtime dependency injection.
+         *
+         * @param injector  A standard HK2 service locator
+         *
+         * @return a binder instance that will be registered by putting as a parameter to
+         * {@link org.glassfish.jersey.server.ResourceConfig#register(Object)}
+         */
+        @NotNull
+        public Binder buildBinder(final ServiceLocator injector) {
+            return new AbstractBinder() {
+                @NotNull
+                private ElideSettings buildElideSettings() {
+                    final EntityDictionary entityDictionary = buildEntityDictionary(injector);
+                    return new ElideSettingsBuilder()
+                            .settings(
+                                    GraphQLSettingsBuilder
+                                            .withDefaults(entityDictionary)
+                                            .graphqlFieldDefinitionCustomizer(GraphQLFieldDefinitionCustomizer.INSTANCE)
+                            )
+                            // more settings ...
+                            .build();
+                }
+            };
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem value="spring" label="Spring">
+    The `GraphQLFieldDefinition` can be customized by setting a `GraphQLFieldDefinitionCustomizer` to the
+    `GraphQLSettingsBuilder`.
+
+    ```java
+    import graphql.annotations.annotationTypes.GraphQLDescription;
+    
+    @Configuration
+    public class ElideConfiguration {
+      @Bean
+      GraphQLSettingsBuilderCustomizer graphqlSettingsBuilderCustomizer() {
+        return graphqlSettings -> graphqlSettings.graphqlFieldDefinitionCustomizer(
+           ((fieldDefinition, parentClass, attributeClass, attribute, fetcher, entityDictionary) -> {
+               GraphQLDescription description = entityDictionary.getAttributeOrRelationAnnotation(parentClass,
+                       GraphQLDescription.class, attribute);
+              if (description != null) {
+                fieldDefinition.description(description.value());
+              }
+            }));
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
