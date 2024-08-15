@@ -31,6 +31,7 @@ import com.yahoo.elide.core.utils.coerce.CoerceUtil;
 import com.yahoo.elide.datastores.jpa.JpaDataStore;
 import com.yahoo.elide.datastores.jpa.PersistenceUnitInfoImpl;
 import com.yahoo.elide.datastores.jpa.transaction.NonJtaTransaction;
+import com.yahoo.elide.graphql.AnnotationGraphQLFieldDefinitionDescriptionCustomizer;
 
 import com.qubitpi.ws.jersey.template.config.ApplicationConfig;
 import com.qubitpi.ws.jersey.template.config.JpaDatastoreConfig;
@@ -43,6 +44,7 @@ import org.hibernate.Session;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 import org.hibernate.jpa.boot.internal.PersistenceUnitInfoDescriptor;
 
+import graphql.annotations.annotationTypes.GraphQLDescription;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -67,6 +69,24 @@ import java.util.stream.Collectors;
 @Immutable
 @ThreadSafe
 public class BinderFactory {
+
+    /**
+     * Custom GraphQLFieldDefinitionCustomizer that uses {@link GraphQLDescription} as a source of field documentation.
+     */
+    @Immutable
+    @ThreadSafe
+    private static class GraphQLFieldDefinitionCustomizer extends
+            AnnotationGraphQLFieldDefinitionDescriptionCustomizer<GraphQLDescription> {
+
+        private static final GraphQLFieldDefinitionCustomizer INSTANCE = new GraphQLFieldDefinitionCustomizer();
+
+        /**
+         * Private constructor.
+         */
+        private GraphQLFieldDefinitionCustomizer() {
+            super(GraphQLDescription.class, GraphQLDescription::value);
+        }
+    }
 
     /**
      * Builds a hk2 Binder instance.
@@ -127,7 +147,11 @@ public class BinderFactory {
             private ElideSettings buildElideSettings() {
                 final EntityDictionary entityDictionary = buildEntityDictionary(injector);
                 return new ElideSettingsBuilder()
-                        .settings(GraphQLSettingsBuilder.withDefaults(entityDictionary))
+                        .settings(
+                                GraphQLSettingsBuilder
+                                        .withDefaults(entityDictionary)
+                                        .graphqlFieldDefinitionCustomizer(GraphQLFieldDefinitionCustomizer.INSTANCE)
+                        )
                         .settings(JsonApiSettingsBuilder.withDefaults(entityDictionary))
                         .dataStore(buildDataStore(buildEntityManagerFactory()))
                         .entityDictionary(entityDictionary)

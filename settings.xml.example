@@ -9,7 +9,7 @@
             <properties>
                 <model.package.jar.group.id>io.github.qubitpi</model.package.jar.group.id>
                 <model.package.jar.artifact.id>jersey-webservice-template-jpa-data-models</model.package.jar.artifact.id>
-                <model.package.jar.version>1.0.13</model.package.jar.version>
+                <model.package.jar.version>1.0.20</model.package.jar.version>
             </properties>
         </profile>
     </profiles>

@@ -30,6 +30,7 @@ import static com.yahoo.elide.test.jsonapi.JsonApiDSL.datum
 import static com.yahoo.elide.test.jsonapi.JsonApiDSL.id
 import static com.yahoo.elide.test.jsonapi.JsonApiDSL.resource
 import static com.yahoo.elide.test.jsonapi.JsonApiDSL.type
+import static org.hamcrest.Matchers.contains
 import static org.hamcrest.Matchers.equalTo
 
 import com.yahoo.elide.jsonapi.JsonApi
@@ -462,7 +463,6 @@ abstract class AbstractITSpec extends Specification {
                                         }
                                     }
                                 }
-
                         """
                 )
                 .when().post().then()
@@ -487,6 +487,45 @@ abstract class AbstractITSpec extends Specification {
                                 ]
                         ).toString()
                 ))
+    }
+
+    def "GraphQL schema introspection contains the documentation of the fields annotated by @GraphQLDescription"() {
+        RestAssured
+                .given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(
+                        query: """
+                                {
+                                    __type(name: "Book") {
+                                        name
+                                        fields {
+                                            name
+                                            description
+                                        }
+                                    }
+                                }
+                        """
+                )
+                .when().post().then()
+                .statusCode(200)
+                .body(equalTo(new JsonBuilder(
+                        data: {
+                            __type: {
+                                name: "Book"
+                                fields: [
+                                        {
+                                            name: "id"
+                                            description: null
+                                        },
+                                        {
+                                            name: "title"
+                                            description: "The book title"
+                                        }
+                                ]
+                            }
+                        }
+                )))
     }
 
     static Response createBook(@NotNull final Book book) {
