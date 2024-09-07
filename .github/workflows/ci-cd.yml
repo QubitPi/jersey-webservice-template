@@ -28,7 +28,7 @@ env:
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: QubitPi/hashicorp-aws/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
 
   tests:
     name: Unit & Integration Tests
@@ -46,9 +46,6 @@ jobs:
   documentation:
     name: Test & Release Documentation (including Javadoc)
     needs: tests
-    outputs:
-      outcome: ${{ job.status }}
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -81,9 +78,6 @@ jobs:
   docker-image:
     name: Build Test & Release Development Docker Image
     needs: tests
-    outputs:
-      outcome: ${{ job.status }}
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -114,13 +108,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/jersey-webservice-template:latest
-
-  slack-notification:
-    name: Send Slack Notification
-    if: ${{ always() }}
-    needs: [documentation, docker-image]
-    uses: QubitPi/hashicorp-aws/.github/workflows/slack-notification.yml@master
-    with:
-      job-status: ${{ (needs.documentation.outputs.outcome == 'success' && needs.docker-image.outputs.outcome == 'success') && 'success' || 'failure' }}
-    secrets:
-      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}

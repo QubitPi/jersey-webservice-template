@@ -18,7 +18,7 @@ JWT seamlessly combines development and deployment of a Webservice API with
    [Immutable Infrastructure](https://www.hashicorp.com/resources/what-is-mutable-vs-immutable-infrastructure)
    DevOp practice that
    [fully automates the API deployment onto
-   AWS](https://qubitpi.github.io/hashicorp-aws/)
+   AWS](https://hashistack.org/)
 
 At the end of the day, JWT helps organization to **improve the velocity and quality of their teams' work**
 
