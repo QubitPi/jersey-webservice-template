@@ -1,12 +1,10 @@
-Jersey Webservice Template <sup>![Java Version Badge][Java Version Badge]</sup>
-===============================================================================
+Jersey Webservice Template
+==========================
 
+[Java Version Badge][Java Version Badge]
 [![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/jersey-webservice-template/actions/workflows/ci-cd.yml)
 ![Last Commit](https://img.shields.io/github/last-commit/QubitPi/jersey-webservice-template/master?logo=github&style=for-the-badge)
-[![Apache License Badge]](https://www.apache.org/licenses/LICENSE-2.0)
-![GitHub Actions Badge][GitHub Actions Badge]
-![HashiCorp Packer Badge][HashiCorp Packer Badge]
-![HashiCorp Terraform Badge][HashiCorp Terraform Badge]
+[![Apache License Badge]][Apache License, Version 2.0]
 
 [Jersey Webservice Template (JWT)][jersey-webservice-template] is a [JSR 370] web service **template** that lets us
 spin up Java web service quickly through [Golden Paths] approach.
@@ -41,28 +39,17 @@ Comprehensive documentation is viewable on our [website][Documentation]
 License
 -------
 
-The use and distribution terms for [jersey-webservice-template] are covered by the
-[Apache License, Version 2.0][Apache License, Version 2.0].
-
-<div align="center">
-    <a href="https://opensource.org/licenses">
-        <img align="center" width="50%" alt="License Illustration" src="https://github.com/QubitPi/QubitPi/blob/master/img/apache-2.png?raw=true">
-    </a>
-</div>
+The use and distribution terms for [jersey-webservice-template] are covered by the [Apache License, Version 2.0].
 
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
-[Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
+[Apache License, Version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 
 [Documentation]: https://qubitpi.github.io/jersey-webservice-template/
 
 [How to set up GitHub Action Secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
-[GitHub Actions Badge]: https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
 [GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/jersey-webservice-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
 [Golden Paths]: https://www.hashicorp.com/blog/maturing-your-terraform-workflow#golden-paths
-
-[HashiCorp Packer Badge]: https://img.shields.io/badge/Packer-02A8EF?style=for-the-badge&logo=Packer&logoColor=white
-[HashiCorp Terraform Badge]: https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white
 
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [Javadoc]: https://qubitpi.github.io/jersey-webservice-template/apidocs/

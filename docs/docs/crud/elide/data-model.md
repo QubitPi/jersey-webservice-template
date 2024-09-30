@@ -24,19 +24,13 @@ between two models, to denote which field is the identifier field, and to [secur
 Annotations
 -----------
 
-Elide has first class support for
-[JPA (Java Persistence API)](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html)
-annotations. These annotations serve double duty by both:
+Elide has first class support for JPA (Java Persistence API) annotations. These annotations serve double duty by both:
 
 - describing the attributes, relationships, and id field of a model.
 - provide an object relational mapping that can be used by an Elide data store to persist the model.
 
 Elide makes use of the following JPA annotations: `@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany`, `@Id`,
 `@EmbeddedId`, and `@GeneratedValue`.
-
-If more information about JPA is need, please
-[review their documentation](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html) or see
-our examples below.
 
 However, JPA is not required and Elide supports its own set of annotations for describing models:
 
