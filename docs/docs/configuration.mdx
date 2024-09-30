@@ -6,6 +6,9 @@ title: Configuration
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+JAX-RS Jersey doesn't specify how application configurations are to be loaded. jersey-webservice-template, however,
+utilizes a library called [owner](https://owner.qubitpi.org/). 
+
 The configurations in this page can be set from several sources in the following order:
 
 1. the [operating system's environment variables]; for instance, an environment variable can be set with
@@ -17,6 +20,8 @@ The configurations in this page can be set from several sources in the following
 
 Note that environment config has higher priority than Java system properties. Java system properties have higher
 priority than file based configuration.
+
+[owner]: https://owner.qubitpi.org/
 
 CI/CD
 -----

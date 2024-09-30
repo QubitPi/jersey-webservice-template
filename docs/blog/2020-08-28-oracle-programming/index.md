@@ -33,32 +33,6 @@ exit | sqlplus -S $user/$pwd@//$server:$port/$service_name @script.sql
 One example value of `$service_name` could be "ORCL". Note that there is a `@` symble preceding the script
 path(`script.sql`)
 
-### Connecting to Oracle DB Instance From the Command Line
-
-#### (First Time) Install Oracle Instant Client and sqlplus using Homebrew
-
-1. Download the two files below from [here](http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html). This
-   is necessary because of Oracle licenses:
-
-   - `instantclient-basic-macos.x64–<version>.zip`
-   - `instantclient-sqlplus-macos.x64–<version>.zip`
-
-2. Run
-
-```bash
-brew tap InstantClientTap/instantclient
-brew install instantclient-basic
-brew install instantclient-sqlplus
-```
-
-#### Connect
-
-```bash
-sqlplus ${DBUSER}/${DBUSERPASSWORD}@//${HOST}:${PORT}/${SERVICE_NAME}
-```
-
-where `SERVICE_NAME` is the same thing as "database name" as in MySQL terminology
-
 ### Shell Commands
 
 #### Display UTF8
