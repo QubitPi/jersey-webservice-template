@@ -3,7 +3,6 @@ Jersey Webservice Template
 
 [Java Version Badge][Java Version Badge]
 [![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/jersey-webservice-template/actions/workflows/ci-cd.yml)
-![Last Commit](https://img.shields.io/github/last-commit/QubitPi/jersey-webservice-template/master?logo=github&style=for-the-badge)
 [![Apache License Badge]][Apache License, Version 2.0]
 
 [Jersey Webservice Template (JWT)][jersey-webservice-template] is a [JSR 370] web service **template** that lets us
@@ -27,12 +26,6 @@ Coming Soon!
 
 Documentation
 -------------
-
-JWT supports 3 kinds of webservice templates:
-
-- [A general scaffolding without any vertical-business logics](https://qubitpi.github.io/jersey-webservice-template/docs/intro)
-- [A JPA webservice template backed by yahoo/elide](https://qubitpi.github.io/jersey-webservice-template/docs/crud/)
-- An async jobstore webservice template similar to yahoo/fili's JobStore design (Developing...)
 
 Comprehensive documentation is viewable on our [website][Documentation]
 

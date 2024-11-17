@@ -12,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'setup'
-description: 'CI setup, such as installing JDK'
-
-runs:
-  using: "composite"
-  steps:
-    - name: Set up JDK
-      uses: QubitPi/jersey-webservice-deployment-actions/.github/actions/jdk-setup@master
+all
+rule 'MD003', style: :setext_with_atx
+rule 'MD004', style: :sublist
+rule 'MD013', line_length: 120
+rule 'MD029', style: :ordered
+rule 'MD026', punctuation: ".,;:!?"

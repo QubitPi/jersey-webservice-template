@@ -126,6 +126,6 @@ If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
 [Jersey]: https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/index.html
 [Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 [jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
-[Jetty]: https://eclipse.dev/jetty/
+[Jetty]: https://en.wikipedia.org/wiki/Jetty_(web_server)
 
 [style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Jersey-Webservice-Template-Project-intellij-code-style.xml
