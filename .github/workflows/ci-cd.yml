@@ -27,19 +27,51 @@ env:
   EMAIL: jack20220723@gmail.com
 
 jobs:
-  yml-md-style-and-link-checks:
-    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
+  cancel-previous:
+    name: Cancel Previous Runs In Order to Allocate Action Resources Immediately for Current Run
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous
+        uses: styfle/cancel-workflow-action@0.10.1
+        with:
+          access_token: ${{ github.token }}
 
-  tests:
-    name: Unit & Integration Tests
-    needs: yml-md-style-and-link-checks
+  yaml-lint:
+    name: YAML Style Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Test environment setup
-        uses: ./.github/actions/ci-setup
-      - name: Set up Docker for Integration Tests
-        uses: docker-practice/actions-setup-docker@master
+      - uses: actionshub/yamllint@main
+
+  markdown-lint:
+    name: Markdown Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actionshub/markdownlint@main
+
+  linkChecker:
+    name: Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.9.0
+        with:
+          fail: true
+
+  tests:
+    name: Unit & Integration Tests
+    needs: [yaml-lint, markdown-lint, linkChecker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Run unit & integration tests
         run: mvn -B clean verify
 
@@ -52,8 +84,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Test environment setup
-        uses: ./.github/actions/ci-setup
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Install dependencies
         working-directory: docs
         run: yarn
@@ -82,8 +117,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Test environment setup
-        uses: ./.github/actions/ci-setup
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Build App WAR file so that Docker can pickup during image build
         run: mvn clean package
       - name: Set up QEMU
