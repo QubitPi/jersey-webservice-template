@@ -50,7 +50,7 @@ class JettyServerFactorySpec extends Specification {
         RestAssured.basePath = "/v1"
     }
 
-    def "Factory produces Jsersey-Jetty applications"() {
+    def "Factory produces Jersey-Jetty applications"() {
         setup:
         Server server = JettyServerFactory.newInstance(PORT, "/v1/*", new TestResourceConfig())
         server.start()
