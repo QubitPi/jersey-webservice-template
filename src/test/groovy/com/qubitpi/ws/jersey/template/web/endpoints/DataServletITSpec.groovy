@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template
+package com.qubitpi.ws.jersey.template.web.endpoints
 
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.PullPolicy
@@ -21,7 +21,6 @@ import org.testcontainers.images.builder.ImageFromDockerfile
 import org.testcontainers.spock.Testcontainers
 
 import io.restassured.RestAssured
-import io.restassured.builder.RequestSpecBuilder
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Subject
