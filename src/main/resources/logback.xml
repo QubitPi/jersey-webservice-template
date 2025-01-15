@@ -23,11 +23,7 @@ limitations under the License.
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
-    <appender name="Sentry" class="io.sentry.logback.SentryAppender">
-    </appender>
-
     <root level="INFO">
         <appender-ref ref="ELK" />
-        <appender-ref ref="Sentry" />
     </root>
 </configuration>
