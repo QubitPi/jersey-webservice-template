@@ -15,70 +15,37 @@
  */
 package com.qubitpi.ws.jersey.template.web.endpoints
 
-import org.testcontainers.containers.GenericContainer
-import org.testcontainers.images.PullPolicy
-import org.testcontainers.images.builder.ImageFromDockerfile
-import org.testcontainers.spock.Testcontainers
+import com.qubitpi.ws.jersey.template.JettyServerFactory
+import com.qubitpi.ws.jersey.template.application.ResourceConfig
+
+import org.eclipse.jetty.server.Server
 
 import io.restassured.RestAssured
-import spock.lang.Shared
 import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Unroll
 
-import java.nio.file.Paths
-
-/**
- * Integration tests for WS running in Dockerfile.
- *
- * It uses testcontainers to orchestrate lifecycle of the test container through @Testcontainers annotation
- *
- * see https://www.testcontainers.org/quickstart/spock_quickstart/
- * see https://www.testcontainers.org/test_framework_integration/spock/#testcontainers-class-annotation
- */
-@Testcontainers
 class DataServletITSpec extends Specification {
 
-    static final int SUCCESS = 0
-    static final List<String> LOCAL_ENVS = ["Mac OS X", "windows"]
-    static final String CHECK_DOCKER_INSTALLED_COMMAND = "docker -v"
-    static final String DOCKERFILE_ABS_PATH = String.format("%s/Dockerfile", System.getProperty("user.dir"))
-
-    @Deprecated
-    @SuppressWarnings('GroovyUnusedCatchParameter')
-    private static boolean dockerNotInstalled() {
-        try {
-            return Runtime.getRuntime().exec(CHECK_DOCKER_INSTALLED_COMMAND).waitFor() != SUCCESS
-        } catch (Exception exception) {
-            return true // I hate this
-        }
-    }
-
-    private static boolean isLocal() {
-        return System.properties['os.name'] as String in LOCAL_ENVS
-    }
-
-    @Shared
-    @Subject
-    GenericContainer container = new GenericContainer<>(
-            new ImageFromDockerfile().withDockerfile(Paths.get(DOCKERFILE_ABS_PATH))
-    )
-            .withExposedPorts(8080)
-            .withImagePullPolicy(PullPolicy.defaultPolicy())
+    static final int PORT = 8080
 
     def setupSpec() {
-        RestAssured.baseURI = "http://" + container.host
-        RestAssured.port = container.firstMappedPort
+        RestAssured.baseURI = "http://localhost"
+        RestAssured.port = PORT
         RestAssured.basePath = "/v1"
     }
 
-    @Unroll
-    def "Dockerized WS responds to healthcheck request 200 SUCCESS"() {
+    def "Healthchecking endpoints returns 200"() {
+        setup:
+        Server server = JettyServerFactory.newInstance(PORT, "/v1/*", new ResourceConfig())
+        server.start()
+
         expect:
         RestAssured.given()
                 .when()
                 .get("/data/healthcheck")
                 .then()
                 .statusCode(200)
+
+        cleanup:
+        server.stop()
     }
 }
