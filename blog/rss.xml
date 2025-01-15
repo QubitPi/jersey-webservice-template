@@ -13,7 +13,7 @@
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/restassured-json</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/restassured-json</guid>
             <pubDate>Fri, 21 Apr 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>Use RestAssured's JsonPath to parse the JSON file into a Map and then compare it with Hamcrest Matchers. This way the
 order didn't matter.</p>
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">static</span><span class="token plain"> </span><span class="token import static namespace" style="opacity:0.7">org</span><span class="token import static namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import static namespace" style="opacity:0.7">hamcrest</span><span class="token import static namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import static class-name">Matchers</span><span class="token import static punctuation" style="color:#393A34">.</span><span class="token import static">equalTo</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> </span><span class="token import namespace" style="opacity:0.7">io</span><span class="token import namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import namespace" style="opacity:0.7">restassured</span><span class="token import namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import namespace" style="opacity:0.7">path</span><span class="token import namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import namespace" style="opacity:0.7">json</span><span class="token import namespace punctuation" style="opacity:0.7;color:#393A34">.</span><span class="token import class-name">JsonPath</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token class-name">JsonPath</span><span class="token plain"> expectedJson </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">JsonPath</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">File</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"/path/to/expected.json"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">given</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">then</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">body</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">""</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">equalTo</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">expectedJson</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">getMap</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">""</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>]]></content:encoded>
@@ -25,7 +25,7 @@ order didn't matter.</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/provider</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/provider</guid>
             <pubDate>Sat, 24 Sep 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>A <strong>Provider</strong> is an interface defined in <a href="https://qubitpi.github.io/javax-inject/api/javax/inject/Provider.html" target="_blank" rel="noopener noreferrer">JSR 330</a>. It is part of the <em>general</em> dependency
 injection concept in Java.</p>
 <p>Whether we are on Java SR or EE, Provider will always be loadable from classpath. For example, the <a href="https://qubitpi.github.io/glassfish-hk2/" target="_blank" rel="noopener noreferrer">HK2</a> is an
@@ -41,7 +41,7 @@ If we are developing Java EE applications, we can use both (<code>Provider</code
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/bearer-authentication</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/bearer-authentication</guid>
             <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p><strong>Bearer authentication</strong> (also called <strong>token authentication</strong>) is an
 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication" target="_blank" rel="noopener noreferrer">HTTP authentication scheme</a> that involves security tokens called bearer tokens. The name
 "Bearer authentication" can be understood as "give access to the bearer of this token." The bearer token is a cryptic
@@ -58,7 +58,7 @@ should only be used over HTTPS (SSL).</p>]]></content:encoded>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/java-optional</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/java-optional</guid>
             <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>Make your code more readable and protect it against null pointer exceptions.</p>
 <p>A wise man once said you are not a real Java programmer until you've dealt with a null pointer exception. Joking aside,
 the null reference is the source of many problems because it is often used to denote the absence of a value. Java SE 8
@@ -217,7 +217,7 @@ map() because getVersion() returns a String rather than an <code>Optional</code>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/happy-path</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/happy-path</guid>
             <pubDate>Sun, 03 Jul 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>In the context of software or information modeling, a happy path (sometimes called happy flow) is a default scenario
 featuring no exceptional or error conditions. For example, the happy path for a function validating credit card numbers
 would be where none of the validation rules raise an error, thus letting execution continue successfully to the end,
@@ -242,7 +242,7 @@ such as the Unified Modeling Language (UML) or SysML</p>]]></content:encoded>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/defensive-copy</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/defensive-copy</guid>
             <pubDate>Wed, 05 Jan 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>A mutable object is simply an object which can change its state after construction. For example, <code>StringBuilder</code> and
 <code>Date</code> are mutable objects, while <code>String</code> and <code>Integer</code> are immutable objects.</p>
 <p>A class may have a mutable object as a field. There are two possible cases for how the state of a mutable object field
@@ -270,7 +270,7 @@ if the defensive copy of <code>DateOfDiscovery</code> is not made, then <code>Pl
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/weak-references</guid>
             <pubDate>Thu, 30 Dec 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="strong-references">Strong References<a href="https://qubitpi.github.io/jersey-webservice-template/blog/weak-references#strong-references" class="hash-link" aria-label="Direct link to Strong References" title="Direct link to Strong References">​</a></h2>
 <p>A <strong>strong reference</strong> is an ordinary Java reference, the kind you use every day. For example, the code:</p>
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token class-name">StringBuffer</span><span class="token plain"> buffer </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">StringBuffer</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
@@ -384,7 +384,7 @@ least you have a choice.</p>]]></content:encoded>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/querydsl</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/querydsl</guid>
             <pubDate>Mon, 05 Jul 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>Sponsored by <a href="http://www.mysema.com/#buzzwords" target="_blank" rel="noopener noreferrer">Mysema</a>, <a href="https://querydsl.com/" target="_blank" rel="noopener noreferrer">Querydsl</a> is similar to Hibernate,
 which offers programmable and type-safe query construction. For example</p>
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token class-name">List</span><span class="token generics punctuation" style="color:#393A34">&lt;</span><span class="token generics class-name">Tuple</span><span class="token generics punctuation" style="color:#393A34">&gt;</span><span class="token plain"> tuples </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> queryFactory</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">select</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">person</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">lastName</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> person</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">firstName</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> person</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">yearOfBirth</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">from</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">person</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">fetch</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
@@ -501,7 +501,7 @@ show below:</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/java-stream</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/java-stream</guid>
             <pubDate>Fri, 30 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="combining-a-collection-of-predicates">Combining a Collection of Predicates<a href="https://qubitpi.github.io/jersey-webservice-template/blog/java-stream#combining-a-collection-of-predicates" class="hash-link" aria-label="Direct link to Combining a Collection of Predicates" title="Direct link to Combining a Collection of Predicates">​</a></h2>
 <p>We chain a collection of Predicates by reducing them. In the following example, we have a list of predicates that we
 combined using <code>Predicate.and()</code>:</p>
@@ -543,7 +543,7 @@ them to a <code>LinkedHashMap</code> to get the expected result:</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/put-vs-post</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/put-vs-post</guid>
             <pubDate>Sun, 25 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>We should choose between PUT and POST based on <a href="http://en.wikipedia.org/wiki/Idempotent" target="_blank" rel="noopener noreferrer">idempotence</a> of the action.</p>
 <p><strong>PUT</strong> implies putting a resource - completely replacing whatever is available at the given URL with a different thing.
 By definition, a PUT is idempotent. Do it as many times as you like, and the result is the same. <code>x=5</code> is idempotent.
@@ -563,7 +563,7 @@ when you know the URL of the "factory" or manager for the category of things you
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/jpql</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/jpql</guid>
             <pubDate>Wed, 28 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>The Java Persistence Query Language (JPQL) is a platform-independent object-oriented query language defined by JPA.
 JPQL is similar to SQL, but operates on objects, attributes and relationships instead of tables and columns.</p>
 <p>The Java Persistence query language (JPQL) is used to define searches against persistent entities independent of the
@@ -1346,7 +1346,7 @@ supported.</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/java-ee</guid>
             <pubDate>Mon, 26 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p><a href="https://www.oracle.com/java/technologies/java-ee-glance.html" target="_blank" rel="noopener noreferrer">Java EE</a> is a collection of specifications for developing
 and deploying enterprise applications.</p>
 <p>In general, enterprise applications refer to software hosted on servers that provide the applications that support the
@@ -1445,7 +1445,7 @@ will be open-source.</p>]]></content:encoded>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-troubleshooting</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-troubleshooting</guid>
             <pubDate>Wed, 09 Sep 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="i-forgot-password">I Forgot Password<a href="https://qubitpi.github.io/jersey-webservice-template/blog/mysql-troubleshooting#i-forgot-password" class="hash-link" aria-label="Direct link to I Forgot Password" title="Direct link to I Forgot Password">​</a></h2>
 <p>Let's say you want to login to MySQL shell as root, whose password is lost. You could do</p>
 <p>Stop and start mysql with <code>--skip-grant-tables</code> option</p>
@@ -1561,7 +1561,7 @@ database level config like this:</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-security</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-security</guid>
             <pubDate>Tue, 08 Sep 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p>Despite being one of the best-known vulnerabilities, SQL Injection continues to rank on the top spot of the infamous
 <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10's list</a> - now part of the more general Injection class.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-applications-become-vulnerable-to-sql-injection">How Applications Become Vulnerable to SQL Injection<a href="https://qubitpi.github.io/jersey-webservice-template/blog/mysql-security#how-applications-become-vulnerable-to-sql-injection" class="hash-link" aria-label="Direct link to How Applications Become Vulnerable to SQL Injection" title="Direct link to How Applications Become Vulnerable to SQL Injection">​</a></h2>
@@ -1627,7 +1627,7 @@ and other constructs available in the SQL language such as columns used in an or
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-polymorphism</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-polymorphism</guid>
             <pubDate>Sun, 06 Sep 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="single-table-inheritance"><a href="http://www.martinfowler.com/eaaCatalog/singleTableInheritance.html" target="_blank" rel="noopener noreferrer">Single Table Inheritance</a><a href="https://qubitpi.github.io/jersey-webservice-template/blog/mysql-polymorphism#single-table-inheritance" class="hash-link" aria-label="Direct link to single-table-inheritance" title="Direct link to single-table-inheritance">​</a></h2>
 <p><strong>Represents an inheritance hierarchy of classes as a single table that has columns for all the fields of the various
 classes</strong>.</p>
@@ -1664,7 +1664,7 @@ each concrete class in the inheritance hierarchy.</p>]]></content:encoded>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-programming</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/mysql-programming</guid>
             <pubDate>Sat, 29 Aug 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="shell">Shell<a href="https://qubitpi.github.io/jersey-webservice-template/blog/mysql-programming#shell" class="hash-link" aria-label="Direct link to Shell" title="Direct link to Shell">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="adjust-display-settings-of-mysql-command-line">Adjust Display Settings of MySQL Command Line<a href="https://qubitpi.github.io/jersey-webservice-template/blog/mysql-programming#adjust-display-settings-of-mysql-command-line" class="hash-link" aria-label="Direct link to Adjust Display Settings of MySQL Command Line" title="Direct link to Adjust Display Settings of MySQL Command Line">​</a></h3>
 <p>You may notice that command line result of mysql is not displaying results properly. Some columns of table are in the
@@ -1764,7 +1764,7 @@ data into a dev instance ("192.168.1.101") for testing purposes.</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/oracle-programming</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/oracle-programming</guid>
             <pubDate>Fri, 28 Aug 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="shell">Shell<a href="https://qubitpi.github.io/jersey-webservice-template/blog/oracle-programming#shell" class="hash-link" aria-label="Direct link to Shell" title="Direct link to Shell">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="run-oracle-sql-script-and-exit-afterwards">Run Oracle SQL script and Exit Afterwards<a href="https://qubitpi.github.io/jersey-webservice-template/blog/oracle-programming#run-oracle-sql-script-and-exit-afterwards" class="hash-link" aria-label="Direct link to Run Oracle SQL script and Exit Afterwards" title="Direct link to Run Oracle SQL script and Exit Afterwards">​</a></h3>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token builtin class-name">exit</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> sqlplus </span><span class="token parameter variable" style="color:#36acaa">-S</span><span class="token plain"> </span><span class="token variable" style="color:#36acaa">$user</span><span class="token plain">/</span><span class="token variable" style="color:#36acaa">$pwd</span><span class="token plain">@//</span><span class="token variable" style="color:#36acaa">$server</span><span class="token builtin class-name">:</span><span class="token variable" style="color:#36acaa">$port</span><span class="token plain">/</span><span class="token variable" style="color:#36acaa">$service_name</span><span class="token plain"> @script.sql</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
@@ -1882,7 +1882,7 @@ to create a new column and move the data from the old column to the new column:<
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/read-avro-command-line</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/read-avro-command-line</guid>
             <pubDate>Mon, 17 Aug 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<p><a href="http://avro.apache.org/" target="_blank" rel="noopener noreferrer">Apache Avro</a> is becoming one of the most popular data serialization formats nowadays, and this
 holds true particularly for Hadoop-based big data platforms because tools like Pig, Hive and of course Hadoop itself
 natively support reading and writing data in Avro format. Many users seem to enjoy Avro but I have heard many complaints
@@ -1946,7 +1946,7 @@ store this data in the file <code>twitter.json</code>.</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom</guid>
             <pubDate>Fri, 23 Aug 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="environment-variables">Environment Variables<a href="https://qubitpi.github.io/jersey-webservice-template/blog/env-var-in-pom#environment-variables" class="hash-link" aria-label="Direct link to Environment Variables" title="Direct link to Environment Variables">​</a></h2>
 <p>To refer to environment variables from the pom.xml, we can use the <code>${env.VARIABLE_NAME}</code> syntax.</p>
 <p>For instance, let's use it to externalize the Java version in the build process:</p>
@@ -1968,7 +1968,7 @@ instance</p>
             <link>https://qubitpi.github.io/jersey-webservice-template/blog/java-env-properties</link>
             <guid>https://qubitpi.github.io/jersey-webservice-template/blog/java-env-properties</guid>
             <pubDate>Wed, 07 Aug 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[[//]: # (Copyright Jiaqi Liu)]]></description>
+            <description><![CDATA[[//]: # (Copyright 2025 Jiaqi Liu)]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="system-properties">System Properties<a href="https://qubitpi.github.io/jersey-webservice-template/blog/java-env-properties#system-properties" class="hash-link" aria-label="Direct link to System Properties" title="Direct link to System Properties">​</a></h2>
 <p>The Java platform uses a <strong>Properties</strong> object to provide information about the local system and configuration, and we
 call it <strong>System Properties</strong>.</p>
