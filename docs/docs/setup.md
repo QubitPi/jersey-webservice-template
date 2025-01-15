@@ -68,7 +68,7 @@ OpenJDK 64-Bit Server VM (build 17.0.10+9, mixed mode)
 
 ### Installing Docker Engine
 
-[Jersey Webservice Template] has Docker-based integration tests; it also supports
+[Jersey Webservice Template] has [Docker-based integration tests]; it also supports
 [running template webserivce in Docker][jersey-webservice-template Dockerfile]. Docker can be installed by following its
 [official instructions](https://docs.docker.com/desktop/install/mac-install/)
 
@@ -119,6 +119,8 @@ If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
 
 [Caching]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/main/java/com/qubitpi/ws/jersey/template/cache
 [Caching tests]: https://github.com/QubitPi/jersey-webservice-template/tree/master/src/test/groovy/org/qubitpi/ws/jersey/template/cache
+
+[Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DockerITSpec.groovy
 
 [JAX-RS]: https://jcp.org/en/jsr/detail?id=370
 [Jersey]: https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/index.html
