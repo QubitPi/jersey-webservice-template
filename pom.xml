@@ -33,30 +33,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-        <version.validation.api>3.0.1</version.validation.api>
-        <version.jcip.annotations>1.0</version.jcip.annotations>
-        <version.slf4j>1.7.25</version.slf4j>
-        <version.logback>1.2.3</version.logback>
-        <version.jackson>2.13.3</version.jackson>
-        <version.owner>1.0.12</version.owner>
-        <version.servlet>6.0.0</version.servlet>
-        <version.jersey>3.1.1</version.jersey>
-        <version.groovy>4.0.6</version.groovy>
-        <version.jetty>11.0.15</version.jetty>
-
-        <version.maven.war.plugin>3.2.2</version.maven.war.plugin>
-        <version.maven.javadoc.plugin>3.5.0</version.maven.javadoc.plugin>
-        <version.maven.jar.plugin>3.1.1</version.maven.jar.plugin>
-        <version.maven.surefire.plugin>3.0.0-M5</version.maven.surefire.plugin>
-        <version.maven.compiler.plugin>3.7.0</version.maven.compiler.plugin>
-        <version.maven.failsafe.plugin>3.0.0-M4</version.maven.failsafe.plugin>
-        <version.maven.checkstyle.plugin>3.1.2</version.maven.checkstyle.plugin>
-        <version.maven.surefire.report.plugin>${version.maven.surefire.plugin}</version.maven.surefire.report.plugin>
-
         <checkstyle.skip>false</checkstyle.skip>
-        <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
-        <checkstyle.suppressions.location>checkstyle-suppressions.xml</checkstyle.suppressions.location>
-        <checkstyle.version>8.30</checkstyle.version>
         <checkstyle.resourceIncludes>**/*.properties*</checkstyle.resourceIncludes>
     </properties>
 
@@ -72,7 +49,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>${version.jackson}</version>
+                <version>2.13.3</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -86,7 +63,7 @@
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-bom</artifactId>
-                <version>${version.jetty}</version>
+                <version>11.0.15</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -103,14 +80,14 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>${version.validation.api}</version>
+            <version>3.0.1</version>
         </dependency>
 
         <!-- Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>${version.servlet}</version>
+            <version>6.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
@@ -174,26 +151,26 @@
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
-            <version>${version.jcip.annotations}</version>
+            <version>1.0</version>
         </dependency>
 
         <!-- Configurations -->
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
             <artifactId>owner</artifactId>
-            <version>${version.owner}</version>
+            <version>1.0.12</version>
         </dependency>
 
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${version.slf4j}</version>
+            <version>1.7.25</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${version.logback}</version>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId>
@@ -210,7 +187,7 @@
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>${version.groovy}</version>
+            <version>4.0.6</version>
             <scope>test</scope>
         </dependency>
         <dependency> <!-- Enable mocking of non-interface types -->
@@ -276,7 +253,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${version.maven.compiler.plugin}</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -288,19 +265,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${version.maven.checkstyle.plugin}</version>
+                <version>3.1.2</version>
                 <dependencies>
                     <!-- override default checkstyle version -->
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.version}</version>
+                        <version>8.30</version>
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <suppressionsLocation>${checkstyle.suppressions.location}</suppressionsLocation>
-                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-                    <configLocation>${checkstyle.config.location}</configLocation>
+                    <configLocation>checkstyle.xml</configLocation>
                     <includes>**\/*.java,**\/*.groovy</includes>
                     <resourceIncludes>**/*.properties,**/*.sample</resourceIncludes>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -320,7 +295,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${version.maven.javadoc.plugin}</version>
+                <version>3.5.0</version>
                 <configuration>
                     <doclint>none</doclint>  <!-- Turnoff all checks -->
                 </configuration>
@@ -354,7 +329,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${version.maven.surefire.plugin}</version>
+                <version>3.0.0-M5</version>
                 <configuration>
                     <systemPropertyVariables>
                         <java.awt.headless>true</java.awt.headless>
@@ -370,14 +345,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${version.maven.surefire.report.plugin}</version>
+                <version>3.0.0-M5</version>
             </plugin>
 
             <!-- Integration Test -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${version.maven.failsafe.plugin}</version>
+                <version>3.0.0-M4</version>
                 <executions>
                     <execution>
                         <goals>
@@ -396,7 +371,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${version.maven.war.plugin}</version>
+                <version>3.2.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -405,7 +380,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${version.maven.jar.plugin}</version>
+                <version>3.1.1</version>
             </plugin>
         </plugins>
     </build>
