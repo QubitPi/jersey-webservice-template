@@ -35,6 +35,9 @@
 
         <checkstyle.skip>false</checkstyle.skip>
         <checkstyle.resourceIncludes>**/*.properties*</checkstyle.resourceIncludes>
+
+        <version.maven.surefire.plugin>3.0.0-M5</version.maven.surefire.plugin>
+        <version.maven.surefire.report.plugin>${version.maven.surefire.plugin}</version.maven.surefire.report.plugin>
     </properties>
 
     <dependencyManagement>
@@ -329,7 +332,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${version.maven.surefire.plugin}</version>
                 <configuration>
                     <systemPropertyVariables>
                         <java.awt.headless>true</java.awt.headless>
@@ -345,7 +348,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${version.maven.surefire.report.plugin}</version>
             </plugin>
 
             <!-- Integration Test -->
