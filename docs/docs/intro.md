@@ -3,55 +3,53 @@ sidebar_position: 1
 title: Introduction
 ---
 
-The Tao of Jersey Webservice Template
--------------------------------------
+Getting Started
+===============
 
-### Workflows, Not Technologies
+:::caution
 
-Our approach is to focus on the end goal and workflow, rather than the underlying technologies. Software and hardware
-will evolve and improve, and it is our goal to make adoption of new tooling simple, while still providing the most
-streamlined user experience possible. Product design starts with an envisioned workflow to achieve a set goal. We then
-identify existing tools that simplify the workflow. If a sufficient tool does not exist, we step in to build it. This
-leads to a fundamentally technology-agnostic view - we will use the best technology available to solve the problem. As
-technologies evolve and better tooling emerges, the ideal workflow is just updated to leverage those technologies.
-Technologies change, end goals stay the same.
+Before proceeding, it is important to note that __we DO NOT support Spring/Spring Boot paradigm__.
+[Jersey Webservice Template] runs as a **[JAX-RS]** webservice backed by its reference implementation [Jersey] running
+as a WAR inside [Jetty] container.
 
-### Immutable Infrastructure
+More info about difference between JAX-RS and Spring can be found in [this thread](https://stackoverflow.com/a/42955575)
 
-#### Immutability
+:::
 
-Immutability is the inability to be changed. This is a concept that can apply at many levels. The most familiar
-implementation of immutability is version control systems; once code is committed, that commit is forever fixed. Version
-control systems, such as git, enjoy widespread use because they offer tremendous benefits. Code becomes versionable,
-allowing rollback and roll forwards. You can inspect and write code atomically. Using versions enables auditing and
-creates a clear history of how the current state was reached. When something breaks, the origin of the error can be
-determined using the version history.
+To use JWT as the basis for a webservice, we start by creating a repository using the template on GitHub.
 
-The concept of immutability can be extended to many aspects of infrastructure — application source, application versions,
-and server state. We believe that using immutable infrastructure leads to more robust systems that are simpler to
-operate, debug, version and visualize.
+Creating a Repository from GitHub Template
+------------------------------------------
 
-### Binding to Standard Makes the Best Software
+We can click on this link to generate a repository using the template: [Create a new repository](https://github.com/QubitPi/jersey-webservice-template/generate) from QubitPi/jersey-webservice-template. Alternatively, we can visit
+the [jersey-webservice-template repository on GitHub](https://github.com/QubitPi/jersey-webservice-template) and click
+on the "Use this template" button on the top-right.
 
-Web services technology are now widespread, standardizing organizational approaches to the cloud. But as business
-expand, web service often struggle to reach the desired levels of scale. Development slows as complexity grows.
+In both cases, the next steps are:
 
-By codifying and standardizing a webservice development and compliance rules, developers can be free to do what they
-want to: add business value by writing code.
+1. Enter a name for the new repository.
+2. Uncheck "Include all branches".
+3. Click on "Create repository from template".
 
-JWT applies the [Pareto Principle] to webservice design. Use case analysis shows that the vast majority of web
-service component need just a handful of inputs to meet most customer requirements. Focusing on this "easy 80%" of use
-cases results in neat, concise web service that are simple to understand and use. It also causes web service to become
-more opinionated, which guides developers into a standard pattern, bringing consistency around how software is used in
-the organization.
+For more details on how to create repositories using template, read the article on the GitHub website:
+[Creating a repository from a template](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
-Gradually, more than just code can be shared. Best practices start to emerge. [Golden paths] are created.
+:::caution
 
-[The Technology Acceptance Model (TAM)] suggests that adoption is predicted on how much people see something as _being
-useful_ and _easy to use_. Standardization and golden paths address both these factors and make adoption of an open
-source project more likely. JWT does more to make itself easy to use by enabling "on-click" experience that goes from
-nothing to a full-fledged webservice on AWS cloud
+If the repository is public, GitHub offers unlimited free build minutes. If it's a private repository, however,
+[billing policy](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions#included-storage-and-minutes)
+applies
 
-[Golden Paths]: https://www.hashicorp.com/blog/maturing-your-terraform-workflow#golden-paths
+:::
 
-[Pareto Principle]: https://en.wikipedia.org/wiki/Pareto_principle
+That's it. A healthcheck endpoint is now ready at localhost:8080/v1/data/healthcheck. At this point, JWT has generated
+a Java webservice project with just what we need to start quickly. Developer can now start adding business value and
+__get work done much faster in a standard way__. The following sections of this documentation contain further details on
+how to proceed next.
+
+- [Development](development)
+- [Configuration](configuration)
+
+[JAX-RS]: https://jcp.org/en/jsr/detail?id=370
+[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+[Jetty]: https://en.wikipedia.org/wiki/Jetty_(web_server)
