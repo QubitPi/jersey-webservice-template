@@ -72,7 +72,6 @@ class DockerITSpec extends Specification {
         RestAssured.basePath = "/v1"
     }
 
-    @Unroll
     def "Dockerized WS responds to healthcheck request 200 SUCCESS"() {
         expect:
         RestAssured.given()

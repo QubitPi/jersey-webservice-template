@@ -52,7 +52,6 @@ class CorsFilterSpec extends Specification {
         beingAborted = isPreflight ? "is" : "is not"
     }
 
-    @Unroll
     def "When a request #beingCrossOrigin cross-origin and #beingPreflight preflight, response headers are #expectedResponseHeaders"() {
         setup: "a request is being configure for being cross-origin/preflight or not"
         ContainerRequestContext request = Mock(ContainerRequestContext)
