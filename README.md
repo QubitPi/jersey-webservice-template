@@ -5,14 +5,49 @@ Jersey Webservice Template
 [![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/jersey-webservice-template/actions/workflows/ci-cd.yml)
 [![Apache License Badge]][Apache License, Version 2.0]
 
-[Jersey Webservice Template (JWT)][jersey-webservice-template] is a [JSR 370] web service **template** that lets us
-spin up Java web service quickly through [GitHub templates]. At the end of the day, JWT helps organization to **improve
-the velocity and quality of their teams' work**
+__Jersey Webservice Template__ (__JWT__) is a [JSR 370] webservice template that lets us spin up Java webservice quickly
+through [GitHub templates]. One can think of JWT as the Jersey/Jetty version of [Spring Initializr]. At the end of the
+day, JWT helps organization to improve the velocity and quality of their teams' work
 
-Documentation
--------------
+Quick Start
+-----------
 
-Comprehensive documentation is viewable on our [website][Documentation]
+Please make sure Docker is installed
+([_Installing Docker_](https://docker.qubitpi.org/desktop/setup/install/mac-install/)), then execute this on-click
+commands:
+
+```console
+docker run --name=jersey-webservice-template -it -p 8080:8080 jack20191124/jersey-webservice-template
+```
+
+That's it. A healthcheck endpoint can be pinned with
+
+```console
+curl -v localhost:8080/v1/data/healthcheck
+```
+
+which would gave
+
+```console
+$ curl -v localhost:8080/v1/data/healthcheck
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /v1/data/healthcheck HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.85.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Content-Length: 0
+< Server: Jetty(11.0.15)
+<
+* Connection #0 to host localhost left intact
+```
+
+Developer can now start adding business values without repeating the time-consuming scaffolding works. To proceed from
+here, including getting and developing the webservice source code, please refer to the [documentation][Documentation]
+for details.
 
 License
 -------
@@ -30,3 +65,5 @@ The use and distribution terms for [jersey-webservice-template] are covered by t
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [jersey-webservice-template]: https://qubitpi.github.io/jersey-webservice-template/
 [JSR 370]: https://jcp.org/en/jsr/detail?id=370
+
+[Spring Initializr]: https://start.spring.io/

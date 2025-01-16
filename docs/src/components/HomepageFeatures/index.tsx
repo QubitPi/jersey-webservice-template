@@ -55,7 +55,7 @@ const FeatureList: FeatureItem[] = [
     id: 'production-quality',
     description: (
       <>
-        Quickly build and deploy production quality web services that expose organization data as a service. Our APIs
+        Quickly build and deploy production quality webservices that expose organization data as a service. Our APIs
         support complex filtering rules, sorting, pagination, subscriptions, and text search.
       </>
     ),
