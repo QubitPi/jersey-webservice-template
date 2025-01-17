@@ -3,10 +3,13 @@ sidebar_position: 3
 title: Development
 ---
 
-Prepare for Local Development
------------------------------
+The following guide is intended to help developers who maintain or want to make changes to the Jersey Webservice
+Template.
 
-This section discusses the one-time setup in order to develop [Jersey Webservice Template].
+Preparing for Local Development
+-------------------------------
+
+This section discusses the one-time setup in order to develop Jersey Webservice Template.
 
 ### Installing Java & Maven (on Mac)
 
@@ -35,8 +38,8 @@ Make sure to execute the `sudo ln -sfn`, `echo 'export PATH=...`, and the `expor
 
 :::tip
 
-Maven uses a separate JDK version, which can be seen via `mvn -v`. If it's not JDK 17, we should have Maven point
-to our JDK 17 using [JAVA_HOME](https://stackoverflow.com/a/2503679):
+JWT is built using maven. Maven uses a separate JDK version, which can be seen via `mvn -v`. If it's not JDK 17, we
+should have Maven point to our JDK 17 using [JAVA_HOME](https://stackoverflow.com/a/2503679):
 
 ```bash
 $ /usr/libexec/java_home
@@ -58,7 +61,7 @@ OpenJDK 64-Bit Server VM (build 17.0.10+9, mixed mode)
 
 ### Installing Docker Engine
 
-[Jersey Webservice Template] has [Docker-based integration tests]; it also supports
+Jersey Webservice Template has [Docker-based integration tests]; it also supports
 [running template webserivce in Docker][jersey-webservice-template Dockerfile]. Docker can be installed by following its
 [official instructions](https://docs.docker.com/desktop/install/mac-install/)
 
@@ -254,7 +257,6 @@ If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
 [Docker-based integration tests]: https://github.com/QubitPi/jersey-webservice-template/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DockerITSpec.groovy
 
 [jcabi-mysql]: https://mysql.jcabi.com/
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
 [jersey-webservice-template Dockerfile]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Dockerfile
 
 [style config]: https://github.com/QubitPi/jersey-webservice-template/blob/master/Jersey-Webservice-Template-Project-intellij-code-style.xml
