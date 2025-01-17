@@ -26,14 +26,14 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Immutable Infrastructure',
-    Svg: require('@site/static/img/hashicorp-logo.svg').default,
+    title: 'Caring for Developers',
+    Svg: require('@site/static/img/developer.svg').default,
     scale: 1,
-    id: 'hashicorp-logo',
+    id: 'not-used',
     description: (
       <>
-        JWT has first-class support for HashiCorp as CI/CD deployment and was designed to be easily deployed and
-        maintained to get our webservice up and running quickly.
+        We understand a good business product is backed by developers who love their works. We let them free to do what
+        they want to: add business value by writing code.
       </>
     ),
   },
@@ -73,14 +73,13 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Caring for Developers',
-    Svg: require('@site/static/img/developer.svg').default,
+    title: 'Container-Native Supported',
+    Svg: require('@site/static/img/docker.svg').default,
     scale: 1,
     id: 'not-used',
     description: (
       <>
-        We understand a good business product is backed by developers who love their works. We let them free to do what
-        they want to: add business value by writing code.
+        JWT supports running in containerized environment out of the box, making its deployment fast and convenient.
       </>
     ),
   },
