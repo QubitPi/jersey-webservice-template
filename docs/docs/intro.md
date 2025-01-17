@@ -42,10 +42,12 @@ applies
 
 :::
 
-That's it. A healthcheck endpoint is now ready at localhost:8080/v1/data/healthcheck. At this point, JWT has generated
-a Java webservice project with just what we need to start quickly. Developer can now start adding business value and
-__get work done much faster in a standard way__. The following sections of this documentation contain further details on
-how to proceed next.
+After Creating the Repository
+-----------------------------
+
+At this point, JWT has generated a Java webservice project with just what we need to start quickly. Developer can now
+start adding business value and __get work done much faster in a standard way__. The following sections of this
+documentation contain further details on how to proceed next.
 
 - [Development](development)
 - [Configuration](configuration)

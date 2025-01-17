@@ -54,6 +54,7 @@ class DockerITSpec extends Specification {
         }
     }
 
+    @Deprecated
     private static boolean isLocal() {
         return System.properties['os.name'] as String in LOCAL_ENVS
     }

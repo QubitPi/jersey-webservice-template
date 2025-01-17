@@ -31,13 +31,13 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">
-          You can <b><em>innovate</em></b> given the <b><em>right technology</em></b>
+          We can <b><em>innovate</em></b> given the <b><em>right technology</em></b>
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Documentation
+            Start Adding Business Values
           </Link>
         </div>
       </div>

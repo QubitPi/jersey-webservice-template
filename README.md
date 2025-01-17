@@ -9,8 +9,17 @@ __Jersey Webservice Template__ (__JWT__) is a [JSR 370] webservice template that
 through [GitHub templates]. One can think of JWT as the Jersey/Jetty version of [Spring Initializr]. At the end of the
 day, JWT helps organization to improve the velocity and quality of their teams' work
 
-Quick Start
+✨ Features
 -----------
+
+- Out-of-the-box healthcheck endpoint
+- Docusaurus-based documentation site freely hosted on GitHub Pages
+- Dockerized webservice
+- ELK application monitoring
+- Flexible webservice configuration
+
+🚀 Quick Start
+--------------
 
 Please make sure Docker is installed
 ([_Installing Docker_](https://docker.qubitpi.org/desktop/setup/install/mac-install/)), then execute this on-click
