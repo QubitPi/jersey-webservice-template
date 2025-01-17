@@ -39,25 +39,7 @@ import java.nio.file.Paths
 @Testcontainers
 class DockerITSpec extends Specification {
 
-    static final int SUCCESS = 0
-    static final List<String> LOCAL_ENVS = ["Mac OS X", "windows"]
-    static final String CHECK_DOCKER_INSTALLED_COMMAND = "docker -v"
     static final String DOCKERFILE_ABS_PATH = String.format("%s/Dockerfile", System.getProperty("user.dir"))
-
-    @Deprecated
-    @SuppressWarnings('GroovyUnusedCatchParameter')
-    private static boolean dockerNotInstalled() {
-        try {
-            return Runtime.getRuntime().exec(CHECK_DOCKER_INSTALLED_COMMAND).waitFor() != SUCCESS
-        } catch (Exception exception) {
-            return true // I hate this
-        }
-    }
-
-    @Deprecated
-    private static boolean isLocal() {
-        return System.properties['os.name'] as String in LOCAL_ENVS
-    }
 
     @Shared
     @Subject
