@@ -253,7 +253,7 @@ If tabs still come out at 2 spaces when hitting TAB or Enter, not 4 spaces, try:
    ("Settings | Editor | Code Style") have priority (will overwrite) over your IDE settings.
 
 [Docker]: https://github.com/QubitPi/fast-ws/blob/master/Dockerfile
-[Docker-based integration tests]: https://github.com/QubitPi/fast-ws/blob/master/src/test/groovy/com/qubitpi/ws/jersey/template/DockerITSpec.groovy
+[Docker-based integration tests]: https://github.com/QubitPi/fast-ws/blob/master/src/test/groovy/com/qubitpi/fastws/DockerITSpec.groovy
 
 [jcabi-mysql]: https://mysql.jcabi.com/
 [fast-ws Dockerfile]: https://github.com/QubitPi/fast-ws/blob/master/Dockerfile

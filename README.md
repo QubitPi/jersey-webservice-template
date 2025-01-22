@@ -2,7 +2,7 @@ FastWS
 ======
 
 ![Java Version Badge][Java Version Badge]
-[![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/fast-ws/actions/workflows/ci-cd.yml)
+[![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/fast-ws/actions/workflows/ci-cd.yaml)
 [![Apache License Badge]][Apache License, Version 2.0]
 
 __FastWS__ is a [JSR 370] webservice template that lets us spin up Java webservice quickly through [GitHub templates].
@@ -69,7 +69,7 @@ The use and distribution terms for [fast-ws]() are covered by the [Apache Licens
 [Documentation]: https://fastws.qubitpi.org/
 
 [GitHub templates]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository#about-template-repositories
-[GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/fast-ws/ci-cd.yml?branch=master&logo=github&style=for-the-badge
+[GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/fast-ws/ci-cd.yaml?branch=master&logo=github&style=for-the-badge
 
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
 [fast-ws]: https://fastws.qubitpi.org/
