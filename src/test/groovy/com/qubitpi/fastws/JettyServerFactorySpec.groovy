@@ -15,6 +15,8 @@
  */
 package com.qubitpi.fastws
 
+import com.qubitpi.fastws.resource.TestEndpoint
+
 import org.eclipse.jetty.server.Server
 import org.glassfish.jersey.server.ResourceConfig
 
@@ -26,7 +28,7 @@ import spock.lang.Specification
 class JettyServerFactorySpec extends Specification {
 
     static final int PORT = 8080
-    static final String ENDPOINT_RESOURCE_PACKAGE = "com.qubitpi.fastws.resource"
+    static final String ENDPOINT_RESOURCE_PACKAGE = TestEndpoint.class.getPackage().getName()
 
     /**
      * DI constructor.

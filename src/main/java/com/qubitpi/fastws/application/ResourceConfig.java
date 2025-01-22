@@ -15,6 +15,7 @@
  */
 package com.qubitpi.fastws.application;
 
+import com.qubitpi.fastws.web.endpoints.DataServlet;
 import com.qubitpi.fastws.web.filters.CorsFilter;
 
 import org.glassfish.hk2.utilities.Binder;
@@ -32,7 +33,7 @@ import net.jcip.annotations.ThreadSafe;
 @ApplicationPath("v1")
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
-    private static final String ENDPOINT_PACKAGE = "com.qubitpi.fastws.web.endpoints";
+    private static final String ENDPOINT_PACKAGE = DataServlet.class.getPackage().getName();
 
     /**
      * DI Constructor that allows for finer dependency injection control.
