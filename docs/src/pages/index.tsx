@@ -19,6 +19,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 import styles from './index.module.css';
 
@@ -27,9 +28,11 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
+        <img
+          className={clsx(styles.heroBannerLogo, "margin-vert--md")}
+          alt="FastWS logo"
+          src={useBaseUrl("img/logo-with-text-white-outline.svg")}
+        />
         <p className="hero__subtitle">
           We can <b><em>innovate</em></b> given the <b><em>right technology</em></b>
         </p>

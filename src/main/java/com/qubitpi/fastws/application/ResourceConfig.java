@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.application;
+package com.qubitpi.fastws.application;
 
-import com.qubitpi.ws.jersey.template.web.filters.CorsFilter;
+import com.qubitpi.fastws.web.filters.CorsFilter;
 
 import org.glassfish.hk2.utilities.Binder;
 
@@ -32,7 +32,7 @@ import net.jcip.annotations.ThreadSafe;
 @ApplicationPath("v1")
 public class ResourceConfig extends org.glassfish.jersey.server.ResourceConfig {
 
-    private static final String ENDPOINT_PACKAGE = "com.qubitpi.ws.jersey.template.web.endpoints";
+    private static final String ENDPOINT_PACKAGE = "com.qubitpi.fastws.web.endpoints";
 
     /**
      * DI Constructor that allows for finer dependency injection control.

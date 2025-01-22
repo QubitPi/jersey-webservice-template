@@ -44,7 +44,7 @@ const FeatureList: FeatureItem[] = [
     id: 'not-used',
     description: (
       <>
-        JWT lets us focus on our business logics, and the template will do the chores.
+        FastWS lets us focus on our business logics, and the template will do the chores.
       </>
     ),
   },
@@ -79,7 +79,7 @@ const FeatureList: FeatureItem[] = [
     id: 'not-used',
     description: (
       <>
-        JWT supports running in containerized environment out of the box, making its deployment fast and convenient.
+        FastWS supports running in containerized environment out of the box, making its deployment fast and convenient.
       </>
     ),
   },
@@ -90,7 +90,7 @@ const FeatureList: FeatureItem[] = [
     id: 'not-used',
     description: (
       <>
-        JWT is 100% open source and available on <a href="https://github.com/QubitPi/jersey-webservice-template">Github</a>. Released
+        FastWS is 100% open source and available on <a href="https://github.com/QubitPi/fast-ws">Github</a>. Released
         under the commercial-friendly
         <a href="http://www.apache.org/licenses/LICENSE-2.0.html"> Apache License, Version 2.0.</a>
       </>

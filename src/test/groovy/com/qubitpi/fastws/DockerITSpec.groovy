@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template
+package com.qubitpi.fastws
 
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.PullPolicy

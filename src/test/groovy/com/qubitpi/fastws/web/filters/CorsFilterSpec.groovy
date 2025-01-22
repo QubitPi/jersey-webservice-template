@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.web.filters
+package com.qubitpi.fastws.web.filters
 
 import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerResponseContext
@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.MultivaluedHashMap
 import jakarta.ws.rs.core.MultivaluedMap
 import jakarta.ws.rs.core.Response
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class CorsFilterSpec extends Specification {
 
