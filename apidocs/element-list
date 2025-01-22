@@ -1,4 +1,4 @@
-com.qubitpi.ws.jersey.template.application
-com.qubitpi.ws.jersey.template.config
-com.qubitpi.ws.jersey.template.web.endpoints
-com.qubitpi.ws.jersey.template.web.filters
+com.qubitpi.fastws.application
+com.qubitpi.fastws.config
+com.qubitpi.fastws.web.endpoints
+com.qubitpi.fastws.web.filters

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.qubitpi.ws.jersey.template.application"},{"l":"com.qubitpi.ws.jersey.template.config"},{"l":"com.qubitpi.ws.jersey.template.web.endpoints"},{"l":"com.qubitpi.ws.jersey.template.web.filters"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.qubitpi.fastws.application"},{"l":"com.qubitpi.fastws.config"},{"l":"com.qubitpi.fastws.web.endpoints"},{"l":"com.qubitpi.fastws.web.filters"}];updateSearchResults();

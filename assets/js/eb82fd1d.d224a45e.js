@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[5949],{2457:s=>{s.exports=JSON.parse('{"label":"JQPL","permalink":"/blog/tags/jqpl","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

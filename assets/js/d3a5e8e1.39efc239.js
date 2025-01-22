@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[207],{9013:e=>{e.exports=JSON.parse('{"label":"MySQL","permalink":"/jersey-webservice-template/blog/tags/my-sql","allTagsPath":"/jersey-webservice-template/blog/tags","count":4,"unlisted":false}')}}]);
