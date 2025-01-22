@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.qubitpi</groupId>
-    <artifactId>jersey-webservice-template</artifactId>
+    <artifactId>fast-ws</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Jersey Webservice Template</name>
+    <name>FastWS</name>
     <description>Template project for building Jersey webservice running in Jetty</description>
-    <url>https://github.com/QubitPi/jersey-webservice-template</url>
+    <url>https://github.com/QubitPi/fast-ws</url>
 
     <developers>
         <developer>

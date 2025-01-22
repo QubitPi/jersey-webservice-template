@@ -18,15 +18,15 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Jersey Webservice Template',
+  title: 'FastWS',
   tagline: 'You can innovate given the right technology',
   favicon: 'img/favicon.ico',
 
-  url: 'https://qubitpi.github.io',
-  baseUrl: '/jersey-webservice-template/',
+  url: 'https://fastws.qubitpi.org',
+  baseUrl: '/',
 
   organizationName: 'QubitPi',
-  projectName: 'jersey-webservice-template',
+  projectName: 'fast-ws',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -45,12 +45,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/QubitPi/jersey-webservice-template/tree/master/docs/',
+          editUrl: 'https://github.com/QubitPi/fast-ws/tree/master/docs/',
         },
         blog: {
           showReadingTime: true,
           blogSidebarCount: 'ALL',
-          editUrl: 'https://github.com/QubitPi/jersey-webservice-template/tree/master/docs/',
+          editUrl: 'https://github.com/QubitPi/fast-ws/tree/master/docs/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -63,9 +63,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Jersey Webservice Template',
+      title: 'FastWS',
       logo: {
-        alt: 'Jersey Webservice Template Logo',
+        alt: 'FastWS Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -77,12 +77,12 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: "https://QubitPi.github.io/jersey-webservice-template/apidocs",
+          href: "https://fastws.qubitpi.org/apidocs",
           label: "API",
           position: "left",
         },
         {
-          href: 'https://github.com/QubitPi/jersey-webservice-template',
+          href: 'https://github.com/QubitPi/fast-ws',
           label: 'GitHub',
           position: 'right',
         },
@@ -105,7 +105,7 @@ const config: Config = {
           items: [
             {
               label: 'Discussions',
-              href: 'https://github.com/QubitPi/jersey-webservice-template/discussions',
+              href: 'https://github.com/QubitPi/fast-ws/discussions',
             },
           ],
         },
@@ -118,7 +118,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/QubitPi/jersey-webservice-template',
+              href: 'https://github.com/QubitPi/fast-ws',
             },
           ],
         },

@@ -13,9 +13,9 @@
 # limitations under the License.
 FROM maven:3.8.3-openjdk-17 as build
 
-RUN mkdir /jersey-webservice-template
-COPY . /jersey-webservice-template
-RUN cd /jersey-webservice-template && mvn clean package -Dmaven.test.skip=true
+RUN mkdir /fast-ws
+COPY . /fast-ws
+RUN cd /fast-ws && mvn clean package -Dmaven.test.skip=true
 
 FROM ubuntu:22.04
 
@@ -47,7 +47,7 @@ RUN rm jetty-home-$JETTY_VERSION.tar.gz
 RUN mkdir jetty-base
 RUN cd jetty-base && java -jar $JETTY_HOME/start.jar --add-module=annotations,server,http,deploy,servlet,webapp,resources,jsp
 
-COPY --from=build /jersey-webservice-template/target/jersey-webservice-template-$WS_VERSION.war $JETTY_WEBAPPS_DIR/ROOT.war
+COPY --from=build /fast-ws/target/fast-ws-$WS_VERSION.war $JETTY_WEBAPPS_DIR/ROOT.war
 
 COPY ./Dockerfile-startup.sh /Dockerfile-startup.sh
 CMD [ "/Dockerfile-startup.sh" ]

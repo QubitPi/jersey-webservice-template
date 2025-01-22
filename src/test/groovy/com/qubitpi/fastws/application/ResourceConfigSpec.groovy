@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.application
+package com.qubitpi.fastws.application
 
-import com.qubitpi.ws.jersey.template.web.filters.CorsFilter
 
 import org.glassfish.jersey.internal.inject.Binder
 
@@ -23,7 +22,7 @@ import spock.lang.Specification
 
 class ResourceConfigSpec extends Specification {
 
-    static final Set<Class> ALWAYS_REGISTERED_FILTERS = [CorsFilter] as Set
+    static final Set<Class> ALWAYS_REGISTERED_FILTERS = [com.qubitpi.fastws.web.filters.CorsFilter] as Set
 
     @SuppressWarnings('GroovyAccessibility')
     def "Instantiation triggers initialization and binding lifecycles"() {

@@ -9,20 +9,20 @@ Getting Started
 :::caution
 
 Before proceeding, it is important to note that __we DO NOT support Spring/Spring Boot paradigm__.
-[Jersey Webservice Template] runs as a **[JAX-RS]** webservice backed by its reference implementation [Jersey] running
+[FastWS] runs as a **[JAX-RS]** webservice backed by its reference implementation [Jersey] running
 as a WAR inside [Jetty] container.
 
 More info about difference between JAX-RS and Spring can be found in [this thread](https://stackoverflow.com/a/42955575)
 
 :::
 
-To use JWT as the basis for a webservice, we start by creating a repository using the template on GitHub.
+To use FastWS as the basis for a webservice, we start by creating a repository using the template on GitHub.
 
 Creating a Repository from GitHub Template
 ------------------------------------------
 
-We can click on this link to generate a repository using the template: [Create a new repository](https://github.com/QubitPi/jersey-webservice-template/generate) from QubitPi/jersey-webservice-template. Alternatively, we can visit
-the [jersey-webservice-template repository on GitHub](https://github.com/QubitPi/jersey-webservice-template) and click
+We can click on this link to generate a repository using the template: [Create a new repository](https://github.com/QubitPi/fast-ws/generate) from QubitPi/fast-ws. Alternatively, we can visit
+the [fast-ws repository on GitHub](https://github.com/QubitPi/fast-ws) and click
 on the "Use this template" button on the top-right.
 
 In both cases, the next steps are:
@@ -45,7 +45,7 @@ applies
 After Creating the Repository
 -----------------------------
 
-At this point, JWT has generated a Java webservice project with just what we need to start quickly. Developer can now
+At this point, FastWS has generated a Java webservice project with just what we need to start quickly. Developer can now
 start adding business value and __get work done much faster in a standard way__. The following sections of this
 documentation contain further details on how to proceed next.
 
@@ -53,5 +53,5 @@ documentation contain further details on how to proceed next.
 - [Configuration](configuration)
 
 [JAX-RS]: https://jcp.org/en/jsr/detail?id=370
-[Jersey Webservice Template]: https://qubitpi.github.io/jersey-webservice-template/
+[FastWS]: https://fastws.qubitpi.org/
 [Jetty]: https://en.wikipedia.org/wiki/Jetty_(web_server)

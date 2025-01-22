@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.web.filters;
+package com.qubitpi.fastws.web.filters;
 
 import jakarta.annotation.Priority;
 import jakarta.validation.constraints.NotNull;

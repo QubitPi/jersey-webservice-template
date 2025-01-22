@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-name: Template CI/CD
+name: CI/CD
 
 "on":
   pull_request:
@@ -98,8 +98,9 @@ jobs:
       - name: Generate Javadoc
         run: mvn -B clean javadoc:javadoc
       - name: Move Javadoc into documentation directory
-        if: github.ref == 'refs/heads/master'
         run: mv target/site/apidocs/ docs/build/apidocs/
+      - name: Load CNAME
+        run: echo fastws.qubitpi.org > docs/build/CNAME
       - name: Deploy documentation (including Javadoc) to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
@@ -137,7 +138,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: jack20191124
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push image to DockerHub
         if: github.ref == 'refs/heads/master'
@@ -145,4 +146,12 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/jersey-webservice-template:latest
+          tags: jack20191124/fast-ws:latest
+      - name: Push image Description
+        if: github.ref == 'refs/heads/master'
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: jack20191124
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: jack20191124/fast-ws
+          readme-filepath: README.md

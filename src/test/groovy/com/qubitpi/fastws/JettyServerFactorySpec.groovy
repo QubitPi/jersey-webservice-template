@@ -13,19 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubitpi.ws.jersey.template.web.endpoints
-
-import com.qubitpi.ws.jersey.template.JettyServerFactory
-import com.qubitpi.ws.jersey.template.application.ResourceConfig
+package com.qubitpi.fastws
 
 import org.eclipse.jetty.server.Server
+import org.glassfish.jersey.server.ResourceConfig
 
 import io.restassured.RestAssured
+import jakarta.inject.Inject
+import jakarta.ws.rs.ApplicationPath
 import spock.lang.Specification
 
-class DataServletITSpec extends Specification {
+class JettyServerFactorySpec extends Specification {
 
     static final int PORT = 8080
+    static final String ENDPOINT_RESOURCE_PACKAGE = "com.qubitpi.fastws.resource"
+
+    /**
+     * DI constructor.
+     * <p>
+     * CAUTION: the {@code @ApplicationPath("v1")} is not taking effects. See {@link JettyServerFactory} for more
+     * details.
+     */
+    @ApplicationPath("v1")
+    class TestResourceConfig extends ResourceConfig {
+
+        @Inject
+        TestResourceConfig() {
+            packages(ENDPOINT_RESOURCE_PACKAGE)
+        }
+    }
 
     def setupSpec() {
         RestAssured.baseURI = "http://localhost"
@@ -33,17 +49,21 @@ class DataServletITSpec extends Specification {
         RestAssured.basePath = "/v1"
     }
 
-    def "Healthchecking endpoints returns 200"() {
+    def "Factory produces Jersey-Jetty applications"() {
         setup:
-        Server server = JettyServerFactory.newInstance(PORT, "/v1/*", new ResourceConfig())
+        Server server = JettyServerFactory.newInstance(PORT, "/v1/*", new TestResourceConfig())
         server.start()
 
         expect:
-        RestAssured.given()
+        RestAssured
                 .when()
-                .get("/data/healthcheck")
+                .get("/v1/example/test")
                 .then()
                 .statusCode(200)
+
+        RestAssured
+                .when()
+                .get("/v1/example/test").asString() == "SUCCESS"
 
         cleanup:
         server.stop()

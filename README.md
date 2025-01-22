@@ -1,13 +1,13 @@
-Jersey Webservice Template
-==========================
+FastWS
+======
 
 ![Java Version Badge][Java Version Badge]
-[![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/jersey-webservice-template/actions/workflows/ci-cd.yml)
+[![GitHub Workflow Status][GitHub Workflow Status]](https://github.com/QubitPi/fast-ws/actions/workflows/ci-cd.yml)
 [![Apache License Badge]][Apache License, Version 2.0]
 
-__Jersey Webservice Template__ (__JWT__) is a [JSR 370] webservice template that lets us spin up Java webservice quickly
-through [GitHub templates]. One can think of JWT as the Jersey/Jetty version of [Spring Initializr]. At the end of the
-day, JWT helps organization to improve the velocity and quality of their teams' work
+__FastWS__ is a [JSR 370] webservice template that lets us spin up Java webservice quickly through [GitHub templates].
+One can think of FastWS as the Jersey/Jetty version of [Spring Initializr]. At the end of the day, FastWS helps
+organization to improve the velocity and quality of their teams' work
 
 ✨ Features
 -----------
@@ -26,7 +26,7 @@ Please make sure Docker is installed
 commands:
 
 ```console
-docker run --name=jersey-webservice-template -it -p 8080:8080 jack20191124/jersey-webservice-template
+docker run --name=fast-ws -it -p 8080:8080 jack20191124/fast-ws
 ```
 
 That's it. A healthcheck endpoint can be pinned with
@@ -61,18 +61,18 @@ for details.
 License
 -------
 
-The use and distribution terms for [jersey-webservice-template] are covered by the [Apache License, Version 2.0].
+The use and distribution terms for [fast-ws]() are covered by the [Apache License, Version 2.0].
 
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
 [Apache License, Version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 
-[Documentation]: https://qubitpi.github.io/jersey-webservice-template/
+[Documentation]: https://fastws.qubitpi.org/
 
 [GitHub templates]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository#about-template-repositories
-[GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/jersey-webservice-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
+[GitHub Workflow Status]: https://img.shields.io/github/actions/workflow/status/QubitPi/fast-ws/ci-cd.yml?branch=master&logo=github&style=for-the-badge
 
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
-[jersey-webservice-template]: https://qubitpi.github.io/jersey-webservice-template/
+[fast-ws]: https://fastws.qubitpi.org/
 [JSR 370]: https://jcp.org/en/jsr/detail?id=370
 
 [Spring Initializr]: https://start.spring.io/
