@@ -51,6 +51,9 @@ documentation contain further details on how to proceed next.
 
 ### Deploying Documentation to GitHub Pages
 
+- Change the domain in [CNAME file](https://github.com/QubitPi/fast-ws/blob/master/docs/CNAME)
+- DOCKERHUB_TOKEN
+
 [JAX-RS]: https://jcp.org/en/jsr/detail?id=370
 [FastWS]: https://fastws.qubitpi.org/
 [Jetty]: https://en.wikipedia.org/wiki/Jetty_(web_server)
