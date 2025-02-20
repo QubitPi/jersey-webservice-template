@@ -49,8 +49,7 @@ At this point, FastWS has generated a Java webservice project with just what we 
 start adding business value and __get work done much faster in a standard way__. The following sections of this
 documentation contain further details on how to proceed next.
 
-- [Development](development)
-- [Configuration](configuration)
+### Deploying Documentation to GitHub Pages
 
 [JAX-RS]: https://jcp.org/en/jsr/detail?id=370
 [FastWS]: https://fastws.qubitpi.org/

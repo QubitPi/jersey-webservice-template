@@ -99,8 +99,8 @@ jobs:
         run: mvn -B clean javadoc:javadoc
       - name: Move Javadoc into documentation directory
         run: mv target/site/apidocs/ docs/build/apidocs/
-      - name: Load CNAME
-        run: echo fastws.qubitpi.org > docs/build/CNAME
+      - name: Load CNAME file
+        run: cp docs/CNAME docs/build
       - name: Deploy documentation (including Javadoc) to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
