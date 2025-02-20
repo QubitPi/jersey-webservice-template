@@ -5,7 +5,7 @@ authors: jiaqi
 tags: [MySQL, Database, JPA]
 ---
 
-[//]: # (Copyright 2025 Jiaqi Liu)
+[//]: # (Copyright 2025 Jiaqi Liu. All rights reserved.)
 
 [//]: # (Licensed under the Apache License, Version 2.0 &#40;the "License"&#41;;)
 [//]: # (you may not use this file except in compliance with the License.)

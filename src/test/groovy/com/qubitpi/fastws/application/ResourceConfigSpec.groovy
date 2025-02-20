@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Jiaqi Liu
+ * Copyright 2025 Jiaqi Liu. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.qubitpi.fastws.application
 
+import com.qubitpi.fastws.web.filters.CorsFilter
 
 import org.glassfish.jersey.internal.inject.Binder
 
@@ -22,7 +23,7 @@ import spock.lang.Specification
 
 class ResourceConfigSpec extends Specification {
 
-    static final Set<Class> ALWAYS_REGISTERED_FILTERS = [com.qubitpi.fastws.web.filters.CorsFilter] as Set
+    static final Set<Class> ALWAYS_REGISTERED_FILTERS = [CorsFilter] as Set
 
     @SuppressWarnings('GroovyAccessibility')
     def "Instantiation triggers initialization and binding lifecycles"() {

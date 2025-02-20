@@ -1,5 +1,5 @@
 /**
- * Copyright 2025 Jiaqi Liu
+ * Copyright 2025 Jiaqi Liu. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 import styles from './index.module.css';

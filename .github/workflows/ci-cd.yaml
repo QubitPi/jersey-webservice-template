@@ -1,4 +1,4 @@
-# Copyright 2025 Jiaqi Liu
+# Copyright 2025 Jiaqi Liu. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:

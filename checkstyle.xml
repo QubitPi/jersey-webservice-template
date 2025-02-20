@@ -386,7 +386,7 @@
     </module>
     <!-- Headers -->
     <module name="RegexpHeader">
-        <property name="header" value="/*\n * Copyright 20[0-2][0-9],? Jiaqi Liu"/>
+        <property name="header" value="/*\n * Copyright 20[0-2][0-9],? Jiaqi Liu. All rights reserved."/>
         <property name="fileExtensions" value="java,groovy,g4" />
         <property name="severity" value="error"/>
     </module>
