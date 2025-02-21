@@ -56,4 +56,5 @@ documentation contain further details on how to proceed next.
 
 [JAX-RS]: https://jcp.org/en/jsr/detail?id=370
 [FastWS]: https://fastws.qubitpi.org/
+[Jersey]: https://qubitpi.github.io/jersey/
 [Jetty]: https://en.wikipedia.org/wiki/Jetty_(web_server)
